@@ -1,0 +1,36 @@
+.input-row {
+    display: flex;
+    margin-bottom: 5px;
+    flex-direction: column;
+}
+
+input,textarea,select {
+    margin: 5px;
+}
+input[type="submit"]{
+margin-top: 20px;
+}
+input[type="date"]{
+width: 150px;
+}
+
+textarea{
+    width: 400px;
+}
+.remove-btn { 
+    background-color: red; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-top: 6px;
+    border-radius: 50%;
+    font-size: 2em;
+    line-height: 0px;
+    transform: rotate(45deg);
+}
+select{
+    width: 150px;
+    height: 20px;
+}
