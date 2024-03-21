@@ -14,7 +14,7 @@ if (file_exists($filename)) {
     ";
     // // Afficher les données du fichier CSV
     echo '
-        <h4>Nombre total de signe : <span id="totalCharacters">0</span></h4>
+        <h4>Nombre total de signes : <span id="totalCharacters">0</span></h4>
         <button id="add-btn" onclick="addInputs() ">+</button></br>
         <form id="form2" action="done.php?" method="get">
             <div id="inputs-container">
@@ -26,13 +26,16 @@ if (file_exists($filename)) {
     $i = 1;
     $a = 1;
     $b = 1;
+    $c = 1;
+    $d = 1;
+    //todo  ajouter select en php
+
     while (($row = fgetcsv($file)) !== false) {
+
         echo '
-        <div class="input-row" id="input-row-' . $a++ . '">
-        
-        <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
+        <div class="input-row" id="input-row-' . $a++ . '"><input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
         <textarea  id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement">' . $row[2] . '</textarea>';
-        echo "<button onclick='supprimerParent(this)' class='remove-btn child'>+</button></div>";
+        echo "<div id='remove-btn-" . ($d++) . "' onclick='removeInputs(\"input-row-" . ($c++) . "\")' class='remove-btn'>+</div></div>";
     }
 
     echo '

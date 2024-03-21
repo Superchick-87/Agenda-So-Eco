@@ -24,8 +24,12 @@
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("txtHint").innerHTML = this.responseText;
-                    select();
                     updateTotalCharacters();
+                    select();
+                    insertSelectInExistingInputs();
+
+
+
 
 
                 }
@@ -37,5 +41,6 @@
 
     <script src="js/formulaire.js"></script>
 </body>
+
 
 </html>
