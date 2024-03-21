@@ -223,34 +223,3 @@ select();
 // Appel de la fonction insertSelectInExistingInputs() pour ajouter des menus déroulants aux blocs existants
 insertSelectInExistingInputs();
 updateTotalCharacters();
-
-// Fonction pour sélectionner automatiquement l'option correspondante dans chaque select
-function selectDefaultOptions() {
-    // Récupérer tous les selects existants
-    const existingSelects = document.querySelectorAll('select[name="country[]"]');
-
-    // Pour chaque select existant
-    existingSelects.forEach(select => {
-        // Récupérer la valeur actuelle du select
-        const selectedValue = select.value;
-
-        // Pour chaque option dans le select
-        select.querySelectorAll('option').forEach(option => {
-            // Si la valeur de l'option correspond à la valeur actuelle du select
-            if (option.value === selectedValue) {
-                // Sélectionner l'option
-                option.setAttribute('selected', 'selected');
-            }
-        });
-    });
-}
-
-// Lire le fichier CSV et mettre à jour les selects existants
-fetch('./datas/2024-03-03_datas.csv') // Remplacez 'datas/2024-03-03_datas.csv' par le chemin de votre fichier CSV réel
-    .then(response => response.text())
-    .then(csvData => {
-        const countries = extractCountriesFromCSV(csvData);
-        updateExistingSelects(countries);
-        selectDefaultOptions(); // Appeler la fonction pour sélectionner les options par défaut
-    })
-    .catch(error => console.error('Une erreur s\'est produite lors de la lecture du fichier CSV :', error));
