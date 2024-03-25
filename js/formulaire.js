@@ -35,7 +35,10 @@ function addInputs() {
         inputRow.appendChild(input1);
         inputRow.appendChild(textarea);
         inputRow.appendChild(removeBtn);
-        container.appendChild(inputRow);
+        // container.appendChild(inputRow);
+        
+        // Insérer la nouvelle rangée juste avant l'élément de soumission
+        container.insertBefore(inputRow, document.getElementById("valid"));
     }
 }
 
@@ -46,6 +49,7 @@ function removeInputs(id) {
 
     // Mise à jour des identifiants des éléments restants
     updateRowIds();
+    updateTotalCharacters();
 }
 
 // Fonction pour mettre à jour les identifiants des éléments restants
@@ -72,9 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // FIN Sert à supprimer un bloc -> Select | Date | Textarea  
 
 
-// window.onload = updateTotalCharacters();
 function updateTotalCharacters() {
-    // var dd = document.getElementById('totalCharacters').textContent;
     let totalCharacters = 0;
 
     // Sélectionner tous les textarea
@@ -84,64 +86,61 @@ function updateTotalCharacters() {
     textAreas.forEach(textArea => {
         totalCharacters += textArea.value.length;
     });
+
+    // Mettre à jour le nombre total de caractères affiché
     document.getElementById('totalCharacters').textContent = totalCharacters;
-
-    // Afficher le nombre total de caractères
-
-    // textarea.addEventListener("input", function () {
-    //     // Met à jour le contenu du span avec le nombre de caractères dans le textarea
-    //     totalCharacters = textarea.value.length;
-    // });
 }
+
+
 
 
 // @ Ajout su select
 function select() {
     var elements = document.querySelectorAll('.input-row').length;
-    // URL de l'API REST fournissant la liste des pays
-    const countriesAPI = 'https://restcountries.com/v3.1/all';
+    // Chemin vers le fichier pays.csv
+    const countriesCSV = 'datas/pays.csv';
 
     // Variable pour garder une trace du nombre de menus déroulants ajoutés
     let dropdownCount = elements;
 
-    // Variable pour garder une trace du nombre de divs ajoutées
-    let divCount = elements;
-
-    // Fonction pour récupérer la liste des pays depuis l'API REST
+    // Fonction pour récupérer la liste des pays depuis le fichier CSV
     async function fetchCountries() {
         try {
-            const response = await fetch(countriesAPI);
-            const data = await response.json();
-
+            const response = await fetch(countriesCSV);
+            const data = await response.text();
+    
+            // Diviser les données CSV en lignes et colonnes
+            const rows = data.split('\n');
+            const countries = rows.map(row => row.split(',')[4]); // La 5ème colonne contient les noms des pays
+    
+            // Trier les pays par ordre alphabétique
+            countries.sort((a, b) => a.localeCompare(b));
+    
             // Créer un nouvel élément select
             const selectElement = document.createElement('select');
-            selectElement.name = "country[]";
-
+            selectElement.name = 'country[]';
+    
             // Créer une option pour sélectionner
             const defaultOption = document.createElement('option');
             defaultOption.value = '';
             defaultOption.textContent = 'Sélectionner un pays';
             selectElement.appendChild(defaultOption);
-
-            // Trier les données des pays par ordre alphabétique en français
-            data.sort((a, b) => {
-                return a.name.common.localeCompare(b.name.common, 'fr');
-            });
-
-            // Parcourir les données pour créer les options du menu déroulant
-            data.forEach(country => {
+    
+            // Parcourir les données triées pour créer les options du menu déroulant
+            countries.forEach(country => {
                 const option = document.createElement('option');
-                option.value = country.name.common;
-                option.textContent = country.name.common;
+                option.value = country;
+                option.textContent = country;
                 selectElement.appendChild(option);
             });
-
+    
             return selectElement;
         } catch (error) {
             console.error('Une erreur s\'est produite :', error);
             return null;
         }
     }
+    
 
     // Ajouter un écouteur d'événements au bouton d'ajout
     const addCountrySelectBtn = document.getElementById('add-btn');
@@ -162,64 +161,5 @@ function select() {
 
 }
 
-async function insertSelectInExistingInputs() {
-    // Récupérer tous les blocs input-row existants
-    const existingInputRows = document.querySelectorAll('.input-row');
-
-    // Fonction pour récupérer la liste des pays depuis l'API REST
-    const countriesAPI = 'https://restcountries.com/v3.1/all';
-    async function fetchCountries() {
-        try {
-            const response = await fetch(countriesAPI);
-            const data = await response.json();
-
-            // Créer un nouvel élément select
-            const selectElement = document.createElement('select');
-            selectElement.name = "country[]";
-
-            // Créer une option pour sélectionner
-            const defaultOption = document.createElement('option');
-            defaultOption.value = '';
-            defaultOption.textContent = 'Sélectionner un pays';
-            selectElement.appendChild(defaultOption);
-
-            // Trier les données des pays par ordre alphabétique en français
-            data.sort((a, b) => {
-                return a.name.common.localeCompare(b.name.common, 'fr');
-            });
-
-            // Parcourir les données pour créer les options du menu déroulant
-            data.forEach(country => {
-                const option = document.createElement('option');
-                option.value = country.name.common;
-                option.textContent = country.name.common;
-                selectElement.appendChild(option);
-            });
-
-            return selectElement;
-        } catch (error) {
-            console.error('Une erreur s\'est produite :', error);
-            return null;
-        }
-    }
-
-    const selectElement = await fetchCountries();
-
-    // Pour chaque bloc input-row existant
-    existingInputRows.forEach((row) => {
-        // Récupérer le champ de date dans ce bloc
-        const dateInput = row.querySelector('input[type="date"]');
-
-        // S'il existe un champ de date dans le bloc
-        if (dateInput) {
-            // Insérer l'élément select avant le champ de date
-            row.insertBefore(selectElement.cloneNode(true), dateInput);
-        }
-    });
-}
-
-// Appel de la fonction select() pour ajouter des menus déroulants au clic sur le bouton d'ajout
 select();
-// Appel de la fonction insertSelectInExistingInputs() pour ajouter des menus déroulants aux blocs existants
-insertSelectInExistingInputs();
 updateTotalCharacters();

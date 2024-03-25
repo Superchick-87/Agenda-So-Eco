@@ -1,4 +1,10 @@
 <?php
+function defaultLand($x){
+    if ($x === '') {
+        $x = 'Sélectionner un pays';
+        return $x;
+    }
+};
 $agendaSod = $_GET['agendaSod'];
 // Initialisation du tableau pour stocker les données
 $donnees = array();

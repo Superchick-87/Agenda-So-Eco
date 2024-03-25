@@ -7,9 +7,9 @@
 input,textarea,select {
     margin: 5px;
 }
-input[type="submit"]{
+/* input[type="submit"]{
 margin-top: 20px;
-}
+} */
 input[type="date"]{
 width: 150px;
 }
@@ -17,8 +17,12 @@ width: 150px;
 textarea{
     width: 400px;
 }
+#txtHint{
+    width: 350px;
+    margin: 0px auto;
+}
 .remove-btn { 
-    background-color: red; 
+    background-color: red;
     color: white;
     border: none;
     cursor: pointer;
@@ -27,10 +31,37 @@ textarea{
     margin-top: 6px;
     border-radius: 50%;
     font-size: 2em;
-    line-height: 0px;
+    line-height: 25px;
     transform: rotate(45deg);
+    text-align: center;
+}
+.add-btn {
+    line-height: 28px;
+    top: 69px;
+    right: 558px;
+}
+.save { 
+   top: 100px;
+    right: 558px;
+}
+.pad{
+    background-color: #607D8B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    height: 30px;
+    font-size: 0.8em;
+    text-align: center;
+    position: fixed;
+    text-align: left;
 }
 select{
     width: 150px;
     height: 20px;
+}
+.state{
+    position: fixed;
+    right: 545px;
+    top: 20px;
 }
