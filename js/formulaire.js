@@ -1,3 +1,55 @@
+// Fonction pour charger le fichier CSV et extraire les données
+async function loadCountriesCSV() {
+    try {
+        const response = await fetch('datas/pays.csv');
+        const data = await response.text();
+
+        // Diviser les données CSV en lignes et colonnes
+        const rows = data.split('\n');
+        const countriesData = rows.map(row => row.split(','));
+
+        // Supprimer l'en-tête du CSV
+        countriesData.shift();
+
+        // Créer un objet de mapping pour les codes de pays et les noms de pays
+        const countriesMap = {};
+        countriesData.forEach(country => {
+            const countryCode = country[2];
+            const countryName = country[4];
+            countriesMap[countryCode] = countryName;
+        });
+
+        return countriesMap;
+    } catch (error) {
+        console.error('Une erreur s\'est produite lors du chargement du fichier CSV :', error);
+        return null;
+    }
+}
+
+// Fonction pour mettre à jour le style de la div avec l'image correspondante
+function updateFlagImage(countryCode) {
+    const flagDiv = document.querySelector('.flag'); // Sélectionner la div avec la classe "flag"
+    flagDiv.style.backgroundImage = `url(./images/flags/${countryCode}.png)`; // Mettre à jour le style avec l'image correspondante
+}
+
+// Fonction pour gérer le changement de sélection dans le menu déroulant
+// Fonction pour gérer le changement de sélection dans le menu déroulant
+async function handleSelectChange(value) {
+    // Récupérer la valeur sélectionnée dans le menu déroulant
+    const selectedValue = value;
+
+    // Charger les données CSV
+    const countriesMap = await loadCountriesCSV();
+
+    // Vérifier si les données sont chargées avec succès
+    if (countriesMap) {
+        // Obtenir le nom du pays à partir du code de pays sélectionné
+        const selectedCountryName = countriesMap[selectedValue];
+
+        // Appeler la fonction pour mettre à jour l'image du drapeau avec le code de pays
+        updateFlagImage(selectedValue);
+    }
+}
 function addInputs() {
     let elements = document.querySelectorAll('.input-row').length;
 
@@ -19,6 +71,35 @@ function addInputs() {
         var flag = document.createElement("div");
         flag.classList.add("flag");
         flag.id = "flag" + inputCount; // ID unique pour chaque ensemble
+
+        // Créer le menu déroulant de sélection de pays
+        var selectElement = document.createElement("select");
+        selectElement.id = "countrySelect" + inputCount; // ID unique pour chaque menu déroulant
+        selectElement.name = "country[]";
+        selectElement.addEventListener('change', function () {
+            handleSelectChange(this.value); // Appeler la fonction avec la valeur sélectionnée
+        });
+
+        // Charger les données CSV
+        loadCountriesCSV().then(countriesMap => {
+            // Ajouter des options par défaut
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Sélectionner un pays';
+            selectElement.appendChild(defaultOption);
+
+            // Ajouter les options de pays
+            for (const countryCode in countriesMap) {
+                const countryName = countriesMap[countryCode];
+                const option = document.createElement('option');
+                option.value = countryCode;
+                option.textContent = countryName;
+                selectElement.appendChild(option);
+            }
+        });
+
+        // Ajouter le menu déroulant de sélection de pays au conteneur
+        selFlag.appendChild(selectElement);
 
         var input1 = document.createElement("input");
         input1.id = "date_" + inputCount;
@@ -42,8 +123,8 @@ function addInputs() {
             updateTotalCharacters();
         };
         inputRow.appendChild(selFlag);
+        selFlag.appendChild(input1);
         selFlag.appendChild(flag);
-        inputRow.appendChild(input1);
         inputRow.appendChild(textarea);
         inputRow.appendChild(removeBtn);
         // container.appendChild(inputRow);
