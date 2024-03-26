@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-   
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    <input type="date" name="agendaSod" id="agendaSod" onchange="showHint(this.value)">
     <div id="txtHint"></div>
+    <div class="colorInfo agendaDateSize">
+        <input id="agendaSod" class="agendaDate" type="date" name="agendaSod" onchange="showHint(this.value)">
+    </div>
 
     <script>
         var agendaSod = document.getElementById('agendaSod');
@@ -24,18 +26,8 @@
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("txtHint").innerHTML = this.responseText;
-                    
-                    // Récupérez tous les textarea
-                    const textAreas = document.querySelectorAll('textarea');
-
-                    // Attachez un gestionnaire d'événements à chaque textarea
-                    textAreas.forEach(textArea => {
-                        textArea.addEventListener('input', updateTotalCharacters);
-                    });
-                    
-                    updateTotalCharacters();
                     select();
-
+                    updateTotalCharacters();
                 }
             };
             xhttp.open("GET", "work.php?agendaSod=" + str, true);

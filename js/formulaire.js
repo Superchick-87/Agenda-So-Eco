@@ -12,6 +12,14 @@ function addInputs() {
         inputRow.classList.add("input-row");
         inputRow.id = "input-row-" + inputCount; // ID unique pour chaque ensemble
 
+        var selFlag = document.createElement("div");
+        selFlag.classList.add("flex");
+        selFlag.id = "selFlag" + inputCount; // ID unique pour chaque ensemble
+
+        var flag = document.createElement("div");
+        flag.classList.add("flag");
+        flag.id = "flag" + inputCount; // ID unique pour chaque ensemble
+
         var input1 = document.createElement("input");
         input1.id = "date_" + inputCount;
         input1.type = "date";
@@ -22,6 +30,7 @@ function addInputs() {
         textarea.rows = "5";
         textarea.name = "event[]";
         textarea.placeholder = "Evènement";
+        textarea.oninput = "updateTotalCharacters()";
         textarea.addEventListener('input', updateTotalCharacters);
 
         var removeBtn = document.createElement("div");
@@ -30,15 +39,17 @@ function addInputs() {
         removeBtn.textContent = "+";
         removeBtn.onclick = function () {
             inputRow.remove(); // Supprimer le bloc parent
+            updateTotalCharacters();
         };
-
+        inputRow.appendChild(selFlag);
+        selFlag.appendChild(flag);
         inputRow.appendChild(input1);
         inputRow.appendChild(textarea);
         inputRow.appendChild(removeBtn);
         // container.appendChild(inputRow);
-        
+
         // Insérer la nouvelle rangée juste avant l'élément de soumission
-        container.insertBefore(inputRow, document.getElementById("valid"));
+        container.insertBefore(inputRow, document.getElementById("save"));
     }
 }
 
@@ -88,7 +99,33 @@ function updateTotalCharacters() {
     });
 
     // Mettre à jour le nombre total de caractères affiché
-    document.getElementById('totalCharacters').textContent = totalCharacters;
+    const totalCharactersElement = document.getElementById('totalCharacters');
+    totalCharactersElement.textContent = totalCharacters;
+
+    // Mettre à jour le texte de l'élément h4 selon la valeur de totalCharacters
+    const signesElement = document.getElementById('signes');
+    if (totalCharacters > 0) {
+        signesElement.textContent = totalCharacters + " signes";
+    } else {
+        signesElement.textContent = "0 signe";
+    }
+
+    // Modifier la classe de l'élément en fonction du nombre total de caractères
+    const elementsColorInfoClass = document.querySelectorAll('.colorInfo');
+    const elementsColorInfoClassOK = document.querySelectorAll('.colorInfoOk');
+    if (totalCharacters >= 1110 && totalCharacters <= 1250) {
+        elementsColorInfoClass.forEach(element => {
+            element.classList.remove('colorInfo');
+            element.classList.add('colorInfoOk');
+        });
+        document.getElementById('make').style.display = 'block'; // Afficher le bouton submit
+    } else {
+        elementsColorInfoClassOK.forEach(element => {
+            element.classList.remove('colorInfoOk');
+            element.classList.add('colorInfo');
+        });
+        document.getElementById('make').style.display = 'none'; // Afficher le bouton submit
+    }
 }
 
 
@@ -108,24 +145,24 @@ function select() {
         try {
             const response = await fetch(countriesCSV);
             const data = await response.text();
-    
+
             // Diviser les données CSV en lignes et colonnes
             const rows = data.split('\n');
             const countries = rows.map(row => row.split(',')[4]); // La 5ème colonne contient les noms des pays
-    
+
             // Trier les pays par ordre alphabétique
             countries.sort((a, b) => a.localeCompare(b));
-    
+
             // Créer un nouvel élément select
             const selectElement = document.createElement('select');
             selectElement.name = 'country[]';
-    
+
             // Créer une option pour sélectionner
             const defaultOption = document.createElement('option');
             defaultOption.value = '';
             defaultOption.textContent = 'Sélectionner un pays';
             selectElement.appendChild(defaultOption);
-    
+
             // Parcourir les données triées pour créer les options du menu déroulant
             countries.forEach(country => {
                 const option = document.createElement('option');
@@ -133,14 +170,14 @@ function select() {
                 option.textContent = country;
                 selectElement.appendChild(option);
             });
-    
+
             return selectElement;
         } catch (error) {
             console.error('Une erreur s\'est produite :', error);
             return null;
         }
     }
-    
+
 
     // Ajouter un écouteur d'événements au bouton d'ajout
     const addCountrySelectBtn = document.getElementById('add-btn');
@@ -150,16 +187,24 @@ function select() {
             let elements = document.querySelectorAll('.input-row').length;
             let dropdownCount = elements;
 
-            // Récupérer le conteneur
+            // // Récupérer le conteneur
+            // const parentContainer = document.getElementById("input-row-" + dropdownCount);
+            // const firstDateInput = parentContainer.querySelector('input[type="date"]');
+            // const selFlag = parentContainer.querySelector('.flex');
+            // if (firstDateInput) {
+            //     parentContainer.insertBefore(selectElement, firstDateInput);
+            // }
             const parentContainer = document.getElementById("input-row-" + dropdownCount);
             const firstDateInput = parentContainer.querySelector('input[type="date"]');
+            const selFlag = parentContainer.querySelector('.flex');
+            const flag = parentContainer.querySelector('.flag');
             if (firstDateInput) {
-                parentContainer.insertBefore(selectElement, firstDateInput);
+                selFlag.insertBefore(selectElement, flag);
             }
         }
     });
 
 }
 
-select();
-updateTotalCharacters();
+// select();
+// updateTotalCharacters();

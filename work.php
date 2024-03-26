@@ -6,15 +6,8 @@ $filename = 'datas/' . $agendaSod . '_datas.csv';
 if (file_exists($filename)) {
     $file = fopen($filename, 'r');
     echo '
-    <h2 class="state">Agenda en cours</h2>
-   
-    ';
-    echo '
-        <h4>Nombre total de signes : <span id="totalCharacters">0</span></h4>
-
         <form id="form2" action="done.php?" method="get">
         <input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
-    
         <div id="inputs-container">
     ';
 
@@ -38,7 +31,6 @@ if (file_exists($filename)) {
     while (($row = fgetcsv($file)) !== false) {
         // Récupération du nom du pays à partir du fichier CSV
         $countryName = $row[1];
-        
         echo '
         <div class="input-row" id="input-row-' . $a++ . '">
             <select name="country[]" id="country_' . $s++ . '">';
@@ -56,41 +48,47 @@ if (file_exists($filename)) {
                 echo '<option value="' . $pays[4] . '" ' . $selected . '>' . $pays[4] . '</option>';
             }
         }
-
         echo '</select>
             <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
-            <textarea  id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement">' . $row[2] . '</textarea>
+            <textarea  id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . $row[2] . '</textarea>
             <div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
         </div>';
     }
 
     echo '
-       
-            
-            <input id="valid" class="save pad" type="submit" value="Sauver">
+    <input id="save" class="save pad" type="submit" name="save" value="Sauver">
+    <input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">
+    <input id="add-btn" onclick="addInputs()" class="add-btn pad" type="button" value="Ajouter un évènement">
     
     </form>
-    <input id="add-btn" onclick="addInputs()" class="add-btn pad" type="button" value="Ajouter un évènement">
-
+    </div>
+    ';
+    echo '
+    <div class="state colorInfo">
+    <h2>Agenda en cours</h2>
+    <p id="totalCharacters" style="display:none;">0</p>
+    <h4 id="signes"></h4>
     </div>
     ';
 
     fclose($file);
 } else {
-    echo "
-        <h2>Vous commencez l'édition d'un nouvel agenda.</h2>
-    ";
+
     echo '
-        <h4>Nombre total de signe : <span id="totalCharacters">0</span></h4>
+        
 
+        
+        <form id="form2" action="done.php?" method="get">
+        <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
+        <div id="inputs-container">
+        </div>
         <input id="add-btn" onclick="addInputs()" class="add-btn pad" type="button" value="Ajouter un évènement">
-
-            <form id="form2" action="done.php?" method="get">
-               <input type="text" name="agendaSod" value=' . $agendaSod . '>
-            <div id="inputs-container">
-                </div>
                 <input type="submit" value="Envoyer">
             </form>
+            <div class="state colorInfo">
+            <h2>Nouvel agenda</h2>
+            <p id="totalCharacters" style="display:none;">0</p>
+            <h4 id="signes"> signes</h4>
+            </div>
     ';
 }
-?>

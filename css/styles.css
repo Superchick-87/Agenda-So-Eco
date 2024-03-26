@@ -1,67 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: radial-gradient(currentColor .5px, transparent .5px);
+    background-size: calc(10* .5px) calc(10* .5px);
+    font-family: 'Roboto', serif;
+
+}
+
+h2,
+h4 {
+    margin: 7px;
+}
+
+form {
+    margin-top: 40px;
+}
+
 .input-row {
     display: flex;
     margin-bottom: 5px;
     flex-direction: column;
 }
 
-input,textarea,select {
+input,
+textarea,
+select {
     margin: 5px;
 }
+
 /* input[type="submit"]{
 margin-top: 20px;
 } */
-input[type="date"]{
-width: 150px;
+input[type="date"] {
+    width: 150px;
 }
 
-textarea{
+textarea {
     width: 400px;
 }
-#txtHint{
+
+#txtHint {
     width: 350px;
     margin: 0px auto;
 }
-.remove-btn { 
-    background-color: red;
+
+.remove-btn {
+    background-color: brown;
     color: white;
     border: none;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-top: 6px;
     border-radius: 50%;
-    font-size: 2em;
+    font-size: 1.5em;
     line-height: 25px;
     transform: rotate(45deg);
     text-align: center;
 }
+
 .add-btn {
     line-height: 28px;
     top: 69px;
     right: 558px;
 }
-.save { 
-   top: 100px;
+
+.save {
+    top: 100px;
     right: 558px;
 }
-.pad{
-    background-color: #607D8B;
+
+.pad {
+    background-color: #2f6ca0;
     color: white;
     border: none;
     cursor: pointer;
     width: 150px;
     height: 30px;
-    font-size: 0.8em;
+    font-size: 1em;
     text-align: center;
-    position: fixed;
-    text-align: left;
 }
-select{
+
+select {
     width: 150px;
     height: 20px;
 }
-.state{
+
+.state {
+    padding: 5px 10px;
     position: fixed;
-    right: 545px;
-    top: 20px;
+    left: 0;
+    top: 37px;
+    width: 200px;
+    color: white;
+}
+
+.colorInfo {
+    background-color: #C1121F;
+}
+
+.colorInfoOk {
+    background-color: #55A630;
+}
+
+.flag {
+    width: 50px;
+    height: 50px;
+    background-color: #C1121F;
+}
+
+.agendaDateSize {
+    position: fixed;
+    top: 4px;
+    text-align: center;
+    height: 32px;
+    width: 220px;
 }
