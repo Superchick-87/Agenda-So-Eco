@@ -39,13 +39,13 @@ if (file_exists($filename)) {
         if (empty($countryName)) {
             // Afficher les options du menu déroulant directement à partir des données obtenues
             foreach ($paysData as $pays) {
-                echo '<option value="' . $pays[4] . '">' . $pays[4] . '</option>';
+                echo '<option value="' . $pays[2] . '">' . $pays[4] . '</option>';
             }
         } else {
             // Sinon, afficher la liste des pays avec la correspondance sélectionnée
             foreach ($paysData as $pays) {
-                $selected = ($pays[4] == $countryName) ? 'selected' : '';
-                echo '<option value="' . $pays[4] . '" ' . $selected . '>' . $pays[4] . '</option>';
+                $selected = ($pays[2] == $countryName) ? 'selected' : '';
+                echo '<option value="' . $pays[2] . '" ' . $selected . '>' . $pays[4] . '</option>';
             }
         }
         echo '</select>

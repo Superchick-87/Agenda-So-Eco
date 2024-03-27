@@ -27,14 +27,14 @@ async function loadCountriesCSV() {
 }
 
 // Fonction pour mettre à jour le style de la div avec l'image correspondante
-function updateFlagImage(countryCode) {
-    const flagDiv = document.querySelector('.flag'); // Sélectionner la div avec la classe "flag"
+function updateFlagImage(countryCode, flagDivId) {
+    const flagDiv = document.getElementById(flagDivId); // Sélectionner la div de drapeau correspondante
+    console.log(flagDiv);
     flagDiv.style.backgroundImage = `url(./images/flags/${countryCode}.png)`; // Mettre à jour le style avec l'image correspondante
 }
 
 // Fonction pour gérer le changement de sélection dans le menu déroulant
-// Fonction pour gérer le changement de sélection dans le menu déroulant
-async function handleSelectChange(value) {
+async function handleSelectChange(value, flagDivId) {
     // Récupérer la valeur sélectionnée dans le menu déroulant
     const selectedValue = value;
 
@@ -47,15 +47,15 @@ async function handleSelectChange(value) {
         const selectedCountryName = countriesMap[selectedValue];
 
         // Appeler la fonction pour mettre à jour l'image du drapeau avec le code de pays
-        updateFlagImage(selectedValue);
+        updateFlagImage(selectedValue, flagDivId);
     }
 }
+let inputCount = 0; // Déclaration de la variable globale
+
 function addInputs() {
     let elements = document.querySelectorAll('.input-row').length;
-
     var inputCount = elements; // Compteur pour les ID uniques
     var container = document.getElementById("inputs-container");
-
     inputCount++; // Incrémenter le compteur
 
     // Vérifier si un élément avec cet ID existe déjà
@@ -77,7 +77,7 @@ function addInputs() {
         selectElement.id = "countrySelect" + inputCount; // ID unique pour chaque menu déroulant
         selectElement.name = "country[]";
         selectElement.addEventListener('change', function () {
-            handleSelectChange(this.value); // Appeler la fonction avec la valeur sélectionnée
+            handleSelectChange(this.value, 'flag' + inputCount); // Appeler la fonction avec la valeur sélectionnée et l'ID du div flag correspondant
         });
 
         // Charger les données CSV
@@ -121,18 +121,29 @@ function addInputs() {
         removeBtn.onclick = function () {
             inputRow.remove(); // Supprimer le bloc parent
             updateTotalCharacters();
+            updateRowIds();
         };
         inputRow.appendChild(selFlag);
         selFlag.appendChild(input1);
         selFlag.appendChild(flag);
         inputRow.appendChild(textarea);
         inputRow.appendChild(removeBtn);
-        // container.appendChild(inputRow);
-
-        // Insérer la nouvelle rangée juste avant l'élément de soumission
         container.insertBefore(inputRow, document.getElementById("save"));
     }
 }
+
+async function handleSelectChange(value, flagDivId) {
+    const selectedValue = value;
+    const countriesMap = await loadCountriesCSV();
+    if (countriesMap) {
+        const selectedCountryName = countriesMap[selectedValue];
+        updateFlagImage(selectedValue, flagDivId);
+    }
+}
+
+
+// Reste de votre code...
+
 
 // Sert à supprimer un bloc -> Select | Date | Textarea  
 function removeInputs(id) {
@@ -140,23 +151,42 @@ function removeInputs(id) {
     inputRow.parentElement.removeChild(inputRow);
 
     // Mise à jour des identifiants des éléments restants
-    updateRowIds();
+    // Mise à jour des identifiants des éléments restants
+    // updateRowIds();
     updateTotalCharacters();
 }
 
-// Fonction pour mettre à jour les identifiants des éléments restants
 function updateRowIds() {
     var remainingRows = document.querySelectorAll('.input-row');
     remainingRows.forEach(function (row, index) {
-        row.id = 'input-row-' + (index + 1); // Mise à jour de l'identifiant
-        row.querySelector('input[type="date"]').id = 'date_' + (index + 1); // Mise à jour de l'identifiant de l'input date
-        row.querySelector('textarea').id = 'event_' + (index + 1); // Mise à jour de l'identifiant de la textarea
-        row.querySelector('.remove-btn').id = 'remove-btn-' + (index + 1); // Mise à jour de l'identifiant du bouton de suppression
+        var newIndex = index + 1;
+        row.id = 'input-row-' + newIndex; // Mise à jour de l'identifiant
+
+        // Mise à jour de l'identifiant de l'input date
+        row.querySelector('input[type="date"]').id = 'date_' + newIndex;
+
+        // Mise à jour de l'identifiant de la textarea
+        row.querySelector('textarea').id = 'event_' + newIndex;
+
+        // Mise à jour de l'identifiant du select
+        row.querySelector('select').id = 'countrySelect' + newIndex;
+
+        // Mise à jour de l'identifiant de la div de drapeau
+        row.querySelector('.flag').id = 'flag' + newIndex;
+
+        // Mise à jour de l'identifiant de la div de sélection de drapeau
+        row.querySelector('.flex').id = 'selFlag' + newIndex;
+
+        // Mise à jour de l'identifiant du bouton de suppression
+        row.querySelector('.remove-btn').id = 'remove-btn-' + newIndex;
+
+        // Mettre à jour l'événement de suppression avec le nouvel identifiant
         row.querySelector('.remove-btn').onclick = function () {
-            removeInputs('input-row-' + (index + 1));
+            removeInputs('input-row-' + newIndex);
         };
     });
 }
+
 
 // Supprimer les éléments input-row déjà présents au chargement de la page
 document.addEventListener('DOMContentLoaded', function () {
@@ -208,84 +238,3 @@ function updateTotalCharacters() {
         document.getElementById('make').style.display = 'none'; // Afficher le bouton submit
     }
 }
-
-
-
-
-// @ Ajout su select
-function select() {
-    var elements = document.querySelectorAll('.input-row').length;
-    // Chemin vers le fichier pays.csv
-    const countriesCSV = 'datas/pays.csv';
-
-    // Variable pour garder une trace du nombre de menus déroulants ajoutés
-    let dropdownCount = elements;
-
-    // Fonction pour récupérer la liste des pays depuis le fichier CSV
-    async function fetchCountries() {
-        try {
-            const response = await fetch(countriesCSV);
-            const data = await response.text();
-
-            // Diviser les données CSV en lignes et colonnes
-            const rows = data.split('\n');
-            const countries = rows.map(row => row.split(',')[4]); // La 5ème colonne contient les noms des pays
-
-            // Trier les pays par ordre alphabétique
-            countries.sort((a, b) => a.localeCompare(b));
-
-            // Créer un nouvel élément select
-            const selectElement = document.createElement('select');
-            selectElement.name = 'country[]';
-
-            // Créer une option pour sélectionner
-            const defaultOption = document.createElement('option');
-            defaultOption.value = '';
-            defaultOption.textContent = 'Sélectionner un pays';
-            selectElement.appendChild(defaultOption);
-
-            // Parcourir les données triées pour créer les options du menu déroulant
-            countries.forEach(country => {
-                const option = document.createElement('option');
-                option.value = country;
-                option.textContent = country;
-                selectElement.appendChild(option);
-            });
-
-            return selectElement;
-        } catch (error) {
-            console.error('Une erreur s\'est produite :', error);
-            return null;
-        }
-    }
-
-
-    // Ajouter un écouteur d'événements au bouton d'ajout
-    const addCountrySelectBtn = document.getElementById('add-btn');
-    addCountrySelectBtn.addEventListener('click', async function () {
-        const selectElement = await fetchCountries();
-        if (selectElement) {
-            let elements = document.querySelectorAll('.input-row').length;
-            let dropdownCount = elements;
-
-            // // Récupérer le conteneur
-            // const parentContainer = document.getElementById("input-row-" + dropdownCount);
-            // const firstDateInput = parentContainer.querySelector('input[type="date"]');
-            // const selFlag = parentContainer.querySelector('.flex');
-            // if (firstDateInput) {
-            //     parentContainer.insertBefore(selectElement, firstDateInput);
-            // }
-            const parentContainer = document.getElementById("input-row-" + dropdownCount);
-            const firstDateInput = parentContainer.querySelector('input[type="date"]');
-            const selFlag = parentContainer.querySelector('.flex');
-            const flag = parentContainer.querySelector('.flag');
-            if (firstDateInput) {
-                selFlag.insertBefore(selectElement, flag);
-            }
-        }
-    });
-
-}
-
-// select();
-// updateTotalCharacters();
