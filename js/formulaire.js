@@ -76,9 +76,11 @@ function addInputs() {
         var selectElement = document.createElement("select");
         selectElement.id = "countrySelect" + inputCount; // ID unique pour chaque menu déroulant
         selectElement.name = "country[]";
+        selectElement.className = "country-select";
         selectElement.addEventListener('change', function () {
             handleSelectChange(this.value, 'flag' + inputCount); // Appeler la fonction avec la valeur sélectionnée et l'ID du div flag correspondant
         });
+
 
         // Charger les données CSV
         loadCountriesCSV().then(countriesMap => {
@@ -122,38 +124,81 @@ function addInputs() {
             inputRow.remove(); // Supprimer le bloc parent
             updateTotalCharacters();
             updateRowIds();
+            // // Après l'ajout des éléments, faire correspondre les sélecteurs déjà présents aux divs de drapeau
+            // updateFlagDivAssociations();
         };
         inputRow.appendChild(selFlag);
-        selFlag.appendChild(input1);
         selFlag.appendChild(flag);
+        selFlag.appendChild(input1);
         inputRow.appendChild(textarea);
         inputRow.appendChild(removeBtn);
         container.insertBefore(inputRow, document.getElementById("save"));
-    }
-}
 
+    }
+
+    updateFlagDivAssociations();
+}
 async function handleSelectChange(value, flagDivId) {
     const selectedValue = value;
     const countriesMap = await loadCountriesCSV();
     if (countriesMap) {
+
         const selectedCountryName = countriesMap[selectedValue];
         updateFlagImage(selectedValue, flagDivId);
     }
 }
 
-
-// Reste de votre code...
-
-
 // Sert à supprimer un bloc -> Select | Date | Textarea  
+// function removeInputs(id) {
+//     var inputRow = document.getElementById(id);
+//     inputRow.parentElement.removeChild(inputRow);
+
+//     // Mise à jour des identifiants des éléments restants
+//     updateTotalCharacters();
+//     updateRowIds();
+// }
+
 function removeInputs(id) {
     var inputRow = document.getElementById(id);
     inputRow.parentElement.removeChild(inputRow);
 
+
+    // Mettre à jour les sélecteurs et les div de drapeau restants
+    document.querySelectorAll('.flex').forEach(function (flexDiv, index) {
+        const selectElement = flexDiv.querySelector('select');
+        const flagDivId = 'flag' + (index + 1);
+        const selectedValue = selectElement.value;
+        handleSelectChange(selectedValue, flagDivId);
+    });
     // Mise à jour des identifiants des éléments restants
-    // Mise à jour des identifiants des éléments restants
-    // updateRowIds();
     updateTotalCharacters();
+    updateRowIds();
+    // Après l'ajout des éléments, faire correspondre les sélecteurs déjà présents aux divs de drapeau
+    updateFlagDivAssociations();
+
+}
+
+// Fonction pour mettre à jour les associations entre les sélecteurs et les divs de drapeau
+function updateFlagDivAssociations() {
+    // Sélectionner tous les sélecteurs présents
+    const selectElements = document.querySelectorAll('.country-select');
+    // Pour chaque sélecteur
+    selectElements.forEach(function (selectElement, index) {
+        // Trouver le div de drapeau associé en utilisant la classe spécifique
+        const flagDiv = selectElement.parentElement.querySelector('.flag');
+        // Si le div de drapeau est trouvé
+        if (flagDiv) {
+            // Obtenir la valeur sélectionnée dans le sélecteur
+            const selectedValue = selectElement.value;
+            // Appeler la fonction pour mettre à jour l'image du drapeau avec la valeur sélectionnée
+            updateFlagImage(selectedValue, flagDiv);
+
+            // Mettre à jour les IDs des sélecteurs et des divs de drapeau pour éviter le décalage de 1
+            const newIndex = index + 1;
+            selectElement.id = 'countrySelect' + newIndex;
+            flagDiv.id = 'flag' + newIndex;
+        }
+    });
 }
 
 function updateRowIds() {
@@ -183,6 +228,7 @@ function updateRowIds() {
         // Mettre à jour l'événement de suppression avec le nouvel identifiant
         row.querySelector('.remove-btn').onclick = function () {
             removeInputs('input-row-' + newIndex);
+
         };
     });
 }
@@ -224,17 +270,17 @@ function updateTotalCharacters() {
     // Modifier la classe de l'élément en fonction du nombre total de caractères
     const elementsColorInfoClass = document.querySelectorAll('.colorInfo');
     const elementsColorInfoClassOK = document.querySelectorAll('.colorInfoOk');
-    if (totalCharacters >= 1110 && totalCharacters <= 1250) {
-        elementsColorInfoClass.forEach(element => {
-            element.classList.remove('colorInfo');
-            element.classList.add('colorInfoOk');
-        });
-        document.getElementById('make').style.display = 'block'; // Afficher le bouton submit
-    } else {
-        elementsColorInfoClassOK.forEach(element => {
-            element.classList.remove('colorInfoOk');
-            element.classList.add('colorInfo');
-        });
-        document.getElementById('make').style.display = 'none'; // Afficher le bouton submit
-    }
+    // if (totalCharacters >= 1110 && totalCharacters <= 1250) {
+    //     elementsColorInfoClass.forEach(element => {
+    //         element.classList.remove('colorInfo');
+    //         element.classList.add('colorInfoOk');
+    //     });
+    //     document.getElementById('make').style.display = 'block'; // Afficher le bouton submit
+    // } else {
+    //     elementsColorInfoClassOK.forEach(element => {
+    //         element.classList.remove('colorInfoOk');
+    //         element.classList.add('colorInfo');
+    //     });
+    //     document.getElementById('make').style.display = 'none'; // Afficher le bouton submit
+    // }
 }

@@ -70,14 +70,9 @@ if (file_exists($filename)) {
     <h4 id="signes"></h4>
     </div>
     ';
-
     fclose($file);
 } else {
-
     echo '
-        
-
-        
         <form id="form2" action="done.php?" method="get">
         <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
         <div id="inputs-container">
