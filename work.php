@@ -33,7 +33,9 @@ if (file_exists($filename)) {
         $countryName = $row[1];
         echo '
         <div class="input-row" id="input-row-' . $a++ . '">
-            <select name="country[]" id="country_' . $s++ . '">';
+        <div class="flex" id="selFag' . $d++ . '">
+        <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
+            <select name="country[]" id="country_' . $s++ . '" >';
 
         // Si aucun pays n'est spécifié dans le fichier CSV
         if (empty($countryName)) {
@@ -48,10 +50,16 @@ if (file_exists($filename)) {
                 echo '<option value="' . $pays[2] . '" ' . $selected . '>' . $pays[4] . '</option>';
             }
         }
-        echo '</select>
-            <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
+        echo '</select>';
+        foreach ($paysData as $pays) {
+            if ($pays[2] == $countryName) {
+                echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.png);"></div>';
+            }
+        }
+        echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
+
+       </div>
             <textarea  id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . $row[2] . '</textarea>
-            <div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
         </div>';
     }
 
