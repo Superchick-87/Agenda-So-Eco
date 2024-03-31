@@ -39,45 +39,46 @@ if (file_exists($filename)) {
         $countryName = $row[1];
         echo '
         <div class="input-row" id="input-row-' . $a++ . '">
-        <div class="flex" id="selFag' . $d++ . '">
-        <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
-            <select name="country[]" id="country_' . $s++ . '" >';
+            <div class="flex" id="selFag' . $d++ . '">
+                <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
+                <select name="country[]" id="country_' . $s++ . '" >';
 
-        // Si aucun pays n'est spécifié dans le fichier CSV
-        if (empty($countryName)) {
-            // Afficher les options du menu déroulant directement à partir des données obtenues
-            foreach ($paysData as $pays) {
-                
-                echo '<option value="' . $pays[2] . '">' . $pays[4] . '</option>';
-            }
-        } else {
-            // Sinon, afficher la liste des pays avec la correspondance sélectionnée
-            foreach ($paysData as $pays) {
-                $selected = ($pays[2] == $countryName) ? 'selected' : '';
-                echo '<option value="' . $pays[2] . '" ' . $selected . '>' . $pays[4] . '</option>';
-            }
+                    // Si aucun pays n'est spécifié dans le fichier CSV
+                    if (empty($countryName)) {
+                        // Afficher les options du menu déroulant directement à partir des données obtenues
+                        foreach ($paysData as $pays) {
+                            
+                            echo '<option value="' . $pays[2] . '">' . $pays[4] . '</option>';
+                        }
+                    } else {
+                        // Sinon, afficher la liste des pays avec la correspondance sélectionnée
+                        foreach ($paysData as $pays) {
+                            $selected = ($pays[2] == $countryName) ? 'selected' : '';
+                            echo '<option value="' . $pays[2] . '" ' . $selected . '>' . $pays[4] . '</option>';
+                        }
+                    }
+                echo '</select>';
+                    foreach ($paysData as $pays) {
+                        if ($pays[2] == $countryName) {
+                            echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.png);"></div>';
+                        }
+                    }
+                    echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
+
+            </div>
+                <textarea  id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . $row[2] . '</textarea>
+            </div> ';
         }
-        echo '</select>';
-        foreach ($paysData as $pays) {
-            if ($pays[2] == $countryName) {
-                echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.png);"></div>';
-            }
-        }
-        echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
 
-       </div>
-            <textarea  id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . $row[2] . '</textarea>
-        </div>';
-    }
-
-    echo '
-    <input id="save" class="save pad" type="submit" name="save" value="Sauver">
-    <input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">
-    <input id="add-btn" onclick="addInputs()" class="add-btn pad" type="button" value="Ajouter un évènement">
-    
-    </form>
-    </div>
-    ';
+            echo '
+            <div class="add-btn" id="add-btn" onclick="addInputs()">+
+            </div>
+            <div class="menu">
+                <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">
+                <input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">
+            </div>
+        </form>
+    </div>';
     echo '
     <div class="state colorInfo">
     <h2>Agenda en cours</h2>
@@ -91,9 +92,13 @@ if (file_exists($filename)) {
         <form id="form2" action="done.php?" method="get">
         <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
         <div id="inputs-container">
+        <div class="add-btn" id="add-btn" onclick="addInputs()">+
         </div>
-        <input id="add-btn" onclick="addInputs()" class="add-btn pad" type="button" value="Ajouter un évènement">
-                <input type="submit" value="Envoyer">
+        <div class="menu">
+            <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">
+            <input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">
+        </div>
+        </div>
             </form>
             <div class="state colorInfo">
             <h2>Nouvel agenda</h2>
@@ -102,23 +107,3 @@ if (file_exists($filename)) {
             </div>
     ';
 }
-// echo '
-// <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-// <script>
-//     $(document).ready(function() {
-//         function updateFlagImage(selectElement) {
-//             var selectedCountryCode = selectElement.val();
-//             var flagElement = selectElement.closest(".input-row").find(".flag");
-//             flagElement.css("background-image", "url(images/flags/" + selectedCountryCode + ".png)");
-//         }
-
-//         $("select[name=\'country[]\']").change(function() {
-//             updateFlagImage($(this));
-//         });
-
-//         $("select[name=\'country[]\']").each(function() {
-//             updateFlagImage($(this));
-//         });
-//     });
-// </script>
-// ';

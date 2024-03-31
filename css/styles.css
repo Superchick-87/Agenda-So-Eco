@@ -69,18 +69,21 @@ textarea {
 }
 
 .add-btn {
-    line-height: 28px;
-    top: 69px;
-    right: 558px;
-}
-
-.save {
-    top: 100px;
-    right: 558px;
+    background-color: #607D8B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 4em;
+    line-height: 47px;
+    text-align: center;
+    margin-top: -20px;
 }
 
 .pad {
-    background-color: #2f6ca0;
+    background-color: #607D8B;
     color: white;
     border: none;
     cursor: pointer;
@@ -88,8 +91,21 @@ textarea {
     height: 30px;
     font-size: 1em;
     text-align: center;
+    margin: 0px;
+}
+.add-btn:hover, .pad:hover  {
+    background-color: #455A64; /* Changement de couleur au survol */
+}
+.save {
+    top: 100px;
+    right: 558px;
 }
 
+.menu{
+    position: fixed;
+    left: 0px;
+    top: 117px;
+}
 select {
     width: 150px;
     height: 20px;

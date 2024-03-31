@@ -120,7 +120,7 @@ function addInputs() {
     selFlag.appendChild(flag);
     inputRow.appendChild(textarea);
     selFlag.appendChild(removeBtn);
-    container.insertBefore(inputRow, document.getElementById("save"));
+    container.insertBefore(inputRow, document.getElementById("add-btn"));
 
 
 }
@@ -161,31 +161,39 @@ function updateTotalCharacters() {
     // Mettre à jour le nombre total de caractères affiché
     const totalCharactersElement = document.getElementById('totalCharacters');
     totalCharactersElement.textContent = totalCharacters;
-
-    // Mettre à jour le texte de l'élément h4 selon la valeur de totalCharacters
     const signesElement = document.getElementById('signes');
+
+    //* Mettre à jour le texte de l'élément h4 selon la valeur de totalCharacters
+    //* et apparaitre / masquer bouton 'sauver'
+
+    
+    if (totalCharacters < 2) {
+        signesElement.textContent = totalCharacters + " signe";
+        document.getElementById('save').style.display = 'none';
+    }
     if (totalCharacters > 1) {
         signesElement.textContent = totalCharacters + " signes";
-    } else {
-        // signesElement.textContent = "0 signe";
-        signesElement.textContent = totalCharacters + " signe";
-
+        document.getElementById('save').style.display = 'block';
     }
 
-    // Modifier la classe de l'élément en fonction du nombre total de caractères
+    //* Modifier la classe de l'élément en fonction du nombre total de caractères
+    //* et apparaitre / masquer bouton 'sauvegarde'
     const elementsColorInfoClass = document.querySelectorAll('.colorInfo');
     const elementsColorInfoClassOK = document.querySelectorAll('.colorInfoOk');
     if (totalCharacters >= 1500 && totalCharacters <= 1600) {
         elementsColorInfoClass.forEach(element => {
             element.classList.remove('colorInfo');
             element.classList.add('colorInfoOk');
+            document.getElementById('make').style.display = 'block'; // Afficher le bouton submit
         });
-        document.getElementById('make').style.display = 'block'; // Afficher le bouton submit
+        // document.getElementById('savee').style.display = 'block'; // Afficher le bouton submit
+
     } else {
         elementsColorInfoClassOK.forEach(element => {
             element.classList.remove('colorInfoOk');
             element.classList.add('colorInfo');
         });
         document.getElementById('make').style.display = 'none'; // Afficher le bouton submit
+
     }
 }
