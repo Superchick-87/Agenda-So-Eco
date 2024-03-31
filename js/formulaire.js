@@ -164,10 +164,12 @@ function updateTotalCharacters() {
 
     // Mettre à jour le texte de l'élément h4 selon la valeur de totalCharacters
     const signesElement = document.getElementById('signes');
-    if (totalCharacters > 0) {
+    if (totalCharacters > 1) {
         signesElement.textContent = totalCharacters + " signes";
     } else {
-        signesElement.textContent = "0 signe";
+        // signesElement.textContent = "0 signe";
+        signesElement.textContent = totalCharacters + " signe";
+
     }
 
     // Modifier la classe de l'élément en fonction du nombre total de caractères

@@ -5,6 +5,12 @@ $filename = 'datas/' . $agendaSod . '_datas.csv';
 
 if (file_exists($filename)) {
     $file = fopen($filename, 'r');
+
+    // Fonction pour mettre à jour l'image du drapeau
+    // Écouteur événements pour les changements de sélection
+    // Appel initial pour mettre à jour les images des drapeaux
+   
+
     echo '
         <form id="form2" action="done.php?" method="get">
         <input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
@@ -41,6 +47,7 @@ if (file_exists($filename)) {
         if (empty($countryName)) {
             // Afficher les options du menu déroulant directement à partir des données obtenues
             foreach ($paysData as $pays) {
+                
                 echo '<option value="' . $pays[2] . '">' . $pays[4] . '</option>';
             }
         } else {
@@ -95,3 +102,23 @@ if (file_exists($filename)) {
             </div>
     ';
 }
+// echo '
+// <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+// <script>
+//     $(document).ready(function() {
+//         function updateFlagImage(selectElement) {
+//             var selectedCountryCode = selectElement.val();
+//             var flagElement = selectElement.closest(".input-row").find(".flag");
+//             flagElement.css("background-image", "url(images/flags/" + selectedCountryCode + ".png)");
+//         }
+
+//         $("select[name=\'country[]\']").change(function() {
+//             updateFlagImage($(this));
+//         });
+
+//         $("select[name=\'country[]\']").each(function() {
+//             updateFlagImage($(this));
+//         });
+//     });
+// </script>
+// ';
