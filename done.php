@@ -54,3 +54,4 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     echo "Tous les champs du formulaire ne sont pas définis.";
     }
 }
+include('pdf.php');
