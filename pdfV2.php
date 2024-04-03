@@ -194,8 +194,19 @@ if (file_exists($csvFile)) {
         $data = str_getcsv($line);
         // Vérifier si la ligne contient au moins 3 colonnes
         if (count($data) >= 3) {
+            $date = trim($data[0]); // Utilisez trim() pour supprimer les espaces blancs autour de la date
             $event = trim($data[2]); // Utilisez trim() pour supprimer les espaces blancs à la fin du texte
             $country = $data[1]; // Supposons que la deuxième colonne contient le nom du pays
+
+            // Vérifier si la date est différente de la date précédente
+            if ($date !== $previousDate) {
+                // Ajouter une ligne avec la date
+                $content[] = array(
+                    'text' => '<p>' . $date . '</p>',
+                );
+                // Mettre à jour la date précédente
+                $previousDate = $date;
+            }
 
             // Chemin de l'image du drapeau
             $flagImage = 'images/flags/' . $country . '.png';
