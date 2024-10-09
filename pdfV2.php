@@ -51,20 +51,20 @@ class MC_TCPDF extends TCPDF
         } else {
             // Split the text into two columns without repeating events
             $linesPerColumn = ceil(count($content) / 2);
-            $column1Events = array_slice($content, 0, $linesPerColumn);
+            $column1Events = array_slice($content, 0, $linesPerColumn + 1);
             $column2Events = array_slice($content, $linesPerColumn);
 
             // Prepare text for column 1
             $column1Text = '';
             foreach ($column1Events as $event) {
-                $column1Text .= $event['text'] . "<br/>";
+                $column1Text .= $event['text'] . "";
             }
 
             // Prepare text for column 2 (excluding events already in column 1)
             $column2Text = '';
             foreach ($column2Events as $event) {
                 if (!in_array($event, $column1Events)) {
-                    $column2Text .= $event['text'] . "<br/>";
+                    $column2Text .= $event['text'] . "";
                 }
             }
 
@@ -100,11 +100,12 @@ class MC_TCPDF extends TCPDF
         $currentFontSize = $this->FontSizePt;
 
         // Initialize variables
+
         $textParts = array('', '');
         $remainingText = $text;
         $lineHeight = $this->getCellHeightRatio() * $this->FontSize;
         $currentHeight = 0;
-        $maxHeight = $availableHeight * 1.1; // Add a small buffer to avoid cutting off text
+        $maxHeight = $availableHeight * 11; // Add a small buffer to avoid cutting off text
 
         // Adjust font size and line height if needed
         if ($adjustFontSize) {
@@ -164,7 +165,8 @@ $pdf->SetMargins(0, 0, 0); // Marge gauche, droite, haut
 $pdf->SetAutoPageBreak(false); // Désactiver le saut de page automatique
 
 // Lecture des données CSV
-$csvFile = 'datas/2024-03-31_datas.csv';
+$csvFile = $csvFilePath;
+// $csvFile = 'datas/2024-03-31_datas.csv';
 if (file_exists($csvFile)) {
     $csvData = file_get_contents($csvFile);
     $lines = explode(PHP_EOL, $csvData);
@@ -173,12 +175,12 @@ if (file_exists($csvFile)) {
     $firstLine = true;
 
     // Définition des colonnes
-    $colonneLargeur = 46.5;
-    $colonneHauteur1 = 170; // Hauteur de la colonne 1
+    $colonneLargeur = 46.8;
+    $colonneHauteur1 = 180; // Hauteur de la colonne 1
     $colonneHauteur2 = 195; // Hauteur de la colonne 2
-    $espaceEntreColonnes = 4.5; // Espace entre les colonnes
+    $espaceEntreColonnes = 4.2; // Espace entre les colonnes
     $minHeight = 12; // Hauteur minimale de chaque événement
-    $fontSize = 9; // Taille de la police
+    $fontSize = 9.5; // Taille de la police
 
     // Tableau pour contenir les données à imprimer dans les colonnes
     $content = array();
@@ -202,7 +204,13 @@ if (file_exists($csvFile)) {
             if ($date !== $previousDate) {
                 // Ajouter une ligne avec la date
                 $content[] = array(
-                    'text' => '<p>' . $date . '</p>',
+                    'text' => '
+                           
+
+                            <div style="color:red; border: 1px solid black; font-family: Roboto; font-size: 15pt; font-weight: bold;">' . $date . '</div>
+                           <p style=" margin: 0; padding: 0; line-height:0pt; font-size: 5pt;">,</p> 
+
+                            ',
                 );
                 // Mettre à jour la date précédente
                 $previousDate = $date;
@@ -215,7 +223,26 @@ if (file_exists($csvFile)) {
             if (file_exists($flagImage)) {
                 // Ajouter le texte à imprimer avec le drapeau
                 $content[] = array(
-                    'text' => '<div><img src="' . $flagImage . '" style="vertical-align: middle;" height="6mm" /> <span style="font-family: Roboto; font-size: 13pt; font-weight: bold;">' . $country . '</span></div>' . $event,
+                    'text' => '                  
+                    <table style="width: auto; margin: 0mm;  padding: 0mm; border-spacing: 0; ">
+                        <tr style="vertical-align: middle; margin: 0mm; padding: 0mm;">
+                        <td style="text-align: left; width: 8mm; height: 5mm; margin: 0mm; padding: 0mm;">
+                        <img src="' . $flagImage . '" style="height: 5mm; margin: 0mm; padding: 0mm;" />
+                        </td>
+                        <td style="line-height: 12pt; text-align: left; font-family: Roboto; font-size: 15pt; font-weight: bold; margin: 0mm; padding: 0mm;">
+                        ' . $country . '
+                        </td>
+                        </tr>
+                        <tr style="margin: 0mm; padding: 0mm;">
+                        <td colspan="2" style="width: 45mm; line-height: 9.5pt; font-family: Times; font-size: 9.5pt; margin: 0mm; padding: 0mm;">
+                        ' . $event . '
+                        </td>
+                        </tr>
+                    </table>
+                    <p style=" margin: 0; padding: 0; line-height:2pt; font-size: 5pt;">...........................................................................................</p> 
+
+                                '
+
                 );
             } else {
                 $content[] = array(
@@ -226,7 +253,7 @@ if (file_exists($csvFile)) {
     }
 
     // Impression du contenu dans deux colonnes avec bordures et texte aligné à gauche
-    $pdf->PrintTwoColumnsWithBorder($content, $colonneLargeur, $espaceEntreColonnes, 26, $colonneHauteur1, $colonneHauteur2, 1, $fontSize, $minHeight);
+    $pdf->PrintTwoColumnsWithBorder($content, $colonneLargeur, $espaceEntreColonnes, 16, $colonneHauteur1, $colonneHauteur2, 1, $fontSize, $minHeight);
 } else {
     die('Le fichier CSV est introuvable.');
 }

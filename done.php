@@ -1,5 +1,6 @@
 <?php
-function defaultLand($x){
+function defaultLand($x)
+{
     if ($x === '') {
         $x = 'Sélectionner un pays';
         return $x;
@@ -23,9 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             // Parcours les valeurs pour construire le tableau à deux dimensions
             for ($i = 0; $i < count($country); $i++) {
                 $donnees[] = array(
-                    'date'=>$date[$i],
-                    'country'=>$country[$i],
-                    'event'=>$event[$i]
+                    'date' => $date[$i],
+                    'country' => $country[$i],
+                    'event' => $event[$i]
                 );
             }
             echo "<pre>";
@@ -33,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             echo "</pre>";
 
             // Générer le fichier CSV
-            $csvFilePath = 'datas/'.$agendaSod.'_datas.csv';
+            $csvFilePath = 'datas/' . $agendaSod . '_datas.csv';
             $csvFile = fopen($csvFilePath, 'w');
 
             // Écriture de l'en-tête du fichier CSV
@@ -51,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             echo "Le nombre de clés, de noms et d'âges ne correspond pas.";
         }
     } else {
-    echo "Tous les champs du formulaire ne sont pas définis.";
+        echo "Tous les champs du formulaire ne sont pas définis.";
     }
 }
-include('pdf.php');
+include('pdfV2.php');
