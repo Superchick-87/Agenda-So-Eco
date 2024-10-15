@@ -1,6 +1,20 @@
 <?php
 require_once('TCPDF/tcpdf.php');
 
+function afficherJourSuivant($date)
+{
+    // Créer un objet DateTime à partir de la date donnée
+    $dateObjet = new DateTime($date);
+
+    // Ajouter un jour à la date
+    $dateObjet->modify('day');
+
+    // Retourner le jour de la semaine au format 'lundi', 'mardi', etc.
+    return strftime('%A', $dateObjet->getTimestamp());
+}
+
+// Définir la locale en français pour obtenir les jours dans la bonne langue
+setlocale(LC_TIME, 'fr_FR.utf8');
 /**
  * Extend TCPDF to work with multiple columns
  */
@@ -51,7 +65,7 @@ class MC_TCPDF extends TCPDF
         } else {
             // Split the text into two columns without repeating events
             $linesPerColumn = ceil(count($content) / 2);
-            $column1Events = array_slice($content, 0, $linesPerColumn + 1);
+            $column1Events = array_slice($content, 0, $linesPerColumn  + 0.5);
             $column2Events = array_slice($content, $linesPerColumn);
 
             // Prepare text for column 1
@@ -105,7 +119,7 @@ class MC_TCPDF extends TCPDF
         $remainingText = $text;
         $lineHeight = $this->getCellHeightRatio() * $this->FontSize;
         $currentHeight = 0;
-        $maxHeight = $availableHeight * 11; // Add a small buffer to avoid cutting off text
+        $maxHeight = $availableHeight * 1.5; // Add a small buffer to avoid cutting off text
 
         // Adjust font size and line height if needed
         if ($adjustFontSize) {
@@ -184,7 +198,7 @@ if (file_exists($csvFile)) {
 
     // Tableau pour contenir les données à imprimer dans les colonnes
     $content = array();
-
+    $n = 0;
     // Boucle pour chaque ligne du CSV
     foreach ($lines as $line) {
         // Sauter la première ligne
@@ -202,16 +216,23 @@ if (file_exists($csvFile)) {
 
             // Vérifier si la date est différente de la date précédente
             if ($date !== $previousDate) {
+
                 // Ajouter une ligne avec la date
                 $content[] = array(
                     'text' => '
-                           
-
-                            <div style="color:red; border: 1px solid black; font-family: Roboto; font-size: 15pt; font-weight: bold;">' . $date . '</div>
-                           <p style=" margin: 0; padding: 0; line-height:0pt; font-size: 5pt;">,</p> 
-
-                            ',
+                            <p style=" margin: 0; padding: 0; line-height:1pt;  font-size: 2pt;">,</p> 
+                            <img src="images/jours/' . afficherJourSuivant($date) . '.jpg"/>
+                            <p style=" margin: 0; padding: 0; line-height:0pt;  font-size: 2pt;">,</p> 
+                                ',
                 );
+                // $content[] = array(
+                //     'text' => '
+                //             <p style=" margin: 0; padding: 0; line-height:1pt;  font-size: 2pt;">,</p> 
+                //             <div style="color:red; border: 1px solid black; font-family: Roboto; font-size: 15pt; font-weight: bold;">' . afficherJourSuivant($date) . '</div>
+                //             <p style=" margin: 0; padding: 0; line-height:1pt;  font-size: 2pt;">,</p> 
+                //                 ',
+                // );
+
                 // Mettre à jour la date précédente
                 $previousDate = $date;
             }
@@ -223,26 +244,23 @@ if (file_exists($csvFile)) {
             if (file_exists($flagImage)) {
                 // Ajouter le texte à imprimer avec le drapeau
                 $content[] = array(
-                    'text' => '                  
-                    <table style="width: auto; margin: 0mm;  padding: 0mm; border-spacing: 0; ">
-                        <tr style="vertical-align: middle; margin: 0mm; padding: 0mm;">
-                        <td style="text-align: left; width: 8mm; height: 5mm; margin: 0mm; padding: 0mm;">
-                        <img src="' . $flagImage . '" style="height: 5mm; margin: 0mm; padding: 0mm;" />
-                        </td>
-                        <td style="line-height: 12pt; text-align: left; font-family: Roboto; font-size: 15pt; font-weight: bold; margin: 0mm; padding: 0mm;">
-                        ' . $country . '
-                        </td>
-                        </tr>
-                        <tr style="margin: 0mm; padding: 0mm;">
-                        <td colspan="2" style="width: 45mm; line-height: 9.5pt; font-family: Times; font-size: 9.5pt; margin: 0mm; padding: 0mm;">
-                        ' . $event . '
-                        </td>
-                        </tr>
-                    </table>
-                    <p style=" margin: 0; padding: 0; line-height:2pt; font-size: 5pt;">...........................................................................................</p> 
-
-                                '
-
+                    'text' => '
+                    <table style=" width: auto; margin: 0mm;  padding: 0mm; border-spacing: 0; ">
+                            <tr style="vertical-align: middle; margin: 0mm; padding: 0mm;">
+                            <td style="text-align: left; width: 8mm; height: 5mm; margin: 0mm; padding: 0mm;">
+                            <img src="' . $flagImage . '" style="height: 5mm; margin: 0mm; padding: 0mm; border-radius: 50%;" />
+                            </td>
+                            <td style="line-height: 12pt; text-align: left; font-family: Roboto; font-size: 15pt; font-weight: bold; margin: 0mm; padding: 0mm;">
+                            ' . $country . '
+                            </td>
+                            </tr>
+                            <tr style="margin: 0mm; padding: 0mm;">
+                            <td colspan="2" style=" width: 45mm; line-height: 8pt; font-family: Times; font-size: 9.5pt; margin: 0mm; padding: 0mm;">
+                            ' . $event . '
+                            </td>
+                            </tr>
+                        </table>
+                        <p style=" margin: 0; padding: 0; line-height:2pt; font-size: 5pt;">...........................................................................................</p>'
                 );
             } else {
                 $content[] = array(
