@@ -61,7 +61,7 @@
 164,583,fm,FSM,États Fédérés de Micronésie,Federated States of Micronesia
 231,840,us,USA,États-Unis,United States
 66,231,et,ETH,Éthiopie,Ethiopia
-182,643,ru,RUS,Fédération de Russie,Russian Federation
+182,643,ru,RUS,Russie,Russian
 72,242,fj,FJI,Fidji,Fiji
 73,246,fi,FIN,Finlande,Finland
 75,250,fr,FRA,France,France
@@ -90,7 +90,7 @@
 46,162,cx,CXR,Île Christmas,Christmas Island
 229,833,im,IMN,Île de Man,Isle of Man
 160,574,nf,NFK,Île Norfolk,Norfolk Island
-70,238,fk,FLK,Îles (malvinas) Falkland,Falkland Islands
+70,238,fk,FLK,Îles Falkland,Falkland Islands
 74,248,ax,ALA,Îles Åland,Åland Islands
 39,136,ky,CYM,Îles Caïmanes,Cayman Islands
 47,166,cc,CCK,Îles Cocos (Keeling),Cocos (Keeling) Islands
@@ -120,7 +120,7 @@
 119,417,kg,KGZ,Kirghizistan,Kyrgyzstan
 87,296,ki,KIR,Kiribati,Kiribati
 118,414,kw,KWT,Koweït,Kuwait
-226,807,mk,MKD,L'ex-République Yougoslave de Macédoine,The Former Yugoslav Republic of Macedonia
+226,807,mk,MKD,L'ex-Rép. Yougoslave de Macédoine,The Former Yugoslav Rep. of Macedonia
 122,426,ls,LSO,Lesotho,Lesotho
 123,428,lv,LVA,Lettonie,Latvia
 121,422,lb,LBN,Liban,Lebanon
@@ -174,30 +174,30 @@
 178,630,pr,PRI,Porto Rico,Puerto Rico
 175,620,pt,PRT,Portugal,Portugal
 179,634,qa,QAT,Qatar,Qatar
-211,760,sy,SYR,République Arabe Syrienne,Syrian Arab Republic
-40,140,cf,CAF,République Centrafricaine,Central African
-117,410,kr,KOR,République de Corée,Republic of Korea
-142,498,md,MDA,République de Moldova,Republic of Moldova
-52,180,cd,COD,République Démocratique du Congo,The Democratic Republic Of The Congo
-120,418,la,LAO,République Démocratique Populaire Lao,Lao People's Democratic Republic
-62,214,do,DOM,République Dominicaine,Dominican Republic
-51,178,cg,COG,République du Congo,Republic of the Congo
-105,364,ir,IRN,République Islamique d'Iran,Islamic Republic of Iran
-116,408,kp,PRK,République Populaire Démocratique de Corée,Democratic People's Republic of Korea
-58,203,cz,CZE,République Tchèque,Czech Republic
-230,834,tz,TZA,République-Unie de Tanzanie,United Republic Of Tanzania
+211,760,sy,SYR,Rép. Arabe Syrienne,Syrian Arab Rep.
+40,140,cf,CAF,Rép. Centrafricaine,Central African
+117,410,kr,KOR,Rép. de Corée,Rep. of Korea
+142,498,md,MDA,Rép. de Moldova,Rep. of Moldova
+52,180,cd,COD,Rép. Démocratique du Congo,The Democratic Rep. Of The Congo
+120,418,la,LAO,Rép. Démocratique Populaire Lao,Lao People's Democratic Rep.
+62,214,do,DOM,Rép. Dominicaine,Dominican Rep.
+51,178,cg,COG,Rép. du Congo,Rep. of the Congo
+105,364,ir,IRN,Rép. Islamique d'Iran,Islamic Rep. of Iran
+116,408,kp,PRK,Rép. Populaire Démocratique de Corée,Democratic People's Rep. of Korea
+58,203,cz,CZE,Rép. Tchèque,Czech Rep.
+230,834,tz,TZA,Tanzanie,Tanzania
 180,638,re,REU,Réunion,Réunion
 181,642,ro,ROU,Roumanie,Romania
 228,826,gb,GBR,Royaume-Uni,United Kingdom
 183,646,rw,RWA,Rwanda,Rwanda
 204,732,eh,ESH,Sahara Occidental,Western Sahara
-185,659,kn,KNA,Saint-Kitts-et-Nevis,Saint Kitts and Nevis
-190,674,sm,SMR,Saint-Marin,San Marino
-188,666,pm,SPM,Saint-Pierre-et-Miquelon,Saint-Pierre and Miquelon
-98,336,va,VAT,Saint-Siège (état de la Cité du Vatican),Vatican City State
-189,670,vc,VCT,Saint-Vincent-et-les Grenadines,Saint Vincent and the Grenadines
-184,654,sh,SHN,Sainte-Hélène,Saint Helena
-187,662,lc,LCA,Sainte-Lucie,Saint Lucia
+185,659,kn,KNA,St-Kitts-et-Nevis,St Kitts and Nevis
+190,674,sm,SMR,St-Marin,San Marino
+188,666,pm,SPM,St-Pierre-et-Miquelon,St-Pierre and Miquelon
+98,336,va,VAT,St-Siège (état de la Cité du Vatican),Vatican City State
+189,670,vc,VCT,St-Vincent-et-les Grenadines,St Vincent and the Grenadines
+184,654,sh,SHN,Ste-Hélène,St Helena
+187,662,lc,LCA,Ste-Lucie,St Lucia
 238,882,ws,WSM,Samoa,Samoa
 5,16,as,ASM,Samoa Américaines,American Samoa
 191,678,st,STP,Sao Tomé-et-Principe,Sao Tome and Principe

@@ -1,5 +1,11 @@
 <?php
+    
 require_once('TCPDF/tcpdf.php');
+    // Envoyer les en-têtes HTTP pour générer le fichier PDF
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: inline; filename="document.pdf"');
+    header('Cache-Control: private, max-age=0, must-revalidate');
+    header('Pragma: public');
 
 function afficherJourSuivant($date)
 {
@@ -35,68 +41,59 @@ class MC_TCPDF extends TCPDF
      * @public
      */
     public function PrintTwoColumnsWithBorder($content, $colWidth, $colSpacing, $startY, $colHeight1, $colHeight2, $borderWidth, $fontSize, $minHeight)
-    {
-        $x1 = 0; // Starting position of column 1
-        $x2 = $colWidth + $colSpacing; // Starting position of column 2
-        $y1 = $startY;
-        $y2 = 1; // Y position of column 2
+{
+    $x1 = 0; // Position de la colonne 1
+    $x2 = $colWidth + $colSpacing; // Position de la colonne 2
+    $y1 = $startY;
+    $y2 = 1; // Position Y de la colonne 2, alignée avec celle de la colonne 1
 
-        // Set font size
-        $this->SetFont('', '', $fontSize);
+    $borderWidth = 0;
 
-        // Combine all events into a single string
-        $allEvents = '';
-        foreach ($content as $item) {
-            $allEvents .= "<br/>" . $item['text'] . "<br/>";
-        }
+     // Définir la taille de police
+     $this->SetFont('', '', $fontSize);
 
-        // Calculate the height of all events combined
-        $totalLines = ceil($this->getStringHeight($colWidth, $allEvents, '', true, 0, false, true, $colWidth, 'T') / $fontSize); // Adjust line height
-        $totalHeight = max($minHeight, $totalLines * $fontSize);
-
-        // Check if all events can fit in column 1
-        if ($totalHeight <= $colHeight1) {
-            // Draw border for column 1 cell
-            $this->Rect($x1, $y1, $colWidth, $totalHeight);
-
-            // Write content to column 1
-            $this->SetXY($x1, $y1); // Position the text inside the column without any margin
-            $this->writeHTMLCell($colWidth, $totalHeight, '', '', $allEvents, 0, 1, false, true, 'L', true);
-        } else {
-            // Split the text into two columns without repeating events
-            $linesPerColumn = ceil(count($content) / 2);
-            $column1Events = array_slice($content, 0, $linesPerColumn  + 0.5);
-            $column2Events = array_slice($content, $linesPerColumn);
-
-            // Prepare text for column 1
-            $column1Text = '';
-            foreach ($column1Events as $event) {
-                $column1Text .= $event['text'] . "";
-            }
-
-            // Prepare text for column 2 (excluding events already in column 1)
-            $column2Text = '';
-            foreach ($column2Events as $event) {
-                if (!in_array($event, $column1Events)) {
-                    $column2Text .= $event['text'] . "";
-                }
-            }
-
-            // Draw border for column 1 cell
-            $this->Rect($x1, $y1, $colWidth, $colHeight1);
-
-            // Write content to column 1
-            $this->SetXY($x1, $y1); // Position the text inside the column without any margin
-            $this->writeHTMLCell($colWidth, $colHeight1, '', '', $column1Text, 0, 1, false, true, 'L', true);
-
-            // Draw border for column 2 cell
-            $this->Rect($x2, $y2, $colWidth, $colHeight2);
-
-            // Write content to column 2
-            $this->SetXY($x2, $y2); // Position the text inside the column without any margin
-            $this->writeHTMLCell($colWidth, $colHeight2, '', '', $column2Text, 0, 1, false, true, 'L', true);
-        }
-    }
+     // Combiner tous les événements en une seule chaîne
+     $allEvents = '';
+     foreach ($content as $item) {
+         $allEvents .= "" . $item['text'] . ""; // Concaténer tous les textes
+     }
+ 
+     // Calculer la hauteur de tout le contenu
+     $totalLines = ceil($this->getStringHeight($colWidth, $allEvents, '', true, 0, false, true, $colWidth, 'T') / $fontSize);
+     $totalHeight = max($minHeight, $totalLines * $fontSize);
+ 
+     // Si le contenu tient dans la première colonne
+     if ($totalHeight <= $colHeight1) {
+         // Ecrire le contenu dans la première colonne sans bordure
+         $this->SetXY($x1, $y1);
+         $this->writeHTMLCell($colWidth, $totalHeight, '', '', $allEvents, 0, 1, false, true, 'L', true);
+     } else {
+         // Diviser le contenu en deux colonnes
+         $linesPerColumn = ceil(count($content) / 2);
+         $column1Events = array_slice($content, 0, $linesPerColumn);
+         $column2Events = array_slice($content, $linesPerColumn);
+ 
+         // Préparer le texte pour la première colonne
+         $column1Text = '';
+         foreach ($column1Events as $event) {
+             $column1Text .= $event['text'] . "";
+         }
+ 
+         // Préparer le texte pour la deuxième colonne
+         $column2Text = '';
+         foreach ($column2Events as $event) {
+             $column2Text .= $event['text'] . "";
+         }
+ 
+         // Ecrire le contenu dans la première colonne sans bordure
+         $this->SetXY($x1, $y1);
+         $this->writeHTMLCell($colWidth, $colHeight1, '', '', $column1Text, 0, 1, false, true, 'L', true);
+ 
+         // Ecrire le contenu dans la deuxième colonne sans bordure
+         $this->SetXY($x2, $y2);
+         $this->writeHTMLCell($colWidth, $colHeight2, '', '', $column2Text, 0, 1, false, true, 'L', true);
+     }
+ }
 
     /**
      * Split a string into two parts based on available height
@@ -107,62 +104,20 @@ class MC_TCPDF extends TCPDF
      * @param $adjustFontSize (bool) whether to adjust font size
      * @return array containing two parts of the text
      */
-    private function getStringSplit($width, $text, $availableHeight, $adjustLineHeight = true, $adjustFontSize = true)
-    {
-        // Set current font
-        $currentFont = $this->FontFamily;
-        $currentFontSize = $this->FontSizePt;
-
-        // Initialize variables
-
-        $textParts = array('', '');
-        $remainingText = $text;
-        $lineHeight = $this->getCellHeightRatio() * $this->FontSize;
-        $currentHeight = 0;
-        $maxHeight = $availableHeight * 1.5; // Add a small buffer to avoid cutting off text
-
-        // Adjust font size and line height if needed
-        if ($adjustFontSize) {
-            $fontSizeRatio = $availableHeight / $lineHeight;
-            $this->SetFontSize($currentFontSize * $fontSizeRatio);
-            $lineHeight = $this->getCellHeightRatio() * $this->FontSize; // Update line height with adjusted font size
-        }
-
-        // Loop through each character in the text
-        for ($i = 0; $i < strlen($text); $i++) {
-            // Add the character to the current part of the text
-            $textParts[0] .= $text[$i];
-            $textParts[1] = $remainingText;
-
-            // Calculate the height of the current part of the text
-            $currentHeight = $this->getStringHeight($width, $textParts[0], '', true, 0, false, true, $width, 'T');
-
-            // Check if the current part of the text exceeds the available height
-            if ($currentHeight >= $maxHeight) {
-                // If adjustLineHeight is true, adjust the line height to fit the available height
-                if ($adjustLineHeight) {
-                    $lineHeightRatio = $availableHeight / $currentHeight;
-                    $this->SetFontSize($this->FontSize * $lineHeightRatio);
-                    $lineHeight = $this->getCellHeightRatio() * $this->FontSize;
-                }
-
-                // Recalculate the height of the current part of the text with the adjusted line height
-                $currentHeight = $this->getStringHeight($width, $textParts[0], '', true, 0, false, true, $width, 'T');
-                // Calculate the remaining text
-                $remainingText = substr($text, $i);
-                break;
-            }
-        }
-
-        // Reset font size to original value
-        $this->SetFont($currentFont, '', $currentFontSize);
-
-        return array($textParts[0], $remainingText);
-    }
 }
+
 
 // Création d'une nouvelle instance MC_TCPDF
 $pdf = new MC_TCPDF('P', 'mm', array(97.8, 197.5), true, 'UTF-8', false);
+
+// Supprimer les marges par défaut
+$pdf->SetMargins(0, 0, 0);  // Gauche, haut, droite
+$pdf->SetHeaderMargin(0);    // Marge d'en-tête
+$pdf->SetFooterMargin(0);    // Marge de pied de page
+
+// Désactiver l'en-tête et le pied de page si nécessaire
+$pdf->setPrintHeader(false);
+$pdf->setPrintFooter(false);
 
 // Ajouter une nouvelle page
 $pdf->AddPage();
@@ -178,10 +133,102 @@ $pdf->SetKeywords('TCPDF, PDF, exemple, test, guide');
 $pdf->SetMargins(0, 0, 0); // Marge gauche, droite, haut
 $pdf->SetAutoPageBreak(false); // Désactiver le saut de page automatique
 
+// Ajouter une image SVG en haut à gauche
+$pdf->ImageSVG(
+    $file = 'images/fond.svg',  // Chemin de l'image SVG
+    $x = 0,  // Position X
+    $y = 0,  // Position Y
+    $w = 97.8,  // Largeur de l'image
+    $h = 197.5,  // Hauteur de l'image
+    '',       // Lien si cliquable (laisser vide si aucun)
+    '',       // Alignement de l'image
+    '',       // Palette des couleurs (laisser vide pour les couleurs de base)
+    0,        // Suppression de bordure (0 pour non)
+    false     // Conserver l'aspect proportionnel
+);
+
+function interletter($x){
+    if ($x > 19) {
+        return 'letter-spacing: -0.4px;';
+    }
+}
+
+// Fonction pour gérer l'interlettrage et le retour à la ligne
+function adjustText($text) {
+    $words = explode(' ', $text);
+    $adjustedText = '';
+    $currentLine = '';
+    
+    foreach ($words as $word) {
+        // Vérifier la longueur du mot
+        if (mb_strlen($word) < 5) {
+            // Si le mot est court, ajuster l'espacement
+            $currentLine .= '<span style="letter-spacing: -0.4px;">' . htmlspecialchars($word) . '</span> ';
+        } else {
+            // Si le mot est long, finir la ligne actuelle et passer à la suivante
+            if ($currentLine !== '') {
+                $adjustedText .= $currentLine . '<br/>'; // Ajouter un retour à la ligne
+                $currentLine = '';
+            }
+            $adjustedText .= htmlspecialchars($word) . ' '; // Ajouter le mot normal
+        }
+    }
+
+    // Ajouter le reste de la ligne si elle n'est pas vide
+    if ($currentLine !== '') {
+        $adjustedText .= $currentLine;
+    }
+
+    return $adjustedText;
+}
+// Fonction pour gérer l'interlettrage et le retour à la ligne uniquement pour les événements
+function adjustEventText($text, $maxCharsPerLine = 90) { // Limite par défaut de 30 caractères par ligne
+    $words = explode(' ', $text);
+    $adjustedText = '';
+    $currentLine = '';
+
+    foreach ($words as $word) {
+        // Vérifier la longueur actuelle de la ligne
+        $tempLine = $currentLine . ($currentLine ? ' ' : '') . $word; // Créer une ligne temporaire
+
+        // Vérifier si la ligne temporaire dépasse la limite de caractères
+        if (mb_strlen($tempLine) < $maxCharsPerLine) {
+            // Si la ligne est pleine, ajouter la ligne actuelle au texte ajusté et réinitialiser la ligne actuelle
+            if ($currentLine !== '') {
+                $adjustedText .= $currentLine . '<br/>'; // Ajouter un retour à la ligne
+            }
+
+            // Si le mot est court, ajuster l'espacement et l'ajouter à la nouvelle ligne
+            if (mb_strlen($word) <= 13) {
+                $adjustedText .= '<span style="letter-spacing: -0.2px;">' . htmlspecialchars($word) . '</span> ';
+            } else {
+                // Ajouter le mot normal
+                $adjustedText .= htmlspecialchars($word) . ' ';
+            }
+
+            // Réinitialiser la ligne actuelle
+            $currentLine = '';
+        } else {
+            // Si la ligne ne dépasse pas la limite, ajouter le mot à la ligne actuelle
+            $currentLine = $tempLine;
+        }
+    }
+
+    // Ajouter le reste de la ligne si elle n'est pas vide
+    if ($currentLine !== '') {
+        $adjustedText .= $currentLine;
+    }
+
+    return $adjustedText;
+}
+
 // Lecture des données CSV
 $csvFile = $csvFilePath;
 // $csvFile = 'datas/2024-03-31_datas.csv';
 if (file_exists($csvFile)) {
+     // Ajuster le texte du pays en utilisant la fonction d'ajustement
+     $adjustedCountry = adjustText($country_full_name);
+
     $csvData = file_get_contents($csvFile);
     $lines = explode(PHP_EOL, $csvData);
 
@@ -198,80 +245,82 @@ if (file_exists($csvFile)) {
 
     // Tableau pour contenir les données à imprimer dans les colonnes
     $content = array();
-    $n = 0;
-    // Boucle pour chaque ligne du CSV
-    foreach ($lines as $line) {
-        // Sauter la première ligne
-        if ($firstLine) {
-            $firstLine = false;
-            continue;
-        }
 
-        $data = str_getcsv($line);
-        // Vérifier si la ligne contient au moins 3 colonnes
-        if (count($data) >= 3) {
-            $date = trim($data[0]); // Utilisez trim() pour supprimer les espaces blancs autour de la date
-            $event = trim($data[2]); // Utilisez trim() pour supprimer les espaces blancs à la fin du texte
-            $country = $data[1]; // Supposons que la deuxième colonne contient le nom du pays
+   // Initialiser une variable pour savoir si c'est le premier ajout
+   $firstLine = true;
+    $previousDate = '';
+    $firstEvent = true;
 
-            // Vérifier si la date est différente de la date précédente
-            if ($date !== $previousDate) {
-
-                // Ajouter une ligne avec la date
-                $content[] = array(
-                    'text' => '
-                            <p style=" margin: 0; padding: 0; line-height:1pt;  font-size: 2pt;">,</p> 
-                            <img src="images/jours/' . afficherJourSuivant($date) . '.jpg"/>
-                            <p style=" margin: 0; padding: 0; line-height:0pt;  font-size: 2pt;">,</p> 
-                                ',
-                );
-                // $content[] = array(
-                //     'text' => '
-                //             <p style=" margin: 0; padding: 0; line-height:1pt;  font-size: 2pt;">,</p> 
-                //             <div style="color:red; border: 1px solid black; font-family: Roboto; font-size: 15pt; font-weight: bold;">' . afficherJourSuivant($date) . '</div>
-                //             <p style=" margin: 0; padding: 0; line-height:1pt;  font-size: 2pt;">,</p> 
-                //                 ',
-                // );
-
-                // Mettre à jour la date précédente
-                $previousDate = $date;
-            }
-
-            // Chemin de l'image du drapeau
-            $flagImage = 'images/flags/' . $country . '.png';
-
-            // Vérifier si le fichier image existe
-            if (file_exists($flagImage)) {
-                // Ajouter le texte à imprimer avec le drapeau
-                $content[] = array(
-                    'text' => '
-                    <table style=" width: auto; margin: 0mm;  padding: 0mm; border-spacing: 0; ">
-                            <tr style="vertical-align: middle; margin: 0mm; padding: 0mm;">
-                            <td style="text-align: left; width: 8mm; height: 5mm; margin: 0mm; padding: 0mm;">
-                            <img src="' . $flagImage . '" style="height: 5mm; margin: 0mm; padding: 0mm; border-radius: 50%;" />
-                            </td>
-                            <td style="line-height: 12pt; text-align: left; font-family: Roboto; font-size: 15pt; font-weight: bold; margin: 0mm; padding: 0mm;">
-                            ' . $country . '
-                            </td>
-                            </tr>
-                            <tr style="margin: 0mm; padding: 0mm;">
-                            <td colspan="2" style=" width: 45mm; line-height: 8pt; font-family: Times; font-size: 9.5pt; margin: 0mm; padding: 0mm;">
-                            ' . $event . '
-                            </td>
-                            </tr>
-                        </table>
-                        <p style=" margin: 0; padding: 0; line-height:2pt; font-size: 5pt;">...........................................................................................</p>'
-                );
-            } else {
-                $content[] = array(
-                    'text' => $event,
-                );
-            }
-        }
+// Boucle pour chaque ligne du CSV
+foreach ($lines as $line) {
+    // Sauter la première ligne
+    if ($firstLine) {
+        $firstLine = false;
+        continue;
     }
 
+    $data = str_getcsv($line);
+    // Vérifier si la ligne contient au moins 3 colonnes
+    if (count($data) >= 4) {
+        $date = trim($data[0]);
+        $event = trim($data[2]);
+        $country = trim($data[1]);
+        $country_full_name = trim($data[3]);
+
+        // Vérifier si la date est différente de la date précédente
+        if ($date !== $previousDate) {
+            // Ajouter une ligne avec la date
+            $content[] = array(
+                'text' => '
+                    <p style="margin: 0; padding: 0; line-height:1pt; font-size: 2pt;">,</p> 
+                    <img src="images/jours/' . afficherJourSuivant($date) . '.jpg"/>
+                    <p style="margin: 0; padding: 0; line-height:-1px; font-size: 2pt;">,</p> 
+                ',
+            );
+
+            // Mettre à jour la date précédente
+            $previousDate = $date;
+
+            // Réinitialiser la variable pour les événements de cette date
+            $firstEvent = true;
+        }
+
+        // Chemin de l'image du drapeau
+        $flagImage = 'images/flags/' . $country . '.jpg';
+
+        // Vérifier si le fichier image existe
+        if (file_exists($flagImage)) {
+           
+            // Ajouter le pays et l'événement
+            $content[] = array(
+                'text' => '
+                <div style="line-height:2px;"> </div>
+                    <div style="font-family:Roboto; font-weight:bold; position:relative; margin-left:90px; line-height:0px; width:100%; padding:0;">
+                        <span style="font-size:14px; color:white;">--</span>
+                        <span style="'.interletter(strlen($country_full_name)).'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
+                    </div>
+                    <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
+                    <div style="line-height:-5px;"></div>
+                    <div style="font-family:utopiastd; font-size:9.5; line-height:9.5px;">' . adjustEventText($event) . '</div>
+                    ',
+            );
+
+           
+
+            // Marquer que le premier événement pour cette date a été traité
+            $firstEvent = false;
+        } else {
+            // Si le drapeau n'existe pas, on ajoute juste l'événement
+            $content[] = array(
+                    'text' => adjustText($event), // Ajuster le texte de l'événement
+            );
+        }
+    }
+}
+
+
     // Impression du contenu dans deux colonnes avec bordures et texte aligné à gauche
-    $pdf->PrintTwoColumnsWithBorder($content, $colonneLargeur, $espaceEntreColonnes, 16, $colonneHauteur1, $colonneHauteur2, 1, $fontSize, $minHeight);
+    $pdf->PrintTwoColumnsWithBorder($content, $colonneLargeur, $espaceEntreColonnes, 18, $colonneHauteur1, $colonneHauteur2, 1, $fontSize, $minHeight);
 } else {
     die('Le fichier CSV est introuvable.');
 }
