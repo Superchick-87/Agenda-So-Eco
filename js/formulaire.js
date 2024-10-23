@@ -80,7 +80,7 @@ function addInputs() {
         // Ajouter des options par défaut
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
-        defaultOption.textContent = 'Sélectionner un pays';
+        defaultOption.textContent = '> Sélectionner un pays <';
         selectElement.appendChild(defaultOption);
 
         // Ajouter les options de pays
@@ -166,7 +166,7 @@ function updateTotalCharacters() {
     //* Mettre à jour le texte de l'élément h4 selon la valeur de totalCharacters
     //* et apparaitre / masquer bouton 'sauver'
 
-    
+
     if (totalCharacters < 2) {
         signesElement.textContent = totalCharacters + " signe";
         document.getElementById('save').style.display = 'none';
@@ -180,7 +180,7 @@ function updateTotalCharacters() {
     //* et apparaitre / masquer bouton 'sauvegarde'
     const elementsColorInfoClass = document.querySelectorAll('.colorInfo');
     const elementsColorInfoClassOK = document.querySelectorAll('.colorInfoOk');
-    if (totalCharacters >= 1500 && totalCharacters <= 1600) {
+    if (totalCharacters >= 1400 && totalCharacters <= 1500) {
         elementsColorInfoClass.forEach(element => {
             element.classList.remove('colorInfo');
             element.classList.add('colorInfoOk');

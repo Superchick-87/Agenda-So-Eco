@@ -80,5 +80,3 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 }
 include('pdfV2.php');
-
-?>
