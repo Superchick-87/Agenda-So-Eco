@@ -29,7 +29,7 @@ async function loadCountriesCSV() {
 // Fonction pour mettre à jour le style de la div avec l'image correspondante
 function updateFlagImage(countryCode, flagDivId) {
     const flagDiv = document.getElementById(flagDivId); // Sélectionner la div de drapeau correspondante
-    flagDiv.style.backgroundImage = `url(./images/flags/${countryCode}.png)`; // Mettre à jour le style avec l'image correspondante
+    flagDiv.style.backgroundImage = `url(./images/flags/${countryCode}.jpg)`; // Mettre à jour le style avec l'image correspondante
 }
 
 // Fonction pour gérer le changement de sélection dans le menu déroulant
@@ -50,13 +50,20 @@ async function handleSelectChange(value, flagDivId) {
 }
 
 function addInputs() {
+
     var container = document.getElementById("inputs-container");
+    container.addEventListener('dragover', allowDrop); // Autoriser le glisser sur le conteneur
+    container.addEventListener('drop', drop); // Définir la fonction à exécuter lors du dépôt
 
     // Créer et ajouter un nouveau bloc
     var inputRow = document.createElement("div");
     inputRow.classList.add("input-row");
     var uniqueId = generateUniqueId(); // Générer un identifiant unique
     inputRow.id = "input-row-" + uniqueId; // ID unique pour chaque ensemble
+
+    inputRow.draggable = true; // Rendre l'élément glissable
+    inputRow.addEventListener('dragstart', drag); // Attacher l'événement de drag
+    inputRow.addEventListener('dragend', dragEnd); // Attacher l'événement de dragend
 
     var selFlag = document.createElement("div");
     selFlag.classList.add("flex");
@@ -80,7 +87,7 @@ function addInputs() {
         // Ajouter des options par défaut
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
-        defaultOption.textContent = '> Sélectionner un pays <';
+        defaultOption.textContent = 'Sélectionner un pays';
         selectElement.appendChild(defaultOption);
 
         // Ajouter les options de pays
@@ -121,8 +128,6 @@ function addInputs() {
     inputRow.appendChild(textarea);
     selFlag.appendChild(removeBtn);
     container.insertBefore(inputRow, document.getElementById("add-btn"));
-
-
 }
 
 function removeInputs(parentRowId) {
@@ -197,3 +202,5 @@ function updateTotalCharacters() {
 
     }
 }
+
+

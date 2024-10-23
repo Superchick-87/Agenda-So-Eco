@@ -58,7 +58,7 @@ if (file_exists($filename)) {
         echo '</select>';
         foreach ($paysData as $pays) {
             if ($pays[2] == $countryName) {
-                echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.png);"></div>';
+                echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.jpg);"></div>';
             }
         }
         echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
@@ -98,7 +98,7 @@ if (file_exists($filename)) {
     </form>
     <div class="state colorInfo">
         <h2>Nouvel agenda</h2>
-        <p id="totalCharacters" style="display:none;">0</p>
+        <p id="totalCharacters" style="display:block;">0</p>
         <h4 id="signes"> signes</h4>
     </div>';
 }
