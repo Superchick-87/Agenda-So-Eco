@@ -69,7 +69,7 @@ class MC_TCPDF extends TCPDF
             $this->writeHTMLCell($colWidth, $totalHeight, '', '', $allEvents, 0, 1, false, true, 'L', true);
         } else {
             // Diviser le contenu en deux colonnes
-            $linesPerColumn = ceil(count($content) / 2.5);
+            $linesPerColumn = ceil(count($content) / 2.1);
             $column1Events = array_slice($content, 0, $linesPerColumn + 0.5);
             $column2Events = array_slice($content, $linesPerColumn);
 
@@ -153,48 +153,6 @@ function interletter($x)
     }
 }
 
-
-// // Fonction pour gérer l'interlettrage et le retour à la ligne uniquement pour les événements
-// function adjustEventText($text, $maxCharsPerLine = 80)
-// { // Limite par défaut de 30 caractères par ligne
-//     $words = explode(' ', $text);
-//     $adjustedText = '';
-//     $currentLine = '';
-
-//     foreach ($words as $word) {
-//         // Vérifier la longueur actuelle de la ligne
-//         $tempLine = $currentLine . ($currentLine ? ' ' : '') . $word; // Créer une ligne temporaire
-
-//         // Vérifier si la ligne temporaire dépasse la limite de caractères
-//         if (mb_strlen($tempLine) < $maxCharsPerLine) {
-//             // Si la ligne est pleine, ajouter la ligne actuelle au texte ajusté et réinitialiser la ligne actuelle
-//             if ($currentLine !== '') {
-//                 $adjustedText .= $currentLine . '<br/>'; // Ajouter un retour à la ligne
-//             }
-//             // Si le mot est court, ajuster l'espacement et l'ajouter à la nouvelle ligne
-//             if (mb_strlen($word) < 10) {
-//                 $adjustedText .= '<span style="letter-spacing: -0.2px;">' . htmlspecialchars($word) . '</span> ';
-//             } else {
-//                 // Ajouter le mot normal
-//                 $adjustedText .= htmlspecialchars($word) . ' ';
-//             }
-
-//             // Réinitialiser la ligne actuelle
-//             $currentLine = '';
-//         } else {
-//             // Si la ligne ne dépasse pas la limite, ajouter le mot à la ligne actuelle
-//             $currentLine = $tempLine;
-//         }
-//     }
-
-//     // Ajouter le reste de la ligne si elle n'est pas vide
-//     if ($currentLine !== '') {
-//         $adjustedText .= $currentLine;
-//     }
-
-//     return $adjustedText;
-// }
-
 // Lecture des données CSV
 $csvFile = $csvFilePath;
 // $csvFile = 'datas/2024-03-31_datas.csv';
@@ -239,6 +197,7 @@ if (file_exists($csvFile)) {
             $event = trim($data[2]);
             $country = trim($data[1]);
             $country_full_name = trim($data[3]);
+            $letter_Spacing = $data[4];
 
             // Vérifier si la date est différente de la date précédente
             if ($date !== $previousDate) {
@@ -274,7 +233,7 @@ if (file_exists($csvFile)) {
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>
-                    <div style="font-family:utopiastd; letter-spacing: -0.15px; font-size:9.4; line-height:9.7px;">' . turn($event) . '</div>
+                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'px; font-size:9.4; line-height:9.7px;">' . turn($event) . '</div>
                     ',
                 );
 

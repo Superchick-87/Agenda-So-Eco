@@ -1,18 +1,18 @@
-date,country,event,country_full_name
-2024-10-21,us,"Réunions annuelles du FMI et de la Banque mondiale, à Washington (jusqu'au 25 octobre).",États-Unis
-2024-10-21,ue,"Conseil « Agriculture et pêche », au Luxembourg (jusqu’au 22 octobre).","Union européenne"
-2024-10-21,ae,"COP16, conférence des parties à la convention sur la biodiversité biologique, à Cali (jusqu'au 1er novembre).","Émirats Arabes Unis"
-2024-10-22,ru,"Sommet des pays adhérents aux BRICS, à Kazan (jusqu'au 24 octobre).",Russie
-2024-10-22,fr,"Parution des mémoires d'Alexeï Navalny, ""Patriote"", publié chez Robert Laffon.",France
-2024-10-23,dk,"Fin de la prolongation de la détention provisoire du militant écologiste Paul Watson. ",Danemark
-2024-10-23,fr,"Sortie en librairie de ""Vingt mois à Matignon"", d'Elisabeth Borne, chez Flammarion.",France
-2024-10-23,fr,"Au musée Grévin, entrée des statues d'Astérix, Obélix et Idéfix à l'occasion des 65 ans de ces personnages.",France
-2024-10-24,fr,"Conférence internationale de soutien au Liban qui réunit les États partenaires du Liban, les Nations unies, l'Union Européenne, des organisations internationales, régionales et de la société civile.",France
-2024-10-24,af,"Prix Sakharov sur les droits humains à Strasbourg, plus haute distinction de l'UE en matière de droits de l'homme.",Afghanistan
-2024-10-26,fr,"Passage à l’heure d’hiver dans la nuit de samedi à dimanche (à 3 heures, il est 2 heures).",France
-2024-10-26,ge,"Elections législatives.",Géorgie
-2024-10-26,af,"Synode sur l'avenir de l’Église, propositions de réformes transmises au pape François par l'assemblée romaine.",Afghanistan
-2024-10-27,uy,"Élections présidentielle et législatives.",Uruguay
-2024-10-27,bg,"Élections législatives, les septièmes en trois ans et demi. ",Bulgarie
-2024-10-27,jp,"Élections législatives anticipées.",Japon
-2024-10-27,us,"Première mondiale du film de Clint Eastwood « Juré n°2 ».",États-Unis
+date,country,event,country_full_name,letter_spacing
+2024-10-21,us,"Réunions annuelles du FMI*@*et de la Banque mondiale,*@*à Washington (jusqu'au 25 octobre).",États-Unis,0
+2024-10-21,ue,"Conseil « Agriculture et pêche », au Luxembourg (jusqu’au 22 octobre).","Union européenne",-0.1
+2024-10-21,ae,"COP16, conférence des parties à la convention sur la biodiversité biologique, à Cali (jusqu'au 1er novembre).","Émirats Arabes Unis",-0.15
+2024-10-22,ru,"Sommet des pays adhérents aux BRICS, à Kazan (jusqu'au 24 octobre).",Russie,0
+2024-10-22,fr,"Parution des mémoires d'Alexeï Navalny, ""Patriote"", publié chez Robert Laffon.",France,0
+2024-10-23,dk,"Fin de la prolongation*@*de la détention provisoire du militant écologiste Paul Watson. ",Danemark,-0.1
+2024-10-23,fr,"Sortie en librairie de ""Vingt mois à Matignon"", d'Elisabeth Borne, chez Flammarion.",France,0
+2024-10-23,fr,"Au musée Grévin, entrée*@*des statues d'Astérix, Obélix*@*et Idéfix à l'occasion des 65 ans*@*de ces personnages.",France,0
+2024-10-24,fr,"Conférence internationale*@*de soutien au Liban qui réunit les États partenaires du Liban, les Nations unies, l'Union Européenne, des organisations internationales, régionales*@*et de la société civile.",France,0
+2024-10-24,af,"Prix Sakharov sur les droits humains à Strasbourg, plus haute distinction de l'UE en matière de droits de l'homme.",Afghanistan,0
+2024-10-26,fr,"Passage à l’heure d’hiver dans la nuit de samedi à dimanche (à 3 heures, il est 2 heures).",France,0
+2024-10-26,ge,"Elections législatives.",Géorgie,0
+2024-10-26,af,"Synode sur l'avenir de l’Église, propositions de réformes transmises au pape François par l'assemblée romaine.",Afghanistan,0
+2024-10-27,uy,"Élections présidentielle*@*et législatives.",Uruguay,0
+2024-10-27,bg,"Élections législatives,*@*les septièmes en trois ans*@*et demi. ",Bulgarie,0
+2024-10-27,jp,"Élections législatives anticipées.",Japon,-0.15
+2024-10-27,us,"Première mondiale du film*@*de Clint Eastwood « Juré n°2 ».",États-Unis,0

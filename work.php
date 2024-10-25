@@ -140,8 +140,35 @@ if (file_exists($csvFilePath)) {
             }
         }
         echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
-        </div>
-        <textarea id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>
+        </div>';
+
+        //@ interlettrage
+
+        // Démarrer le menu déroulant
+        echo '<select name="letterSpacing[]">';
+
+        // Afficher la valeur actuelle du CSV si elle existe
+        if (isset($row[4])) { // Assurez-vous que $row[4] existe
+            // Afficher cette valeur comme option sélectionnée
+            $currentValue = htmlspecialchars($row[4]);
+            echo '<option value="' . $currentValue . '" selected>' . $currentValue . '</option>';
+        } else {
+            // Si aucune valeur n'est présente, ne rien faire
+        }
+
+        // Afficher les options du tableau $letterSpacing
+        foreach ($letterSpacing as $value => $label) {
+            // Vérifier si la valeur actuelle est égale à la valeur du tableau
+            $selected = (isset($currentValue) && $value == $currentValue) ? ' selected' : '';
+            echo '<option value="' . htmlspecialchars($value) . '"' . $selected . '>' . htmlspecialchars($label) . '</option>';
+        }
+
+        // Terminer le menu déroulant
+        echo '</select>';
+
+        //@ FIN interlettrage
+
+        echo '<textarea id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>
     </div>';
     }
 

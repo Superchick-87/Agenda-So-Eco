@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $date = $_GET['date'];
         $country = $_GET['country'];
         $event = $_GET['event'];
+        $letterSpacing = $_GET['letterSpacing'];
 
         // Vérifie si le nombre de noms est égal au nombre d'âges
         if (count($date) == count($country) && count($country) == count($event)) {
@@ -51,7 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     'date' => $date[$i],
                     'country' => $countryReference,
                     'event' => $eventText, // Utiliser le texte d'événement modifié
-                    'country_full_name' => $countryFullName // Ajout du nom complet du pays
+                    'country_full_name' => $countryFullName, // Ajout du nom complet du pays
+                    'letter_spacing' => $letterSpacing[$i] // Valeur de l'interlettrage de chaque bloc
                 );
             }
 
@@ -65,12 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $csvFile = fopen($csvFilePath, 'w');
 
             // Écriture de l'en-tête du fichier CSV
-            fputcsv($csvFile, array('date', 'country', 'event', 'country_full_name'));
+            fputcsv($csvFile, array('date', 'country', 'event', 'country_full_name', 'letter_spacing'));
 
             // Écriture des données dans le fichier CSV
             foreach ($donnees as $info) {
                 // Laisser fputcsv gérer l'encapsulation et les retours de ligne
-                fputcsv($csvFile, array($info['date'], $info['country'], $info['event'], $info['country_full_name']));
+                fputcsv($csvFile, array($info['date'], $info['country'], $info['event'], $info['country_full_name'], $info['letter_spacing']));
             }
 
             fclose($csvFile);
