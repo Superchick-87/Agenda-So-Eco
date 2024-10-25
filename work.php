@@ -1,19 +1,96 @@
+
 <?php
 $agendaSod = $_GET['agendaSod'];
+$csvFilePath = 'datas/' . $agendaSod . '_datas.csv';
+include('includes/options.php');
 
-$filename = 'datas/' . $agendaSod . '_datas.csv';
+$csvFileePathh = 'datas/' . $agendaSod . '_pref.csv';
+$interDateBasValue = null;
+$interDateHautValue = null;
+$interPaysHautValue = null;
+$interPaysBasValue = null;
 
-if (file_exists($filename)) {
-    $file = fopen($filename, 'r');
+// Vérifier si le fichier CSV existe
+if (file_exists($csvFileePathh)) {
+    if (($csvFilee = fopen($csvFileePathh, 'r')) !== false) {
+        // Lire l'en-tête du CSV
+        fgetcsv($csvFilee); // Ignore the header
 
-    // Fonction pour mettre à jour l'image du drapeau
-    // Écouteur événements pour les changements de sélection
-    // Appel initial pour mettre à jour les images des drapeaux
+        // Lire la première ligne des valeurs
+        if (($data = fgetcsv($csvFilee)) !== false) {
+            $interDateHautValue = $data[0]; // Récupérer la valeur de 'inter_Date_Haut'
+            $interDateBasValue = $data[1];  // Récupérer la valeur de 'inter_Date_Bas'
+            $interPaysHautValue = $data[2]; // Récupérer la valeur de 'inter_Date_Haut'
+            $interPaysBasValue = $data[3];  // Récupérer la valeur de 'inter_Date_Bas'
+        }
 
+        fclose($csvFilee);
+    }
+}
+
+if (file_exists($csvFilePath)) {
+    $file = fopen($csvFilePath, 'r');
 
     echo '
-<form id="form2" action="done.php?" method="get">
-    <input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
+    <form id="form2" action="done.php?" method="get">';
+    
+        //@ gestion des select pour les paramètres 
+       
+        //* espacements dates haut / bas
+        
+        // Afficher les menus déroulants avec les options pré-sélectionnées
+        echo '<label for="interDateHaut">Espacement date Haut</label>';
+        echo '<select name="interDateHaut" id="interDateHaut">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interDateHaut as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interDateHautValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select>';
+
+        echo '<label for="interDateBas">Espacement date Bas</label>';
+        echo '<select name="interDateBas" id="interDateBas">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interDateBas as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interDateBasValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select></br>';
+
+
+        //* FIN espacements dates haut / bas
+
+        //* espacements pays haut / bas
+        
+        // Afficher les menus déroulants avec les options pré-sélectionnées
+        
+        echo '<label for="interPaysHaut">Espacement Pays Haut</label>';
+        echo '<select name="interPaysHaut" id="interPaysHaut">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interPaysHaut as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interPaysHautValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select>';
+
+        echo '<label for="interPaysBas">Espacement Pays Bas</label>';
+        echo '<select name="interPaysBas" id="interPaysBas">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interPaysBas as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interPaysBasValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select></br>';
+        
+        //* FIN espacements dates haut / bas
+
+        //@ FIN gestion des select pour les paramètres 
+
+    echo '<input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
     <div id="inputs-container">';
 
     $headers = fgetcsv($file);
@@ -74,15 +151,15 @@ if (file_exists($filename)) {
         <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">
         <input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">
     </div>
-</form>
-</div>';
+    </form>
+    </div>';
 
     echo '
-<div class="state colorInfo">
-    <h2>Agenda en cours</h2>
-    <p id="totalCharacters" style="display:none;">0</p>
-    <h4 id="signes"></h4>
-</div>';
+        <div class="state colorInfo">
+            <h2>Agenda en cours</h2>
+            <p id="totalCharacters" style="display:none;">0</p>
+            <h4 id="signes"></h4>
+        </div>';
     fclose($file);
 } else {
     echo '
@@ -98,7 +175,8 @@ if (file_exists($filename)) {
     </form>
     <div class="state colorInfo">
         <h2>Nouvel agenda</h2>
-        <p id="totalCharacters" style="display:block;">0</p>
+        <p id="totalCharacters" style="display:none;">0</p>
         <h4 id="signes"> signes</h4>
     </div>';
-}
+};
+?>

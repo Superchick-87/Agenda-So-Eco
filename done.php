@@ -1,4 +1,5 @@
 <?php
+
 function defaultLand($x)
 {
     if ($x === '') {
@@ -78,5 +79,52 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     } else {
         echo "Tous les champs du formulaire ne sont pas définis.";
     }
+
+    // Ajouter les données au tableau, y compris le nom complet du pays
+    $donneesPref[] = array(
+        'inter_Date_Haut' => $_GET['interDateHaut'], // Date espacement haut  
+        'inter_Date_Bas' => $_GET['interDateBas'], // Date espacement bas
+        'inter_Pays_Haut' => $_GET['interPaysHaut'], // Pays espacement haut  
+        'inter_Pays_Bas' => $_GET['interPaysBas'] // Pays espacement bas 
+    );
+    // Générer le fichier CSV
+    $csvFilePathh = 'datas/' . $agendaSod . '_pref.csv';
+    $csvFilee = fopen($csvFilePathh, 'w');
+    
+    if ($csvFilee === false) {
+        die("Erreur lors de l'ouverture du fichier CSV.");
+    }
+    
+    // Écriture de l'en-tête du fichier CSV
+    fputcsv($csvFilee, array('inter_Date_Haut', 'inter_Date_Bas', 'inter_Pays_Haut', 'inter_Pays_Bas'));
+
+    // Écriture des données dans le fichier CSV
+    foreach ($donneesPref as $infoo) {
+        // Écrire la ligne avec le nom complet du pays
+        fputcsv($csvFilee, array($infoo['inter_Date_Haut'], $infoo['inter_Date_Bas'],$infoo['inter_Pays_Haut'], $infoo['inter_Pays_Bas']));
+    }
+    fclose($csvFilee);
+
 }
 include('pdfV2.php');
+
+// Chemin du dossier et du fichier PDF
+$directory = 'ProductionPdf/';
+$filename = 'infog_SOD_Agenda_'.$agendaSod .'.pdf';
+$filePath = $directory . $filename;
+// Vérifier si le fichier existe
+if (file_exists($filePath)) {
+    // Si le fichier existe, afficher le PDF dans la page
+    echo '
+    <h3>Votre PDF :</h3>
+    <embed src="' . $filePath . '" type="application/pdf" width="70%" height="800px" />';
+} else {
+    // Si le fichier n'existe pas, afficher un message
+    echo '<p>Le fichier PDF n\'existe pas dans le dossier spécifié.</p>';
+}
+
+?>
+
+
+
+

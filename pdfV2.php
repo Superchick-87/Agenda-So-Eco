@@ -2,10 +2,10 @@
 
 require_once('TCPDF/tcpdf.php');
 // Envoyer les en-têtes HTTP pour générer le fichier PDF
-header('Content-Type: application/pdf');
-header('Content-Disposition: inline; filename="document.pdf"');
-header('Cache-Control: private, max-age=0, must-revalidate');
-header('Pragma: public');
+// header('Content-Type: application/pdf');
+// header('Content-Disposition: inline; filename="document.pdf"');
+// header('Cache-Control: private, max-age=0, must-revalidate');
+// header('Pragma: public');
 
 function afficherJourSuivant($date)
 {
@@ -115,7 +115,7 @@ $pdf->SetMargins(0, 0, 0);  // Gauche, haut, droite
 $pdf->SetHeaderMargin(0);    // Marge d'en-tête
 $pdf->SetFooterMargin(0);    // Marge de pied de page
 
-// Désactiver l'en-tête et le pied de page si nécessaire
+// Désactiver l'en-tête et le pied de page
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
 
@@ -152,36 +152,6 @@ function interletter($x)
         return 'letter-spacing: -0.2px;';
     }
 }
-
-// Fonction pour gérer l'interlettrage et le retour à la ligne
-// function adjustText($text)
-// {
-//     $words = explode(' ', $text);
-//     $adjustedText = '';
-//     $currentLine = '';
-
-//     foreach ($words as $word) {
-//         // Vérifier la longueur du mot
-//         if (mb_strlen($word) < 5) {
-//             // Si le mot est court, ajuster l'espacement
-//             $currentLine .= '<span style="letter-spacing: -0.4px;">' . htmlspecialchars($word) . '</span> ';
-//         } else {
-//             // Si le mot est long, finir la ligne actuelle et passer à la suivante
-//             if ($currentLine !== '') {
-//                 $adjustedText .= $currentLine . '<br/>'; // Ajouter un retour à la ligne
-//                 $currentLine = '';
-//             }
-//             $adjustedText .= htmlspecialchars($word) . ' '; // Ajouter le mot normal
-//         }
-//     }
-
-//     // Ajouter le reste de la ligne si elle n'est pas vide
-//     if ($currentLine !== '') {
-//         $adjustedText .= $currentLine;
-//     }
-
-//     return $adjustedText;
-// }
 
 // Fonction pour gérer l'interlettrage et le retour à la ligne uniquement pour les événements
 function adjustEventText($text, $maxCharsPerLine = 29)
@@ -274,9 +244,9 @@ if (file_exists($csvFile)) {
                 // Ajouter une ligne avec la date
                 $content[] = array(
                     'text' => '
-                    <p style="margin: 0; padding: 0; line-height:0.5pt; font-size: 2pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:'.$_GET['interDateHaut'].'px; font-size: 2pt;">,</p> 
                     <img src="images/jours/' . afficherJourSuivant($date) . '.jpg"/>
-                    <p style="margin: 0; padding: 0; line-height:-0.5px; font-size: 2pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:'.$_GET['interDateBas'].'px; font-size: 2pt;">,</p> 
                 ',
                 );
 
@@ -296,13 +266,13 @@ if (file_exists($csvFile)) {
                 // Ajouter le pays et l'événement
                 $content[] = array(
                     'text' => '
-                <div style="line-height:1px;"> </div>
-                    <div style="font-family:Roboto; font-weight:bold; position:relative; margin-left:90px; line-height:0px; width:100%; padding:0;">
+                <div style="line-height:0px;"> </div>
+                    <div style="line-height:'.$_GET['interPaysHaut'].'px; font-family:Roboto; font-weight:bold; position:relative; margin-left:90px;  width:100%; padding:0;">
                         <span style="font-size:14px; color:white;">--</span>
                         <span style="' . interletter(strlen($country_full_name)) . 'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
-                    <div style="line-height:-3px;"></div>
+                    <div style="line-height:'.$_GET['interPaysBas'].'px;"></div>
                     <div style="font-family:utopiastd; font-size:9.5; line-height:9.7px;">' . adjustEventText($event) . '</div>
                     ',
                 );
@@ -328,5 +298,23 @@ if (file_exists($csvFile)) {
 }
 
 // Génération du PDF
-ob_clean(); // Effacer tout contenu de sortie avant de générer le PDF
-$pdf->Output('exemple.pdf', 'I');
+// ob_clean(); // Effacer tout contenu de sortie avant de générer le PDF
+// $pdf->Output('exemple.pdf', 'I');
+
+// Chemin du dossier où enregistrer le fichier PDF
+$directory = __DIR__ . '/ProductionPdf/'; // Exemple : 'pdf_files/' ou '/var/www/html/pdf/'
+
+// Vérifier si le dossier existe, sinon le créer
+if (!file_exists($directory)) {
+    mkdir($directory, 0777, true); // Créer le dossier avec les permissions
+}
+
+// Nom du fichier PDF
+$filename = 'infog_SOD_Agenda_'.$agendaSod.'.pdf'; // Le nom du fichier PDF
+
+// Enregistrer le fichier PDF dans le dossier spécifique
+$pdf->Output($directory . $filename, 'F'); // 'F' pour sauver dans un fichier
+
+// echo "Le PDF a été généré avec succès dans le dossier : " . $directory . $filename;
+
+

@@ -29,9 +29,6 @@
                     document.getElementById("txtHint").innerHTML = this.responseText;
                     updateTotalCharacters();
 
-
-
-
                     $(document).ready(function () {
                         function updateFlagImage(selectElement) {
                             var selectedCountryCode = selectElement.val();
@@ -47,9 +44,6 @@
                             updateFlagImage($(this));
                         });
                     });
-
-
-
                 }
             };
             xhttp.open("GET", "work.php?agendaSod=" + str, true);
@@ -90,9 +84,5 @@
             event.target.classList.remove('dragging'); // Remove the dragging class when drag ends
         }
     </script>
-
-
 </body>
-
-
 </html>
