@@ -1,5 +1,5 @@
 <?php
-
+include('includes/manipText.php');
 require_once('TCPDF/tcpdf.php');
 // Envoyer les en-têtes HTTP pour générer le fichier PDF
 // header('Content-Type: application/pdf');
@@ -69,8 +69,8 @@ class MC_TCPDF extends TCPDF
             $this->writeHTMLCell($colWidth, $totalHeight, '', '', $allEvents, 0, 1, false, true, 'L', true);
         } else {
             // Diviser le contenu en deux colonnes
-            $linesPerColumn = ceil(count($content) / 2.1);
-            $column1Events = array_slice($content, 0, $linesPerColumn);
+            $linesPerColumn = ceil(count($content) / 2.5);
+            $column1Events = array_slice($content, 0, $linesPerColumn + 0.5);
             $column2Events = array_slice($content, $linesPerColumn);
 
             // Préparer le texte pour la première colonne
@@ -153,46 +153,47 @@ function interletter($x)
     }
 }
 
-// Fonction pour gérer l'interlettrage et le retour à la ligne uniquement pour les événements
-function adjustEventText($text, $maxCharsPerLine = 29)
-{ // Limite par défaut de 30 caractères par ligne
-    $words = explode(' ', $text);
-    $adjustedText = '';
-    $currentLine = '';
 
-    foreach ($words as $word) {
-        // Vérifier la longueur actuelle de la ligne
-        $tempLine = $currentLine . ($currentLine ? ' ' : '') . $word; // Créer une ligne temporaire
+// // Fonction pour gérer l'interlettrage et le retour à la ligne uniquement pour les événements
+// function adjustEventText($text, $maxCharsPerLine = 80)
+// { // Limite par défaut de 30 caractères par ligne
+//     $words = explode(' ', $text);
+//     $adjustedText = '';
+//     $currentLine = '';
 
-        // Vérifier si la ligne temporaire dépasse la limite de caractères
-        if (mb_strlen($tempLine) < $maxCharsPerLine) {
-            // Si la ligne est pleine, ajouter la ligne actuelle au texte ajusté et réinitialiser la ligne actuelle
-            if ($currentLine !== '') {
-                $adjustedText .= $currentLine . '<br/>'; // Ajouter un retour à la ligne
-            }
-            // Si le mot est court, ajuster l'espacement et l'ajouter à la nouvelle ligne
-            if (mb_strlen($word) < 5) {
-                $adjustedText .= '<span style="letter-spacing: -0.25px;">' . htmlspecialchars($word) . '</span> ';
-            } else {
-                // Ajouter le mot normal
-                $adjustedText .= htmlspecialchars($word) . ' ';
-            }
+//     foreach ($words as $word) {
+//         // Vérifier la longueur actuelle de la ligne
+//         $tempLine = $currentLine . ($currentLine ? ' ' : '') . $word; // Créer une ligne temporaire
 
-            // Réinitialiser la ligne actuelle
-            $currentLine = '';
-        } else {
-            // Si la ligne ne dépasse pas la limite, ajouter le mot à la ligne actuelle
-            $currentLine = $tempLine;
-        }
-    }
+//         // Vérifier si la ligne temporaire dépasse la limite de caractères
+//         if (mb_strlen($tempLine) < $maxCharsPerLine) {
+//             // Si la ligne est pleine, ajouter la ligne actuelle au texte ajusté et réinitialiser la ligne actuelle
+//             if ($currentLine !== '') {
+//                 $adjustedText .= $currentLine . '<br/>'; // Ajouter un retour à la ligne
+//             }
+//             // Si le mot est court, ajuster l'espacement et l'ajouter à la nouvelle ligne
+//             if (mb_strlen($word) < 10) {
+//                 $adjustedText .= '<span style="letter-spacing: -0.2px;">' . htmlspecialchars($word) . '</span> ';
+//             } else {
+//                 // Ajouter le mot normal
+//                 $adjustedText .= htmlspecialchars($word) . ' ';
+//             }
 
-    // Ajouter le reste de la ligne si elle n'est pas vide
-    if ($currentLine !== '') {
-        $adjustedText .= $currentLine;
-    }
+//             // Réinitialiser la ligne actuelle
+//             $currentLine = '';
+//         } else {
+//             // Si la ligne ne dépasse pas la limite, ajouter le mot à la ligne actuelle
+//             $currentLine = $tempLine;
+//         }
+//     }
 
-    return $adjustedText;
-}
+//     // Ajouter le reste de la ligne si elle n'est pas vide
+//     if ($currentLine !== '') {
+//         $adjustedText .= $currentLine;
+//     }
+
+//     return $adjustedText;
+// }
 
 // Lecture des données CSV
 $csvFile = $csvFilePath;
@@ -244,9 +245,9 @@ if (file_exists($csvFile)) {
                 // Ajouter une ligne avec la date
                 $content[] = array(
                     'text' => '
-                    <p style="margin: 0; padding: 0; line-height:'.$_GET['interDateHaut'].'px; font-size: 2pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:' . $_GET['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
                     <img src="images/jours/' . afficherJourSuivant($date) . '.jpg"/>
-                    <p style="margin: 0; padding: 0; line-height:'.$_GET['interDateBas'].'px; font-size: 2pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:' . $_GET['interDateBas'] . 'px; font-size: 2pt;">,</p> 
                 ',
                 );
 
@@ -267,13 +268,13 @@ if (file_exists($csvFile)) {
                 $content[] = array(
                     'text' => '
                 <div style="line-height:0px;"> </div>
-                    <div style="line-height:'.$_GET['interPaysHaut'].'px; font-family:Roboto; font-weight:bold; position:relative; margin-left:90px;  width:100%; padding:0;">
+                    <div style="line-height:' . $_GET['interPaysHaut'] . 'px; font-family:Roboto; font-weight:bold; position:relative; margin-left:90px;  width:100%; padding:0;">
                         <span style="font-size:14px; color:white;">--</span>
                         <span style="' . interletter(strlen($country_full_name)) . 'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
-                    <div style="line-height:'.$_GET['interPaysBas'].'px;"></div>
-                    <div style="font-family:utopiastd; font-size:9.5; line-height:9.7px;">' . adjustEventText($event) . '</div>
+                    <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>
+                    <div style="font-family:utopiastd; letter-spacing: -0.15px; font-size:9.4; line-height:9.7px;">' . turn($event) . '</div>
                     ',
                 );
 
@@ -284,7 +285,7 @@ if (file_exists($csvFile)) {
             } else {
                 // Si le drapeau n'existe pas, on ajoute juste l'événement
                 $content[] = array(
-                    'text' => adjustEventText($event), // Ajuster le texte de l'événement
+                    'text' => turn(htmlspecialchars($event)), // Ajuster le texte de l'événement
                 );
             }
         }
@@ -310,11 +311,9 @@ if (!file_exists($directory)) {
 }
 
 // Nom du fichier PDF
-$filename = 'infog_SOD_Agenda_'.$agendaSod.'.pdf'; // Le nom du fichier PDF
+$filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf'; // Le nom du fichier PDF
 
 // Enregistrer le fichier PDF dans le dossier spécifique
 $pdf->Output($directory . $filename, 'F'); // 'F' pour sauver dans un fichier
 
 // echo "Le PDF a été généré avec succès dans le dossier : " . $directory . $filename;
-
-

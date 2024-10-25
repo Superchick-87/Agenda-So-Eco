@@ -3,6 +3,7 @@
 $agendaSod = $_GET['agendaSod'];
 $csvFilePath = 'datas/' . $agendaSod . '_datas.csv';
 include('includes/options.php');
+include('includes/manipText.php');
 
 $csvFileePathh = 'datas/' . $agendaSod . '_pref.csv';
 $interDateBasValue = null;
@@ -33,62 +34,62 @@ if (file_exists($csvFilePath)) {
 
     echo '
     <form id="form2" action="done.php?" method="get">';
-    
-        //@ gestion des select pour les paramètres 
-       
-        //* espacements dates haut / bas
-        
-        // Afficher les menus déroulants avec les options pré-sélectionnées
-        echo '<label for="interDateHaut">Espacement date Haut</label>';
-        echo '<select name="interDateHaut" id="interDateHaut">';
-        // Utiliser une boucle foreach pour afficher chaque option
-        foreach ($interDateHaut as $value => $label) {
-            // Vérifier si la valeur doit être sélectionnée
-            $selected = ($value == $interDateHautValue) ? ' selected' : '';
-            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-        }
-        echo '</select>';
 
-        echo '<label for="interDateBas">Espacement date Bas</label>';
-        echo '<select name="interDateBas" id="interDateBas">';
-        // Utiliser une boucle foreach pour afficher chaque option
-        foreach ($interDateBas as $value => $label) {
-            // Vérifier si la valeur doit être sélectionnée
-            $selected = ($value == $interDateBasValue) ? ' selected' : '';
-            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-        }
-        echo '</select></br>';
+    //@ gestion des select pour les paramètres 
+
+    //* espacements dates haut / bas
+
+    // Afficher les menus déroulants avec les options pré-sélectionnées
+    echo '<label for="interDateHaut">Espacement date Haut</label>';
+    echo '<select name="interDateHaut" id="interDateHaut">';
+    // Utiliser une boucle foreach pour afficher chaque option
+    foreach ($interDateHaut as $value => $label) {
+        // Vérifier si la valeur doit être sélectionnée
+        $selected = ($value == $interDateHautValue) ? ' selected' : '';
+        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+    }
+    echo '</select>';
+
+    echo '<label for="interDateBas">Espacement date Bas</label>';
+    echo '<select name="interDateBas" id="interDateBas">';
+    // Utiliser une boucle foreach pour afficher chaque option
+    foreach ($interDateBas as $value => $label) {
+        // Vérifier si la valeur doit être sélectionnée
+        $selected = ($value == $interDateBasValue) ? ' selected' : '';
+        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+    }
+    echo '</select></br>';
 
 
-        //* FIN espacements dates haut / bas
+    //* FIN espacements dates haut / bas
 
-        //* espacements pays haut / bas
-        
-        // Afficher les menus déroulants avec les options pré-sélectionnées
-        
-        echo '<label for="interPaysHaut">Espacement Pays Haut</label>';
-        echo '<select name="interPaysHaut" id="interPaysHaut">';
-        // Utiliser une boucle foreach pour afficher chaque option
-        foreach ($interPaysHaut as $value => $label) {
-            // Vérifier si la valeur doit être sélectionnée
-            $selected = ($value == $interPaysHautValue) ? ' selected' : '';
-            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-        }
-        echo '</select>';
+    //* espacements pays haut / bas
 
-        echo '<label for="interPaysBas">Espacement Pays Bas</label>';
-        echo '<select name="interPaysBas" id="interPaysBas">';
-        // Utiliser une boucle foreach pour afficher chaque option
-        foreach ($interPaysBas as $value => $label) {
-            // Vérifier si la valeur doit être sélectionnée
-            $selected = ($value == $interPaysBasValue) ? ' selected' : '';
-            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-        }
-        echo '</select></br>';
-        
-        //* FIN espacements dates haut / bas
+    // Afficher les menus déroulants avec les options pré-sélectionnées
 
-        //@ FIN gestion des select pour les paramètres 
+    echo '<label for="interPaysHaut">Espacement Pays Haut</label>';
+    echo '<select name="interPaysHaut" id="interPaysHaut">';
+    // Utiliser une boucle foreach pour afficher chaque option
+    foreach ($interPaysHaut as $value => $label) {
+        // Vérifier si la valeur doit être sélectionnée
+        $selected = ($value == $interPaysHautValue) ? ' selected' : '';
+        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+    }
+    echo '</select>';
+
+    echo '<label for="interPaysBas">Espacement Pays Bas</label>';
+    echo '<select name="interPaysBas" id="interPaysBas">';
+    // Utiliser une boucle foreach pour afficher chaque option
+    foreach ($interPaysBas as $value => $label) {
+        // Vérifier si la valeur doit être sélectionnée
+        $selected = ($value == $interPaysBasValue) ? ' selected' : '';
+        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+    }
+    echo '</select></br>';
+
+    //* FIN espacements dates haut / bas
+
+    //@ FIN gestion des select pour les paramètres 
 
     echo '<input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
     <div id="inputs-container">';
@@ -140,7 +141,7 @@ if (file_exists($csvFilePath)) {
         }
         echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
         </div>
-        <textarea id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . $row[2] . '</textarea>
+        <textarea id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>
     </div>';
     }
 
