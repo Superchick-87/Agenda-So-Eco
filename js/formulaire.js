@@ -23,17 +23,12 @@ async function addInputs() {
     const container = document.getElementById("inputs-container");
     const uniqueId = generateUniqueId();
 
-    // Création de la ligne d'entrée
     const inputRow = document.createElement("div");
     inputRow.classList.add("input-row");
     inputRow.id = "input-row-" + uniqueId;
     inputRow.draggable = true;
-    
-    // Ajout des événements de drag-and-drop
     inputRow.addEventListener('dragstart', drag);
     inputRow.addEventListener('dragend', dragEnd);
-    inputRow.addEventListener('dragover', allowDrop); // Permettre le drag sur l'élément
-    inputRow.addEventListener('drop', drop); // Gestion du dépôt sur l'élément
 
     const selFlag = document.createElement("div");
     selFlag.classList.add("flex");
@@ -92,28 +87,25 @@ async function addInputs() {
     const blocJour = document.createElement("div");
     blocJour.classList.add("bloc_jour");
 
+    // Conteneur pour l'icône et le select (espacement entre lettres)
+    const flexOptPicto = document.createElement("div");
+    flexOptPicto.classList.add("flex_opt_picto");
+
+    // Icône d'interlettrage
+    const pictoOpt = document.createElement("div");
+    pictoOpt.classList.add("picto_opt");
+    pictoOpt.style.backgroundImage = "url('images/opti_letter_space.svg')";
+
     // Menu de sélection pour interlettrage
     const letterSpacingSelect = document.createElement("select");
     letterSpacingSelect.id = "letterSpacing_" + uniqueId;
     letterSpacingSelect.name = "letterSpacing[]";
-    letterSpacingSelect.className = "agendaOpt";
+    letterSpacingSelect.className = "agendaOpt selopt";
     letterSpacingSelect.onchange = function () {
         updateLetterSpacing(this);
     };
 
     // Remplir le select avec les options d'espacement
-    const letterSpacingOptions = {
-        '0.25': '0.25 pt',
-        '0.2': '0.20 pt',
-        '0.15': '0.15 pt',
-        '0.1': '0.10 pt',
-        '0': '0 pt',
-        '-0.1': '-0.10 pt',
-        '-0.15': '-0.15 pt',
-        '-0.2': '-0.20 pt',
-        '-0.25': '-0.25 pt'
-    };
-
     for (const value in letterSpacingOptions) {
         const option = document.createElement("option");
         option.value = value; // Utiliser la clé comme valeur
@@ -121,13 +113,19 @@ async function addInputs() {
         letterSpacingSelect.appendChild(option);
     }
 
+    // Ajout de l'icône et du select dans `flex_opt_picto`
+    flexOptPicto.appendChild(pictoOpt);
+    flexOptPicto.appendChild(letterSpacingSelect);
+
+    // Ajout de `flex_opt_picto` dans `bloc_jour`
+    blocJour.appendChild(flexOptPicto);
+
     // Création de l'affichage du jour
     const dayDisplay = document.createElement("h3");
     dayDisplay.id = "jour_nom" + uniqueId;
     dayDisplay.textContent = "Jour";  // Texte initial qui sera remplacé
 
     // Ajout du jour et du select dans `bloc_jour`
-    blocJour.appendChild(letterSpacingSelect);
     blocJour.appendChild(dayDisplay);
 
     // Ajout de `bloc_jour` dans `flexOpt`
@@ -153,6 +151,7 @@ async function addInputs() {
     inputRow.appendChild(flexOpt);
     container.insertBefore(inputRow, document.getElementById("add-btn"));
 }
+
 
 
 

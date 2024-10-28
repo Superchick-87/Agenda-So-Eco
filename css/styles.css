@@ -16,7 +16,9 @@ h2,
 h4 {
     margin: 7px;
 }
-
+hr{
+    margin: 10px 2px;
+}
 /* Change cursor to crosshair when dragging */
 .input-row {
     cursor: grab;
@@ -80,7 +82,6 @@ textarea {
     padding: 5px 10px;
     outline: none;
 }
-
 .textarea::placeholder {
     color: var(--font-color-sub);
     opacity: 0.8;
@@ -197,9 +198,25 @@ textarea {
     flex-direction: row-reverse;
     align-items: flex-start;
 }
-
+.flex_opt_picto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.picto_opt{
+    width: 30px;
+    height: 36px;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+.selopt{
+    background-color: #4d5d67;
+    color: white;
+    border: solid 1px white;
+}
 .agendaOpt {
     width: 70px;
+    margin-left: 0px;
 }
 .agendaDateSize {
     position: fixed;
@@ -211,6 +228,7 @@ textarea {
 .bloc_opt{
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
     margin: 20px 0px;
     width: min-content;
     background-color: #607d8b;

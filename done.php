@@ -90,7 +90,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         'inter_Date_Haut' => $_GET['interDateHaut'], // Date espacement haut  
         'inter_Date_Bas' => $_GET['interDateBas'], // Date espacement bas
         'inter_Pays_Haut' => $_GET['interPaysHaut'], // Pays espacement haut  
-        'inter_Pays_Bas' => $_GET['interPaysBas'] // Pays espacement bas 
+        'inter_Pays_Bas' => $_GET['interPaysBas'], // Pays espacement bas 
+        'interligne' => $_GET['interligne'], // interligna de l'ensemble du texte
+        'adjust_Colonne' => $_GET['adjustColonne'] // ajustage des colonnes
     );
     // Générer le fichier CSV
     $csvFilePathh = 'datas/' . $agendaSod . '_pref.csv';
@@ -101,12 +103,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 
     // Écriture de l'en-tête du fichier CSV
-    fputcsv($csvFilee, array('inter_Date_Haut', 'inter_Date_Bas', 'inter_Pays_Haut', 'inter_Pays_Bas'));
+    fputcsv($csvFilee, array('inter_Date_Haut', 'inter_Date_Bas', 'inter_Pays_Haut', 'inter_Pays_Bas', 'interligne','adjust_Colonne'));
 
     // Écriture des données dans le fichier CSV
     foreach ($donneesPref as $infoo) {
         // Écrire la ligne avec le nom complet du pays
-        fputcsv($csvFilee, array($infoo['inter_Date_Haut'], $infoo['inter_Date_Bas'], $infoo['inter_Pays_Haut'], $infoo['inter_Pays_Bas']));
+        fputcsv($csvFilee, array($infoo['inter_Date_Haut'], $infoo['inter_Date_Bas'], $infoo['inter_Pays_Haut'], $infoo['inter_Pays_Bas'], $infoo['interligne'], $infoo['adjust_Colonne']));
     }
     fclose($csvFilee);
 }

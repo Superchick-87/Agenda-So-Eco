@@ -57,7 +57,7 @@ class MC_TCPDF extends TCPDF
             $this->writeHTMLCell($colWidth, $totalHeight, '', '', $allEvents, 0, 1, false, true, 'L', true);
         } else {
             // Diviser le contenu en deux colonnes
-            $linesPerColumn = ceil(count($content) / 2.1);
+            $linesPerColumn = ceil(count($content) / $_GET['adjustColonne']);
             $column1Events = array_slice($content, 0, $linesPerColumn + 0.5);
             $column2Events = array_slice($content, $linesPerColumn);
 
@@ -221,7 +221,7 @@ if (file_exists($csvFile)) {
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>
-                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'px; font-size:9.5; line-height:9.7px;">' . turn(exposant($event)) . '</div>
+                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'px; font-size:9.5; line-height:'.$_GET['interligne'].'px;">' . turn(exposant($event)) . '</div>
                     ',
                 );
 
