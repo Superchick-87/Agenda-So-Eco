@@ -4,6 +4,9 @@ $agendaSod = $_GET['agendaSod'];
 $csvFilePath = 'datas/' . $agendaSod . '_datas.csv';
 include('includes/options.php');
 include('includes/manipText.php');
+include('includes/jourEnFr.php');
+
+
 
 $csvFileePathh = 'datas/' . $agendaSod . '_pref.csv';
 $interDateBasValue = null;
@@ -37,57 +40,60 @@ if (file_exists($csvFilePath)) {
 
     //@ gestion des select pour les paramètres 
 
-    //* espacements dates haut / bas
+    echo '<div id="options" class="bloc_opt">';
 
-    // Afficher les menus déroulants avec les options pré-sélectionnées
-    echo '<label for="interDateHaut">Espacement date Haut</label>';
-    echo '<select name="interDateHaut" id="interDateHaut">';
-    // Utiliser une boucle foreach pour afficher chaque option
-    foreach ($interDateHaut as $value => $label) {
-        // Vérifier si la valeur doit être sélectionnée
-        $selected = ($value == $interDateHautValue) ? ' selected' : '';
-        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-    }
-    echo '</select>';
+        //* espacements dates haut / bas
+        // Afficher les menus déroulants avec les options pré-sélectionnées
+        echo '<label for="interDateHaut">Espacement date Haut</label>';
+        echo '<select name="interDateHaut" id="interDateHaut" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interDateHaut as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interDateHautValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select>';
 
-    echo '<label for="interDateBas">Espacement date Bas</label>';
-    echo '<select name="interDateBas" id="interDateBas">';
-    // Utiliser une boucle foreach pour afficher chaque option
-    foreach ($interDateBas as $value => $label) {
-        // Vérifier si la valeur doit être sélectionnée
-        $selected = ($value == $interDateBasValue) ? ' selected' : '';
-        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-    }
-    echo '</select></br>';
+        echo '<label for="interDateBas">Espacement date Bas</label>';
+        echo '<select name="interDateBas" id="interDateBas" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interDateBas as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interDateBasValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select></br>';
 
+
+        //* FIN espacements dates haut / bas
+
+        //* espacements pays haut / bas
+
+        // Afficher les menus déroulants avec les options pré-sélectionnées
+
+        echo '<label for="interPaysHaut">Espacement Pays Haut</label>';
+        echo '<select name="interPaysHaut" id="interPaysHaut" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interPaysHaut as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interPaysHautValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select>';
+
+        echo '<label for="interPaysBas">Espacement Pays Bas</label>';
+        echo '<select name="interPaysBas" id="interPaysBas" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interPaysBas as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interPaysBasValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select></br>';
 
     //* FIN espacements dates haut / bas
 
-    //* espacements pays haut / bas
-
-    // Afficher les menus déroulants avec les options pré-sélectionnées
-
-    echo '<label for="interPaysHaut">Espacement Pays Haut</label>';
-    echo '<select name="interPaysHaut" id="interPaysHaut">';
-    // Utiliser une boucle foreach pour afficher chaque option
-    foreach ($interPaysHaut as $value => $label) {
-        // Vérifier si la valeur doit être sélectionnée
-        $selected = ($value == $interPaysHautValue) ? ' selected' : '';
-        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-    }
-    echo '</select>';
-
-    echo '<label for="interPaysBas">Espacement Pays Bas</label>';
-    echo '<select name="interPaysBas" id="interPaysBas">';
-    // Utiliser une boucle foreach pour afficher chaque option
-    foreach ($interPaysBas as $value => $label) {
-        // Vérifier si la valeur doit être sélectionnée
-        $selected = ($value == $interPaysBasValue) ? ' selected' : '';
-        echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
-    }
-    echo '</select></br>';
-
-    //* FIN espacements dates haut / bas
+    echo '</div>';
 
     //@ FIN gestion des select pour les paramètres 
 
@@ -102,6 +108,8 @@ if (file_exists($csvFilePath)) {
     $d = 1;
     $s = 1;
     $z = 1;
+    $zz = 1;
+    $zzz = 1;
 
     // Lecture du fichier CSV des pays
     $paysFile = fopen('datas/pays.csv', 'r');
@@ -117,7 +125,7 @@ if (file_exists($csvFilePath)) {
         echo '
     <div class="input-row" id="input-row-' . $a++ . '" draggable="true" ondragstart="drag(event)" ondragover="allowDrop(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
         <div class="flex" id="selFag' . $d++ . '">
-            <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '">
+            <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '" onchange="updateDayName(this)">
             <select name="country[]" id="country_' . $s++ . '">';
 
         // Si aucun pays n'est spécifié dans le fichier CSV
@@ -142,36 +150,43 @@ if (file_exists($csvFilePath)) {
         echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
         </div>';
 
-        //@ interlettrage
+        echo '<div class="flex_opt">';
 
-        // Démarrer le menu déroulant
-        echo '<select name="letterSpacing[]">';
+            echo '<div class="bloc_jour">';
+                //@ interlettrage
 
-        // Afficher la valeur actuelle du CSV si elle existe
-        if (isset($row[4])) { // Assurez-vous que $row[4] existe
-            // Afficher cette valeur comme option sélectionnée
-            $currentValue = htmlspecialchars($row[4]);
-            echo '<option value="' . $currentValue . '" selected>' . $currentValue . '</option>';
-        } else {
-            // Si aucune valeur n'est présente, ne rien faire
-        }
+                // Démarrer le menu déroulant
+                echo '<select id="letterSpacing_' . $zz++ . '" name="letterSpacing[]" class="agendaOpt" onchange="updateLetterSpacing(this)">';
 
-        // Afficher les options du tableau $letterSpacing
-        foreach ($letterSpacing as $value => $label) {
-            // Vérifier si la valeur actuelle est égale à la valeur du tableau
-            $selected = (isset($currentValue) && $value == $currentValue) ? ' selected' : '';
-            echo '<option value="' . htmlspecialchars($value) . '"' . $selected . '>' . htmlspecialchars($label) . '</option>';
-        }
+                // Afficher la valeur actuelle du CSV si elle existe
+                if (isset($row[4])) { // Assurez-vous que $row[4] existe
+                    // Afficher cette valeur comme option sélectionnée
+                    $currentValue = htmlspecialchars($row[4]);
+                    echo '<option value="' . $currentValue . '" selected>' . $currentValue . '</option>';
+                } else {
+                    // Si aucune valeur n'est présente, ne rien faire
+                }
 
-        // Terminer le menu déroulant
-        echo '</select>';
+                // Afficher les options du tableau $letterSpacing
+                foreach ($letterSpacing as $value => $label) {
+                    // Vérifier si la valeur actuelle est égale à la valeur du tableau
+                    $selected = (isset($currentValue) && $value == $currentValue) ? ' selected' : '';
+                    echo '<option value="' . htmlspecialchars($value) . '"' . $selected . '>' . htmlspecialchars($label) . '</option>';
+                }
 
-        //@ FIN interlettrage
+                // Terminer le menu déroulant
+                echo '</select>';
+                
+                //@ FIN interlettrage
+                
+                echo '<h3 id="jour_nom' . $zzz++ . '"  onchange="updateDayName(this)">'.afficherJourSuivant($row[0]).'</h3>';
 
-        echo '<textarea id="event_' . $b++ . '" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>
-    </div>';
+            echo '</div>';
+            
+            echo '<textarea id="event_' . $b++ . '" style="letter-spacing:'.$row[4].'pt;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
+        echo '</div>';
+        echo '</div>';
     }
-
     echo '
     <div class="add-btn" id="add-btn" onclick="addInputs()">+
     </div>
@@ -191,7 +206,69 @@ if (file_exists($csvFilePath)) {
     fclose($file);
 } else {
     echo '
-    <form id="form2" action="done.php?" method="get">
+    <form id="form2" action="done.php?" method="get">';
+
+    //@ gestion des select pour les paramètres 
+
+    echo '<div id="options" class="bloc_opt">';
+
+        //* espacements dates haut / bas
+        // Afficher les menus déroulants avec les options pré-sélectionnées
+        echo '<label for="interDateHaut">Espacement date Haut</label>';
+        echo '<select name="interDateHaut" id="interDateHaut" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interDateHaut as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interDateHautValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select>';
+
+        echo '<label for="interDateBas">Espacement date Bas</label>';
+        echo '<select name="interDateBas" id="interDateBas" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interDateBas as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interDateBasValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select></br>';
+
+
+        //* FIN espacements dates haut / bas
+
+        //* espacements pays haut / bas
+
+        // Afficher les menus déroulants avec les options pré-sélectionnées
+
+        echo '<label for="interPaysHaut">Espacement Pays Haut</label>';
+        echo '<select name="interPaysHaut" id="interPaysHaut" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interPaysHaut as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interPaysHautValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select>';
+
+        echo '<label for="interPaysBas">Espacement Pays Bas</label>';
+        echo '<select name="interPaysBas" id="interPaysBas" class="agendaOpt">';
+        // Utiliser une boucle foreach pour afficher chaque option
+        foreach ($interPaysBas as $value => $label) {
+            // Vérifier si la valeur doit être sélectionnée
+            $selected = ($value == $interPaysBasValue) ? ' selected' : '';
+            echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
+        }
+        echo '</select></br>';
+
+    //* FIN espacements dates haut / bas
+
+    echo '</div>';
+
+    //@ FIN gestion des select pour les paramètres 
+
+
+    echo'
         <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
         <div id="inputs-container">
             <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>

@@ -1,4 +1,5 @@
 <?php
+include('includes/jourEnFr.php');
 include('includes/manipText.php');
 require_once('TCPDF/tcpdf.php');
 // Envoyer les en-têtes HTTP pour générer le fichier PDF
@@ -7,20 +8,7 @@ require_once('TCPDF/tcpdf.php');
 // header('Cache-Control: private, max-age=0, must-revalidate');
 // header('Pragma: public');
 
-function afficherJourSuivant($date)
-{
-    // Créer un objet DateTime à partir de la date donnée
-    $dateObjet = new DateTime($date);
 
-    // Ajouter un jour à la date
-    $dateObjet->modify('day');
-
-    // Retourner le jour de la semaine au format 'lundi', 'mardi', etc.
-    return strftime('%A', $dateObjet->getTimestamp());
-}
-
-// Définir la locale en français pour obtenir les jours dans la bonne langue
-setlocale(LC_TIME, 'fr_FR.utf8');
 /**
  * Extend TCPDF to work with multiple columns
  */
@@ -205,7 +193,7 @@ if (file_exists($csvFile)) {
                 $content[] = array(
                     'text' => '
                     <p style="margin: 0; padding: 0; line-height:' . $_GET['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
-                    <img src="images/jours/' . afficherJourSuivant($date) . '.jpg"/>
+                    <img src="images/jours/' . afficherJourSuivant($date) . '.svg"/>
                     <p style="margin: 0; padding: 0; line-height:' . $_GET['interDateBas'] . 'px; font-size: 2pt;">,</p> 
                 ',
                 );
@@ -233,7 +221,7 @@ if (file_exists($csvFile)) {
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>
-                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'px; font-size:9.4; line-height:9.7px;">' . turn($event) . '</div>
+                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'px; font-size:9.5; line-height:9.7px;">' . turn(exposant($event)) . '</div>
                     ',
                 );
 

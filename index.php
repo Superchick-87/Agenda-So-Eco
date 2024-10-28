@@ -1,3 +1,12 @@
+ <?php
+include('includes/options.php');
+$letterSpacingJson = json_encode($letterSpacing);
+?>
+
+<script>
+    const letterSpacingOptions = <?php echo $letterSpacingJson; ?>;
+</script>
+
 <!DOCTYPE html>
 <html lang="fr">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -14,10 +23,7 @@
     <div class="colorInfo agendaDateSize">
         <input id="agendaSod" class="agendaDate" type="date" name="agendaSod" onchange="showHint(this.value)">
     </div>
-    <?php
-    $letterSpacingJson = json_encode($letterSpacing);
-echo $letterSpacingJson;
-?>
+
     <script>
         var agendaSod = document.getElementById('agendaSod');
         function showHint(str) {
@@ -54,8 +60,8 @@ echo $letterSpacingJson;
             xhttp.send();
         }
     </script>
-
-    <script src="js/formulaire.js"></script>
+<script src="js/formulaire.js"></script>
+  
     <script>
         function allowDrop(event) {
             event.preventDefault(); // Prevent default behavior
@@ -88,5 +94,6 @@ echo $letterSpacingJson;
             event.target.classList.remove('dragging'); // Remove the dragging class when drag ends
         }
     </script>
+      
 </body>
 </html>

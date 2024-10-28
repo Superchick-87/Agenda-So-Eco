@@ -87,7 +87,7 @@ textarea {
 }
 
 textarea {
-    width: 275px;
+    width: 267px;
     font-family: times;
     font-size: 19.5px;
 }
@@ -96,6 +96,7 @@ textarea {
     width: 350px;
     margin: 0px auto;
 }
+
 
 .remove-btn {
     background-color: brown;
@@ -191,10 +192,41 @@ textarea {
     align-items: center;
 }
 
+.flex_opt {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+}
+
+.agendaOpt {
+    width: 70px;
+}
 .agendaDateSize {
     position: fixed;
     top: 4px;
     text-align: center;
     height: 32px;
     width: 220px;
+}
+.bloc_opt{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+    width: min-content;
+    background-color: #607d8b;
+    text-align: end;
+    padding: 10px;
+    position: fixed;
+    left: 0px;
+    color: white;
+    top: 150px;
+}
+.bloc_jour{
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    height: 137px;
+    color: #00000045;
+    font-size: 25px;
 }

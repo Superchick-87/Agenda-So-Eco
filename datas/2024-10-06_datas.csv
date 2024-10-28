@@ -1,17 +1,17 @@
-date,country,event,country_full_name
-2024-10-07,gb,"Procès de BHP, le géant minier australien pour sa responsabilité dans la pollution entraînée par la rupture en 2015 d'un barrage de résidus miniers au Brésil (jusqu'au 20 décembre).",Royaume-Uni
-2024-10-07,ue,"Session plénière du Parlement européen à Strasbourg*@*(jusqu’au 10 octobre). ","Union européenne"
-2024-10-07,se,"Annonce du prix Nobel*@*de médecine, Stockholm.",Suède
-2024-10-08,se,"Annonce du prix Nobel*@*de physique, à Stockholm.",Suède
-2024-10-08,fr,"BD : Parution de ""Moi, Fadi, le frère volé"" de Riad Sattouf (éd. Les Livres du futur).",France
-2024-10-08,fr,"Rencontres stratégiques*@*de la Méditerranée 2024 à Toulon (jusqu’au 9 octobre).",France
-2024-10-09,se,"Annonce du prix Nobel*@*de chimie, à Stockholm.",Suède
-2024-10-09,fr,"Sortie du film « The Apprentice », biopic sur Donald Trump (le 11 aux États-Unis).",France
-2024-10-10,af,"WWF publie le rapport Planète vivante sur l’état de santé*@*de la biodiversité dans le monde.",Afghanistan
-2024-10-10,gb,"Parution des mémoires de Boris Johnson intitulées « Unleashed ».",Royaume-Uni
-2024-10-10,se,"Annonce du prix Nobel*@*de littérature, à Stockholm.",Suède
-2024-10-10,fr,"Jugement dans l'affaire du déraillement mortel du TGV Est à Eckwersheim (Bas-Rhin) le 14 novembre 2015, après le procès de la SNCF, de ses filiales Systra et SNCF Réseau, et de trois salariés. Ce déraillement avait causé 11 morts et 42 blessés.",France
-2024-10-10,fr,"Présentation du projet de budget pour 2025 en conseil des ministres. ",France
-2024-10-11,no,"Annonce du prix Nobel de la paix, à Oslo.",Norvège
-2024-10-12,de,"Sommet international pour coordonner le soutien militaire à l’Ukraine : 50 États se retrouvent à Ramstein où se trouve la base.",Allemagne
-2024-10-11,cy,"Sommet des pays du Sud de l’UE (Med9) à Paphos. ",Chypre
+date,country,event,country_full_name,letter_spacing
+2024-10-07,gb,"Procès de BHP, le géant minier australien pour sa responsabilité dans la pollution entraînée par la rupture en 2015 d'un barrage de résidus miniers au Brésil (jusqu'au 20 décembre).",Royaume-Uni,-0.25
+2024-10-07,ue,"Session plénière du Parlement européen à Strasbourg*@*(jusqu’au 10 octobre). ","Union européenne",0
+2024-10-07,se,"Annonce du prix Nobel*@*de médecine, Stockholm.",Suède,0
+2024-10-08,se,"Annonce du prix Nobel*@*de physique, à Stockholm.",Suède,0.25
+2024-10-08,fr,"BD : Parution de ""Moi, Fadi, le frère volé"" de Riad Sattouf (éd. Les Livres du futur).",France,0.25
+2024-10-08,fr,"Rencontres stratégiques*@*de la Méditerranée 2024 à Toulon (jusqu’au 9 octobre).",France,0
+2024-10-09,se,"Annonce du prix Nobel*@*de chimie, à Stockholm.",Suède,0
+2024-10-09,fr,"Sortie du film « The Apprentice », biopic sur Donald Trump (le 11 aux États-Unis).",France,0
+2024-10-10,af,"WWF publie le rapport Planète vivante sur l’état*@*de santé de la biodiversité dans le monde.",Afghanistan,0.2
+2024-10-10,gb,"Parution des mémoires*@*de Boris Johnson intitulées*@*« Unleashed ».",Royaume-Uni,0
+2024-10-10,se,"Annonce du prix Nobel*@*de littérature, à Stockholm.",Suède,0
+2024-10-10,fr,"Jugement dans l'affaire*@*du déraillement mortel du TGV Est à Eckwersheim (Bas-Rhin) le 14 novembre 2015,*@*après le procès de la SNCF,*@*de ses filiales Systra et SNCF Réseau, et de trois salariés.*@*Ce déraillement avait causé 11 morts et 42 blessés.",France,0
+2024-10-10,fr,"Présentation du projet*@*de budget pour 2025 en conseil des ministres. ",France,-0.1
+2024-10-11,no,"Annonce du prix Nobel*@*de la paix, à Oslo.",Norvège,0
+2024-10-12,de,"Sommet international pour coordonner le soutien militaire à l’Ukraine : 50 États*@*se retrouvent à Ramstein*@*où se trouve la base.",Allemagne,0.1
+2024-10-11,cy,"Sommet des pays du Sud*@*de l’UE (Med9) à Paphos. ",Chypre,0.25
