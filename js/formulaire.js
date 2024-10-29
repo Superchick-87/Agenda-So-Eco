@@ -29,6 +29,8 @@ async function addInputs() {
     inputRow.draggable = true;
     inputRow.addEventListener('dragstart', drag);
     inputRow.addEventListener('dragend', dragEnd);
+    inputRow.addEventListener('dragover', allowDrop);
+    inputRow.addEventListener('drop', drop);
 
     const selFlag = document.createElement("div");
     selFlag.classList.add("flex");
@@ -39,7 +41,7 @@ async function addInputs() {
     dateInput.id = "date_" + uniqueId;
     dateInput.type = "date";
     dateInput.name = "date[]";
-    dateInput.onchange = function() {
+    dateInput.onchange = function () {
         updateDayName(this);
     };
 
@@ -232,7 +234,7 @@ function updateTotalCharacters() {
     const elementsColorInfoClass = document.querySelectorAll('.colorInfo');
     const elementsColorInfoClassOK = document.querySelectorAll('.colorInfoOk');
 
-  
+
     // Gestion de l'affichage basé sur le nombre de caractères
     if (totalCharacters >= 1400 && totalCharacters <= 1500) {
         elementsColorInfoClass.forEach(element => {

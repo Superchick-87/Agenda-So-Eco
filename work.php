@@ -26,6 +26,8 @@ if (file_exists($csvFileePathh)) {
             $interDateBasValue = $data[1];  // Récupérer la valeur de 'inter_Date_Bas'
             $interPaysHautValue = $data[2]; // Récupérer la valeur de 'inter_Date_Haut'
             $interPaysBasValue = $data[3];  // Récupérer la valeur de 'inter_Date_Bas'
+            $interLigneValue = $data[4];  // Récupérer la valeur de 'interligne'
+            $adjustColonneValue = $data[5];  // Récupérer la valeur de 'adjust_Colonne'
         }
 
         fclose($csvFilee);
@@ -38,11 +40,11 @@ if (file_exists($csvFilePath)) {
     echo '
     <form id="form2" action="done.php?" method="get">';
 
-        //@ gestion des select pour les paramètres 
+    //@ gestion des select pour les paramètres 
 
-        include('includes/barreOpt.php');
+    include('includes/barreOpt.php');
 
-        //@ FIN gestion des select pour les paramètres 
+    //@ FIN gestion des select pour les paramètres 
 
     echo '<input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
     <div id="inputs-container">';
@@ -99,41 +101,41 @@ if (file_exists($csvFilePath)) {
 
         echo '<div class="flex_opt">';
 
-            echo '<div class="bloc_jour">';
-                //@ interlettrage
-                echo '<div class="flex_opt_picto">';
-                    echo '<div class="picto_opt" style="background-image: url(images/opti_letter_space.svg);"></div>';
-                    
-                    // Démarrer le menu déroulant
-                    echo '<select id="letterSpacing_' . $zz++ . '" name="letterSpacing[]" class="agendaOpt selopt" onchange="updateLetterSpacing(this)">';
+        echo '<div class="bloc_jour">';
+        //@ interlettrage
+        echo '<div class="flex_opt_picto">';
+        echo '<div class="picto_opt" style="background-image: url(images/opti_letter_space.svg);"></div>';
 
-                    // Afficher la valeur actuelle du CSV si elle existe
-                    if (isset($row[4])) { // Assurez-vous que $row[4] existe
-                        // Afficher cette valeur comme option sélectionnée
-                        $currentValue = htmlspecialchars($row[4]);
-                        echo '<option value="' . $currentValue . '" selected>' . $currentValue . '</option>';
-                    } else {
-                        // Si aucune valeur n'est présente, ne rien faire
-                    }
+        // Démarrer le menu déroulant
+        echo '<select id="letterSpacing_' . $zz++ . '" name="letterSpacing[]" class="agendaOpt selopt" onchange="updateLetterSpacing(this)">';
 
-                    // Afficher les options du tableau $letterSpacing
-                    foreach ($letterSpacing as $value => $label) {
-                        // Vérifier si la valeur actuelle est égale à la valeur du tableau
-                        $selected = (isset($currentValue) && $value == $currentValue) ? ' selected' : '';
-                        echo '<option value="' . htmlspecialchars($value) . '"' . $selected . '>' . htmlspecialchars($label) . '</option>';
-                    }
+        // Afficher la valeur actuelle du CSV si elle existe
+        if (isset($row[4])) { // Assurez-vous que $row[4] existe
+            // Afficher cette valeur comme option sélectionnée
+            $currentValue = htmlspecialchars($row[4]);
+            echo '<option value="' . $currentValue . '" selected>' . $currentValue . '</option>';
+        } else {
+            // Si aucune valeur n'est présente, ne rien faire
+        }
 
-                    // Terminer le menu déroulant
-                    echo '</select>';
-                echo '</div>';
-                
-                //@ FIN interlettrage
-                
-                echo '<h3 id="jour_nom' . $zzz++ . '"  onchange="updateDayName(this)">'.afficherJourSuivant($row[0]).'</h3>';
+        // Afficher les options du tableau $letterSpacing
+        foreach ($letterSpacing as $value => $label) {
+            // Vérifier si la valeur actuelle est égale à la valeur du tableau
+            $selected = (isset($currentValue) && $value == $currentValue) ? ' selected' : '';
+            echo '<option value="' . htmlspecialchars($value) . '"' . $selected . '>' . htmlspecialchars($label) . '</option>';
+        }
 
-            echo '</div>';
-            
-            echo '<textarea id="event_' . $b++ . '" style="letter-spacing:'.$row[4].'pt;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
+        // Terminer le menu déroulant
+        echo '</select>';
+        echo '</div>';
+
+        //@ FIN interlettrage
+
+        echo '<h3 id="jour_nom' . $zzz++ . '"  onchange="updateDayName(this)">' . afficherJourSuivant($row[0]) . '</h3>';
+
+        echo '</div>';
+
+        echo '<textarea id="event_' . $b++ . '" style="letter-spacing:' . $row[4] . 'mm;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
         echo '</div>';
         echo '</div>';
     }
@@ -142,8 +144,8 @@ if (file_exists($csvFilePath)) {
     </div>
     <div class="menu">
         <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
-        echo '<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
-     echo '</div>
+    echo '<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
+    echo '</div>
     </form>
     </div>';
 
@@ -158,20 +160,20 @@ if (file_exists($csvFilePath)) {
     echo '
     <form id="form2" action="done.php?" method="get">';
 
-        //@ gestion des select pour les paramètres 
+    //@ gestion des select pour les paramètres 
 
-        include('includes/barreOpt.php');
+    include('includes/barreOpt.php');
 
-        //@ FIN gestion des select pour les paramètres 
+    //@ FIN gestion des select pour les paramètres 
 
-    echo'
+    echo '
         <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
         <div id="inputs-container">
             <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
             <div class="menu">
                 <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
-                //  echo'<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
-            echo'</div>
+    //  echo'<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
+    echo '</div>
         </div>
     </form>
     <div class="state colorInfo">

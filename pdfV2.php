@@ -155,10 +155,10 @@ if (file_exists($csvFile)) {
     $firstLine = true;
 
     // Définition des colonnes
-    $colonneLargeur = 46.8;
+    $colonneLargeur = 48;
     $colonneHauteur1 = 180; // Hauteur de la colonne 1
     $colonneHauteur2 = 195; // Hauteur de la colonne 2
-    $espaceEntreColonnes = 4.2; // Espace entre les colonnes
+    $espaceEntreColonnes = 2; // Espace entre les colonnes
     $minHeight = 12; // Hauteur minimale de chaque événement
     $fontSize = 9.5; // Taille de la police
 
@@ -221,7 +221,7 @@ if (file_exists($csvFile)) {
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>
-                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'px; font-size:9.5; line-height:'.$_GET['interligne'].'px;">' . turn(exposant($event)) . '</div>
+                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'mm; font-size:9.5; line-height:' . $_GET['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
                     ',
                 );
 

@@ -13,6 +13,8 @@ function turnFront($tring)
 }
 function exposant($tring)
 {
+    $tring = str_replace('1 re', '1<sup>re</sup>', $tring);
+    $tring = str_replace('1 er', '1<sup>er</sup>', $tring);
     $tring = str_replace('1 e', '1<sup>e</sup>', $tring);
     $tring = str_replace('2 e', '2<sup>e</sup>', $tring);
     $tring = str_replace('3 e', '3<sup>e</sup>', $tring);
@@ -24,6 +26,8 @@ function exposant($tring)
     $tring = str_replace('9 e', '9<sup>e</sup>', $tring);
     $tring = str_replace('0 e', '0<sup>e</sup>', $tring);
 
+    $tring = str_replace('1re', '1<sup>re</sup>', $tring);
+    $tring = str_replace('1er', '1<sup>er</sup>', $tring);
     $tring = str_replace('1e', '1<sup>e</sup>', $tring);
     $tring = str_replace('2e', '2<sup>e</sup>', $tring);
     $tring = str_replace('3e', '3<sup>e</sup>', $tring);
@@ -34,5 +38,12 @@ function exposant($tring)
     $tring = str_replace('8e', '8<sup>e</sup>', $tring);
     $tring = str_replace('9e', '9<sup>e</sup>', $tring);
     $tring = str_replace('0e', '0<sup>e</sup>', $tring);
+
+    $tring = str_replace(' "', ' «', $tring);
+    $tring = str_replace('", ', '», ', $tring);
+    $tring = str_replace('" ', '» ', $tring);
+    $tring = str_replace(' «', ' « ', $tring);
+    $tring = str_replace('», ', ' », ', $tring);
+    $tring = str_replace('» ', ' » ', $tring);
     return $tring;
 }

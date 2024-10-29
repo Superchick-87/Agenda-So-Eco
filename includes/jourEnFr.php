@@ -20,21 +20,3 @@ function afficherJourSuivant($date)
     // Retourner le jour de la semaine au format 'lundi', 'mardi', etc. avec majuscule
     return ucfirst($formatter->format($dateObjet)); // Mettre en majuscule la première lettre
 }
-
-// function afficherJourSuivant($date) {
-//     $dateObjet = new DateTime($date);
-//     $dateObjet->modify('+1 day');
-
-//     $jours = [
-//         'Monday' => 'lundi',
-//         'Tuesday' => 'mardi',
-//         'Wednesday' => 'mercredi',
-//         'Thursday' => 'jeudi',
-//         'Friday' => 'vendredi',
-//         'Saturday' => 'samedi',
-//         'Sunday' => 'dimanche',
-//     ];
-
-//     $jourEnAnglais = $dateObjet->format('l');
-//     return ucfirst($jours[$jourEnAnglais]); // Mettre en majuscule la première lettre
-// }

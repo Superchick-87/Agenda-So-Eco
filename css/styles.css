@@ -16,9 +16,11 @@ h2,
 h4 {
     margin: 7px;
 }
-hr{
+
+hr {
     margin: 10px 2px;
 }
+
 /* Change cursor to crosshair when dragging */
 .input-row {
     cursor: grab;
@@ -82,15 +84,16 @@ textarea {
     padding: 5px 10px;
     outline: none;
 }
+
 .textarea::placeholder {
     color: var(--font-color-sub);
     opacity: 0.8;
 }
 
 textarea {
-    width: 267px;
+    width: 279px;
     font-family: times;
-    font-size: 19.5px;
+    font-size: 19px;
 }
 
 #txtHint {
@@ -198,26 +201,31 @@ textarea {
     flex-direction: row-reverse;
     align-items: flex-start;
 }
+
 .flex_opt_picto {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.picto_opt{
+
+.picto_opt {
     width: 30px;
     height: 36px;
     background-repeat: no-repeat;
     background-size: 25px;
 }
-.selopt{
+
+.selopt {
     background-color: #4d5d67;
     color: white;
     border: solid 1px white;
 }
+
 .agendaOpt {
     width: 70px;
     margin-left: 0px;
 }
+
 .agendaDateSize {
     position: fixed;
     top: 4px;
@@ -225,7 +233,8 @@ textarea {
     height: 32px;
     width: 220px;
 }
-.bloc_opt{
+
+.bloc_opt {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -239,12 +248,13 @@ textarea {
     color: white;
     top: 150px;
 }
-.bloc_jour{
+
+.bloc_jour {
     display: flex;
     flex-direction: column-reverse;
     flex-wrap: nowrap;
     justify-content: space-between;
     height: 137px;
     color: #00000045;
-    font-size: 25px;
+    font-size: 23px;
 }
