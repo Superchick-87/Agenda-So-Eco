@@ -1,13 +1,13 @@
 date,country,event,country_full_name,letter_spacing
-2024-09-30,us,"Élection présidentielle, début du vote anticipé en Pennsylvanie.",États-Unis,0
-2024-09-30,ue,"Session plénière, au Parlement, à Strasbourg (jusqu'au 19).","Union européenne",0
-2024-09-30,fr,"Ouverture à Paris du procès de Peter Cherif, vétéran du djihad, pour association de malfaiteurs terroriste riminelle entre 2011 et 2018, période de sa présence au Yémen au sein d'Al-Qaïda dans la péninsule arabique. Il est accusé notamment d'avoir joué un rôle auprès d'un des assaillants de « Charlie Hebdo » en 2015.",France,0
+2024-09-30,us,"Élection présidentielle, début*@*du vote anticipé en Pennsylvanie.",États-Unis,-0.025
+2024-09-30,ue,"Session plénière, au Parlement,*@*à Strasbourg (jusqu'au 19).","Union européenne",0
+2024-09-30,fr,"Ouverture à Paris du procès de Peter Cherif, vétéran du djihad, pour association de malfaiteurs terroriste riminelle entre 2011 *@*et 2018, période de sa présence au Yémen au sein d'Al-Qaïda dans la péninsule arabique. *@*Il est accusé notamment d'avoir joué un rôle auprès d'un des assaillants de « Charlie Hebdo» en 2015.",France,0
 2024-10-01,fr,"Girondins de Bordeaux : audience devant le tribunal de commerce de Bordeaux dans le cadre du suivi du redressement judiciaire du club.",France,0
-2024-10-03,fr,"Journée d'action et de grève à l'appel de l'intersyndicale des agents de la Protection judiciaire de la jeunesse pour défendre « un service public de la justice des mineurs de qualité ».",France,0
+2024-10-03,fr,"Journée d'action et de grève*@*à l'appel de l'intersyndicale*@*des agents de la Protection judiciaire de la jeunesse pour défendre « un service public*@*de la justice des mineurs*@*de qualité ».",France,0.025
 2024-10-03,on,"Au Conseil de sécurité, réunion sur la question palestinienne.",Onu,0
-2024-10-04,fr,"Grève des laboratoires d'analyses médicales pour protester contre la baisse de leurs tarifs prévue par l'Assurance maladie (jusqu'au 23).",France,0
-2024-10-04,fr,"Sciences-Po Paris : vote du conseil d'administration de la Fondation nationale des sciences politiques sur les trois candidats en lice pour prendre la direction de l'école.",France,0
+2024-10-04,fr,"Grève des laboratoires d'analyses médicales pour protester contre la baisse de leurs tarifs prévue par l'Assurance maladie (jusqu'au 23).",France,-0.05
+2024-10-04,fr,"Sciences-Po Paris : vote*@*du conseil d'administration*@*de la Fondation nationale*@*des sciences politiques sur*@*les trois candidats en lice pour prendre la direction de l'école.",France,0
 2024-10-04,fr,"Musique : Sortie du disque de Manu Chao : « Viva Tu » (label Because Music).",France,0
-2024-10-05,fr,"41ᵉ édition des Journées européennes du patrimoine (également dimanche).",France,0
-2024-10-05,fr,"Fédération des motards en colère : manifestation nationale pour protester contre le contrôle technique pour les deux-roues (également dimanche).",France,0
-2024-10-06,on,"Ouverture de la 79ᵉ session de l'Assemblée générale à New York (jusqu'au 30).",Onu,0
+2024-10-05,fr,"41e édition des Journées européennes du patrimoine (également dimanche).",France,0
+2024-10-05,fr,"Fédération des motards en colère : manifestation nationale pour protester contre le contrôle technique pour les deux-roues (également dimanche).",France,-0.05
+2024-10-06,on,"Ouverture de la 79e session*@*de l'Assemblée générale à New York (jusqu'au 30).",Onu,0

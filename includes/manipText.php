@@ -39,6 +39,8 @@ function exposant($tring)
     $tring = str_replace('9e', '9<sup>e</sup>', $tring);
     $tring = str_replace('0e', '0<sup>e</sup>', $tring);
 
+    $tring = str_replace('<sup>e</sup>t', 'et', $tring);
+
     $tring = str_replace(' "', ' «', $tring);
     $tring = str_replace('", ', '», ', $tring);
     $tring = str_replace('" ', '» ', $tring);
