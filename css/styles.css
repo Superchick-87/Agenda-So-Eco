@@ -28,7 +28,6 @@ hr {
 }
 
 .input-row {
-
     /* Default cursor when hovering over draggable item */
     --input-focus: #2d8cf0;
     --font-color: #323232;
@@ -130,7 +129,73 @@ textarea {
     line-height: 47px;
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 160px;
 }
+
+/* .go-up {
+    background-color: #607D8B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 4em;
+    line-height: 47px;
+    position: fixed;
+    top: 418px;
+    left: 730px;
+    rotate: -90deg;
+    padding-bottom: -24px;
+    text-align: center;
+} */
+
+#go-up {
+    position: fixed;
+    rotate: -90deg;
+    right: 20%;
+    bottom: 16%;
+    display: none; /* Masqué par défaut */
+    width: 40px;
+    height: 40px;
+    background-color: #3498db; /* Couleur d'arrière-plan */
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#go-up:hover {
+    background-color: #2980b9; /* Couleur au survol */
+}
+
+#go-down {
+    position: fixed;
+    rotate: 90deg;
+    right: 20%;
+    bottom: 9%; /* Positionné juste sous le bouton "go-up" */
+    display: none; /* Masqué par défaut */
+    width: 40px;
+    height: 40px;
+    background-color: #3498db; /* Couleur d'arrière-plan */
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#go-down:hover {
+    background-color: #2980b9; /* Couleur au survol */
+}
+
 
 .pad {
     background-color: #607D8B;
@@ -256,5 +321,5 @@ textarea {
     justify-content: space-between;
     height: 137px;
     color: #00000045;
-    font-size: 23px;
+    font-size: 21px;
 }

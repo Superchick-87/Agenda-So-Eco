@@ -214,8 +214,8 @@ if (file_exists($csvFile)) {
                 // Ajouter le pays et l'événement
                 $content[] = array(
                     'text' => '
-                <div style="line-height:0px;"> </div>
-                    <div style="line-height:' . $_GET['interPaysHaut'] . 'px; font-family:Roboto; font-weight:bold; position:relative; margin-left:90px;  width:100%; padding:0;">
+                <div style="line-height:' . $_GET['interPaysHaut'] . 'px;"> </div>
+                    <div style="line-height:1px; font-family:Roboto; font-weight:bold; position:relative; margin-left:90px;  width:100%; padding:0;">
                         <span style="font-size:14px; color:white;">--</span>
                         <span style="' . interletter(strlen($country_full_name)) . 'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
                     </div>

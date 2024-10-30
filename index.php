@@ -26,43 +26,63 @@ $letterSpacingJson = json_encode($letterSpacing);
 
     <script>
         var agendaSod = document.getElementById('agendaSod');
-        function showHint(str) {
-            var xhttp;
-            if (str == '') {
-                document.getElementById("txtHint").innerHTML = "mdmdm";
-                return;
-            }
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("txtHint").innerHTML = this.responseText;
-                    updateTotalCharacters();
-                    
 
-                    $(document).ready(function () {
-                        function updateFlagImage(selectElement) {
-                            var selectedCountryCode = selectElement.val();
-                            var flagElement = selectElement.closest(".input-row").find(".flag");
-                            flagElement.css("background-image", "url(images/flags/" + selectedCountryCode + ".jpg)");
-                        }
+function showHint(str) {
+    var xhttp;
+    if (str == '') {
+        document.getElementById("txtHint").innerHTML = "mdmdm";
+        return;
+    }
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("txtHint").innerHTML = this.responseText;
+            updateTotalCharacters();
 
-                        $("select[name=\'country[]\']").change(function () {
-                            updateFlagImage($(this));
-                        });
+            // // Correction ici : obtenir les éléments par la classe "input-row"
+            // const inputRows = document.getElementsByClassName("input-row");
+            // console.log(inputRows.length);
 
-                        $("select[name=\'country[]\']").each(function () {
-                            updateFlagImage($(this));
-                        });
-                    });
+            // // Déclarer les boutons pour pouvoir les masquer si nécessaire
+            // const goUpButton = document.getElementById("go-up");
+            // const goDownButton = document.getElementById("go-down");
+
+            // if (inputRows.length === 0) {
+            //     // Si aucun élément "input-row" n'est présent, masquer les boutons
+            //     goUpButton.style.display = "none";
+            //     goDownButton.style.display = "none";
+            // } else {
+            //     // Si des éléments sont présents, afficher les boutons
+            //     goUpButton.style.display = "block";
+            //     goDownButton.style.display = "block";
+            // }
+
+            $(document).ready(function () {
+                function updateFlagImage(selectElement) {
+                    var selectedCountryCode = selectElement.val();
+                    var flagElement = selectElement.closest(".input-row").find(".flag");
+                    flagElement.css("background-image", "url(images/flags/" + selectedCountryCode + ".jpg)");
                 }
-            };
-            xhttp.open("GET", "work.php?agendaSod=" + str, true);
-            xhttp.send();
+
+                $("select[name='country[]']").change(function () {
+                    updateFlagImage($(this));
+                });
+
+                $("select[name='country[]']").each(function () {
+                    updateFlagImage($(this));
+                });
+            });
         }
+    };
+    xhttp.open("GET", "work.php?agendaSod=" + str, true);
+    xhttp.send();
+}
     </script>
 <script src="js/formulaire.js"></script>
   
     <script>
+
+
         function allowDrop(event) {
             event.preventDefault(); // Prevent default behavior
         }

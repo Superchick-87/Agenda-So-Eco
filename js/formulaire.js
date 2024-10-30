@@ -23,6 +23,18 @@ async function addInputs() {
     const container = document.getElementById("inputs-container");
     const uniqueId = generateUniqueId();
 
+    // Vérifier si `add-btn` existe dans `inputs-container`
+    let addButton = document.getElementById("add-btn");
+    if (!addButton) {
+        // Créer le bouton et l'ajouter dans le conteneur
+        addButton = document.createElement("div");
+        addButton.classList.add("add-btn");
+        addButton.id = "add-btn";
+        addButton.onclick = addInputs;
+        addButton.textContent = "+";
+        container.appendChild(addButton);
+    }
+
     const inputRow = document.createElement("div");
     inputRow.classList.add("input-row");
     inputRow.id = "input-row-" + uniqueId;
@@ -110,8 +122,8 @@ async function addInputs() {
     // Remplir le select avec les options d'espacement
     for (const value in letterSpacingOptions) {
         const option = document.createElement("option");
-        option.value = value; // Utiliser la clé comme valeur
-        option.textContent = letterSpacingOptions[value]; // Utiliser la valeur pour l'affichage
+        option.value = value;
+        option.textContent = letterSpacingOptions[value];
         letterSpacingSelect.appendChild(option);
     }
 
@@ -125,7 +137,7 @@ async function addInputs() {
     // Création de l'affichage du jour
     const dayDisplay = document.createElement("h3");
     dayDisplay.id = "jour_nom" + uniqueId;
-    dayDisplay.textContent = "Jour";  // Texte initial qui sera remplacé
+    dayDisplay.textContent = "Jour";
 
     // Ajout du jour et du select dans `bloc_jour`
     blocJour.appendChild(dayDisplay);
@@ -151,11 +163,75 @@ async function addInputs() {
     flexOpt.appendChild(eventTextArea);
     inputRow.appendChild(selFlag);
     inputRow.appendChild(flexOpt);
-    container.insertBefore(inputRow, document.getElementById("add-btn"));
+
+
+
+    // Insérer avant `add-btn`
+    container.insertBefore(inputRow, addButton);
+
+    // Centrer la nouvelle boîte à l'écran
+    inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    const goDownButton = document.getElementById("go-down");
+    goDownButton.style.display = "none";
 }
 
+// Fonction pour remonter en haut de la page
+function goUp() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// Fonction pour descendre en bas de la page
+function goDown() {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
 
+// Affiche ou cache le bouton "go-up" en fonction du défilement
+function updateScrollButtons() {
+    // Obtenir les éléments par la classe "input-row"
+    const inputRows = document.getElementsByClassName("input-row");
+    console.log("Nombre d'input-row :", inputRows.length);
 
+    const goUpButton = document.getElementById("go-up");
+    const goDownButton = document.getElementById("go-down");
+
+    // Vérifiez si la page est défilable
+    const isScrollable = document.body.scrollHeight > window.innerHeight;
+    const isAtTop = window.scrollY === 0;
+    const isAtBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight;
+
+    if (!isScrollable || inputRows.length === 0) {
+        // Si la page n'est pas défilable ou s'il n'y a pas d'éléments "input-row", masquer les boutons
+        goUpButton.style.display = "none";
+        goDownButton.style.display = "none";
+    } else if (isAtTop) {
+        // En haut de la page : afficher seulement "go-down"
+        goUpButton.style.display = "none";
+        goDownButton.style.display = "block";
+    } else if (isAtBottom) {
+        // En bas de la page : afficher seulement "go-up"
+        goUpButton.style.display = "block";
+        goDownButton.style.display = "none";
+    } else {
+        // Entre le haut et le bas : afficher les deux boutons
+        goUpButton.style.display = "block";
+        goDownButton.style.display = "block";
+    }
+}
+
+// Attacher l'événement de scroll
+window.addEventListener("scroll", updateScrollButtons);
+
+// Utiliser MutationObserver pour surveiller les changements dans les éléments "input-row"
+const observer = new MutationObserver(updateScrollButtons);
+
+// Configurer l'observateur pour surveiller les ajouts et suppressions d'éléments dans le conteneur parent
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
+
+// Appeler la fonction au chargement initial
+updateScrollButtons();
 
 // Fonction pour générer un ID unique
 function generateUniqueId() {
@@ -248,4 +324,6 @@ function updateTotalCharacters() {
         });
     }
 }
+
+
 

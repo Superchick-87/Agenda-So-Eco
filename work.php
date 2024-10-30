@@ -37,6 +37,7 @@ if (file_exists($csvFileePathh)) {
 if (file_exists($csvFilePath)) {
     $file = fopen($csvFilePath, 'r');
 
+    // echo '<div id="go-up" class="go-up" id="go-up" onclick="goUp()" style.display = "none";>></div>';
     echo '
     <form id="form2" action="done.php?" method="get">';
 
@@ -49,6 +50,8 @@ if (file_exists($csvFilePath)) {
     echo '<input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
     <div id="inputs-container">';
 
+echo ' <div id="go-up" onclick="goUp()">></div>
+        <div id="go-down" onclick="goDown()">></div>';
     $headers = fgetcsv($file);
     $i = 1;
     $a = 1;
@@ -140,8 +143,7 @@ if (file_exists($csvFilePath)) {
         echo '</div>';
     }
     echo '
-    <div class="add-btn" id="add-btn" onclick="addInputs()">+
-    </div>
+    <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
     <div class="menu">
         <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
     echo '<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
@@ -157,6 +159,7 @@ if (file_exists($csvFilePath)) {
         </div>';
     fclose($file);
 } else {
+
     echo '
     <form id="form2" action="done.php?" method="get">';
 
@@ -167,10 +170,12 @@ if (file_exists($csvFilePath)) {
     //@ FIN gestion des select pour les paramètres 
 
     echo '
-        <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
-        <div id="inputs-container">
-            <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
-            <div class="menu">
+    <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
+    <div id="inputs-container">
+        <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
+        <div id="go-up" onclick="goUp()">></div>
+        <div id="go-down" onclick="goDown()">↓</div>
+    <div class="menu">
                 <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
     //  echo'<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
     echo '</div>
