@@ -16,8 +16,8 @@
     </div>
     <?php
     $letterSpacingJson = json_encode($letterSpacing);
-echo $letterSpacingJson;
-?>
+    echo $letterSpacingJson;
+    ?>
     <script>
         var agendaSod = document.getElementById('agendaSod');
         function showHint(str) {
@@ -31,7 +31,7 @@ echo $letterSpacingJson;
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("txtHint").innerHTML = this.responseText;
                     updateTotalCharacters();
-                    
+
 
                     $(document).ready(function () {
                         function updateFlagImage(selectElement) {
@@ -89,4 +89,5 @@ echo $letterSpacingJson;
         }
     </script>
 </body>
+
 </html>

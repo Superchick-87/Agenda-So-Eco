@@ -41,11 +41,13 @@ function exposant($tring)
 
     $tring = str_replace('<sup>e</sup>t', 'et', $tring);
 
-    $tring = str_replace(' "', ' «', $tring);
-    $tring = str_replace('", ', '», ', $tring);
-    $tring = str_replace('" ', '» ', $tring);
-    $tring = str_replace(' «', ' « ', $tring);
-    $tring = str_replace('», ', ' », ', $tring);
-    $tring = str_replace('» ', ' » ', $tring);
+    // $tring = str_replace(' "', ' «', $tring);
+    // $tring = str_replace('" ', '» ', $tring);
+
+    // $tring = str_replace('", ', '», ', $tring);
+
+    // $tring = str_replace(' «', ' « ', $tring);
+    // $tring = str_replace('», ', ' », ', $tring);
+    // $tring = str_replace('» ', ' » ', $tring);
     return $tring;
 }

@@ -164,16 +164,22 @@ async function addInputs() {
     inputRow.appendChild(selFlag);
     inputRow.appendChild(flexOpt);
 
-
-
-    // Insérer avant `add-btn`
+    //* Insérer avant `add-btn`
     container.insertBefore(inputRow, addButton);
 
-    // Centrer la nouvelle boîte à l'écran
+    //* Centrer la nouvelle boîte à l'écran
     inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
     const goDownButton = document.getElementById("go-down");
     goDownButton.style.display = "none";
+
+    //* modife les guillemets us en fr à la saisie
+    document.querySelectorAll('.input-text').forEach((textarea) => {
+        textarea.addEventListener('input', function (event) {
+            const content = textarea.value;
+            // Remplacer les guillemets anglais par des guillemets français
+            textarea.value = content.replace(/"([^"]*)"/g, '« $1 »');
+        });
+    });
 }
 
 // Fonction pour remonter en haut de la page
@@ -278,7 +284,7 @@ function updateLetterSpacing(selectElement) {
     const textAreaId = selectElement.id.replace("letterSpacing", "event");
     const textArea = document.getElementById(textAreaId);
     if (textArea) {
-        textArea.style.letterSpacing = selectElement.value + 'pt';
+        textArea.style.letterSpacing = (selectElement.value * 1.5) + 'mm';
     }
 }
 
@@ -315,7 +321,7 @@ function updateTotalCharacters() {
     if (totalCharacters >= 1400 && totalCharacters <= 1500) {
         elementsColorInfoClass.forEach(element => {
             element.classList.replace('colorInfo', 'colorInfoOk');
-            document.getElementById('make').style.display = 'block';
+            // document.getElementById('make').style.display = 'block';
         });
     } else {
         elementsColorInfoClassOK.forEach(element => {
@@ -324,6 +330,7 @@ function updateTotalCharacters() {
         });
     }
 }
+
 
 
 

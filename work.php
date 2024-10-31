@@ -50,7 +50,7 @@ if (file_exists($csvFilePath)) {
     echo '<input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
     <div id="inputs-container">';
 
-echo ' <div id="go-up" onclick="goUp()">></div>
+    echo ' <div id="go-up" onclick="goUp()">></div>
         <div id="go-down" onclick="goDown()">></div>';
     $headers = fgetcsv($file);
     $i = 1;
@@ -138,7 +138,7 @@ echo ' <div id="go-up" onclick="goUp()">></div>
 
         echo '</div>';
 
-        echo '<textarea id="event_' . $b++ . '" style="letter-spacing:' . $row[4] . 'mm;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
+        echo '<textarea id="event_' . $b++ . '" style="letter-spacing:' . $row[4] . ' mm;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
         echo '</div>';
         echo '</div>';
     }

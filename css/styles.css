@@ -90,9 +90,9 @@ textarea {
 }
 
 textarea {
-    width: 279px;
-    font-family: times;
-    font-size: 19px;
+    width: 313px;
+    font-family: 'Roboto';
+    font-size: 20px;
 }
 
 #txtHint {
@@ -154,11 +154,13 @@ textarea {
     position: fixed;
     rotate: -90deg;
     right: 20%;
-    bottom: 16%;
-    display: none; /* Masqué par défaut */
+    bottom: 19%;
+    display: none;
+    /* Masqué par défaut */
     width: 40px;
     height: 40px;
-    background-color: #3498db; /* Couleur d'arrière-plan */
+    background-color: #3498db;
+    /* Couleur d'arrière-plan */
     color: white;
     font-size: 24px;
     text-align: center;
@@ -170,18 +172,22 @@ textarea {
 }
 
 #go-up:hover {
-    background-color: #2980b9; /* Couleur au survol */
+    background-color: #2980b9;
+    /* Couleur au survol */
 }
 
 #go-down {
     position: fixed;
     rotate: 90deg;
     right: 20%;
-    bottom: 9%; /* Positionné juste sous le bouton "go-up" */
-    display: none; /* Masqué par défaut */
+    bottom: 14%;
+    /* Positionné juste sous le bouton "go-up" */
+    display: none;
+    /* Masqué par défaut */
     width: 40px;
     height: 40px;
-    background-color: #3498db; /* Couleur d'arrière-plan */
+    background-color: #3498db;
+    /* Couleur d'arrière-plan */
     color: white;
     font-size: 24px;
     text-align: center;
@@ -193,7 +199,8 @@ textarea {
 }
 
 #go-down:hover {
-    background-color: #2980b9; /* Couleur au survol */
+    background-color: #2980b9;
+    /* Couleur au survol */
 }
 
 
@@ -202,11 +209,11 @@ textarea {
     color: white;
     border: none;
     cursor: pointer;
-    width: 150px;
+    width: 125px;
     height: 30px;
     font-size: 1em;
     text-align: center;
-    margin: 0px;
+    margin: 2px 0px;
 }
 
 .add-btn:hover,
@@ -223,15 +230,15 @@ textarea {
 .menu {
     position: fixed;
     left: 0px;
-    top: 117px;
+    top: 478px
 }
 
 .state {
     padding: 5px 10px;
     position: fixed;
     left: 0;
-    top: 37px;
-    width: 200px;
+    top: 67px;
+    width: 220px;
     color: white;
 }
 
@@ -295,15 +302,15 @@ textarea {
     position: fixed;
     top: 4px;
     text-align: center;
-    height: 32px;
+    height: 42px;
     width: 220px;
+    padding: 10px;
 }
 
 .bloc_opt {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    margin: 20px 0px;
+    /* margin: 20px 0px; */
     width: min-content;
     background-color: #607d8b;
     text-align: end;
@@ -321,5 +328,5 @@ textarea {
     justify-content: space-between;
     height: 137px;
     color: #00000045;
-    font-size: 21px;
+    font-size: 20px;
 }
