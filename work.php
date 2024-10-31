@@ -174,7 +174,7 @@ if (file_exists($csvFilePath)) {
     <div id="inputs-container">
         <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
         <div id="go-up" onclick="goUp()">></div>
-        <div id="go-down" onclick="goDown()">↓</div>
+        <div id="go-down" onclick="goDown()">></div>
     <div class="menu">
                 <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
     //  echo'<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
