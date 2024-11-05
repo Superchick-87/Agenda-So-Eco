@@ -65,6 +65,7 @@ if (file_exists($csvFilePath)) {
     $z = 1;
     $zz = 1;
     $zzz = 1;
+    $xx = 1;
 
     // Lecture du fichier CSV des pays
     $paysFile = fopen('datas/pays.csv', 'r');
@@ -102,8 +103,9 @@ if (file_exists($csvFilePath)) {
                 echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.jpg);"></div>';
             }
         }
-        echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>
-        </div>';
+        echo '<div onclick="toggleVisibility(' . $xx++  . ')" class="toggle-btn">-</div>';
+        echo '<div id="remove-btn-' . $d++ . '" onclick="removeInputs(\'input-row-' . $c++ . '\')" class="remove-btn">+</div>';
+        echo '</div>';
 
         echo '<div class="flex_opt">';
 

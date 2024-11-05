@@ -20,167 +20,199 @@ async function loadCountriesCSV() {
 }
 
 async function addInputs() {
-    const container = document.getElementById("inputs-container");
-    const uniqueId = generateUniqueId();
+    try {
+        const container = document.getElementById("inputs-container");
+        const uniqueId = generateUniqueId();
+        console.log("Generated uniqueId:", uniqueId);
 
-    // Vérifier si `add-btn` existe dans `inputs-container`
-    let addButton = document.getElementById("add-btn");
-    if (!addButton) {
-        // Créer le bouton et l'ajouter dans le conteneur
-        addButton = document.createElement("div");
-        addButton.classList.add("add-btn");
-        addButton.id = "add-btn";
-        addButton.onclick = addInputs;
-        addButton.textContent = "+";
-        container.appendChild(addButton);
-    }
+        let addButton = document.getElementById("add-btn");
+        if (!addButton) {
+            addButton = document.createElement("div");
+            addButton.classList.add("add-btn");
+            addButton.id = "add-btn";
+            addButton.onclick = addInputs;
+            addButton.textContent = "+";
+            container.appendChild(addButton);
+        }
 
-    const inputRow = document.createElement("div");
-    inputRow.classList.add("input-row");
-    inputRow.id = "input-row-" + uniqueId;
-    inputRow.draggable = true;
-    inputRow.addEventListener('dragstart', drag);
-    inputRow.addEventListener('dragend', dragEnd);
-    inputRow.addEventListener('dragover', allowDrop);
-    inputRow.addEventListener('drop', drop);
+        const inputRow = document.createElement("div");
+        inputRow.classList.add("input-row");
+        inputRow.id = "input-row-" + uniqueId;
+        inputRow.draggable = true;
+        inputRow.addEventListener('dragstart', drag);
+        inputRow.addEventListener('dragend', dragEnd);
+        inputRow.addEventListener('dragover', allowDrop);
+        inputRow.addEventListener('drop', drop);
 
-    const selFlag = document.createElement("div");
-    selFlag.classList.add("flex");
-    selFlag.id = "selFlag" + uniqueId;
+        const selFlag = document.createElement("div");
+        selFlag.classList.add("flex");
+        selFlag.id = "selFlag" + uniqueId;
 
-    // Création de l'élément date
-    const dateInput = document.createElement("input");
-    dateInput.id = "date_" + uniqueId;
-    dateInput.type = "date";
-    dateInput.name = "date[]";
-    dateInput.onchange = function () {
-        updateDayName(this);
-    };
+        const dateInput = document.createElement("input");
+        dateInput.id = "date_" + uniqueId;
+        dateInput.type = "date";
+        dateInput.name = "date[]";
+        dateInput.onchange = function () {
+            updateDayName(this);
+        };
 
-    // Création du select pour les pays
-    const selectElement = document.createElement("select");
-    selectElement.id = "country_" + uniqueId;
-    selectElement.name = "country[]";
-    selectElement.className = "country-select";
-    selectElement.addEventListener('change', function () {
-        handleSelectChange(this.value, 'flag' + uniqueId);
-    });
-
-    // Remplir le select avec les options des pays
-    const countriesMap = await loadCountriesCSV();
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '';
-    defaultOption.textContent = 'Sélectionner un pays';
-    selectElement.appendChild(defaultOption);
-
-    for (const countryCode in countriesMap) {
-        const option = document.createElement("option");
-        option.value = countryCode;
-        option.textContent = countriesMap[countryCode];
-        selectElement.appendChild(option);
-    }
-
-    // Drapeau du pays
-    const flagDiv = document.createElement("div");
-    flagDiv.classList.add("flag");
-    flagDiv.id = "flag" + uniqueId;
-
-    // Bouton de suppression
-    const removeBtn = document.createElement("div");
-    removeBtn.classList.add("remove-btn");
-    removeBtn.textContent = "+";
-    removeBtn.onclick = function () {
-        removeInputs(inputRow.id);
-    };
-
-    // Bloc de la boîte contenant jour, espacement entre lettres et texte de l'événement
-    const flexOpt = document.createElement("div");
-    flexOpt.classList.add("flex_opt");
-
-    // Création du conteneur bloc_jour
-    const blocJour = document.createElement("div");
-    blocJour.classList.add("bloc_jour");
-
-    // Conteneur pour l'icône et le select (espacement entre lettres)
-    const flexOptPicto = document.createElement("div");
-    flexOptPicto.classList.add("flex_opt_picto");
-
-    // Icône d'interlettrage
-    const pictoOpt = document.createElement("div");
-    pictoOpt.classList.add("picto_opt");
-    pictoOpt.style.backgroundImage = "url('images/opti_letter_space.svg')";
-
-    // Menu de sélection pour interlettrage
-    const letterSpacingSelect = document.createElement("select");
-    letterSpacingSelect.id = "letterSpacing_" + uniqueId;
-    letterSpacingSelect.name = "letterSpacing[]";
-    letterSpacingSelect.className = "agendaOpt selopt";
-    letterSpacingSelect.onchange = function () {
-        updateLetterSpacing(this);
-    };
-
-    // Remplir le select avec les options d'espacement
-    for (const value in letterSpacingOptions) {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = letterSpacingOptions[value];
-        letterSpacingSelect.appendChild(option);
-    }
-
-    // Ajout de l'icône et du select dans `flex_opt_picto`
-    flexOptPicto.appendChild(pictoOpt);
-    flexOptPicto.appendChild(letterSpacingSelect);
-
-    // Ajout de `flex_opt_picto` dans `bloc_jour`
-    blocJour.appendChild(flexOptPicto);
-
-    // Création de l'affichage du jour
-    const dayDisplay = document.createElement("h3");
-    dayDisplay.id = "jour_nom" + uniqueId;
-    dayDisplay.textContent = "Jour";
-
-    // Ajout du jour et du select dans `bloc_jour`
-    blocJour.appendChild(dayDisplay);
-
-    // Ajout de `bloc_jour` dans `flexOpt`
-    flexOpt.appendChild(blocJour);
-
-    // Zone de texte pour l'événement
-    const eventTextArea = document.createElement("textarea");
-    eventTextArea.id = "event_" + uniqueId;
-    eventTextArea.classList.add("input-text");
-    eventTextArea.name = "event[]";
-    eventTextArea.rows = 5;
-    eventTextArea.placeholder = "Evènement";
-    eventTextArea.oninput = updateTotalCharacters;
-
-    // Append des éléments dans la boîte
-    selFlag.appendChild(dateInput);
-    selFlag.appendChild(selectElement);
-    selFlag.appendChild(flagDiv);
-    selFlag.appendChild(removeBtn);
-
-    flexOpt.appendChild(eventTextArea);
-    inputRow.appendChild(selFlag);
-    inputRow.appendChild(flexOpt);
-
-    //* Insérer avant `add-btn`
-    container.insertBefore(inputRow, addButton);
-
-    //* Centrer la nouvelle boîte à l'écran
-    inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const goDownButton = document.getElementById("go-down");
-    goDownButton.style.display = "none";
-
-    //* modife les guillemets us en fr à la saisie
-    document.querySelectorAll('.input-text').forEach((textarea) => {
-        textarea.addEventListener('input', function (event) {
-            const content = textarea.value;
-            // Remplacer les guillemets anglais par des guillemets français
-            textarea.value = content.replace(/"([^"]*)"/g, '« $1 »');
+        const selectElement = document.createElement("select");
+        selectElement.id = "country_" + uniqueId;
+        selectElement.name = "country[]";
+        selectElement.className = "country-select";
+        selectElement.addEventListener('change', function () {
+            handleSelectChange(this.value, 'flag' + uniqueId);
         });
-    });
+
+        const countriesMap = await loadCountriesCSV();
+        console.log("Loaded countries:", countriesMap);
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Sélectionner un pays';
+        selectElement.appendChild(defaultOption);
+
+        for (const countryCode in countriesMap) {
+            const option = document.createElement("option");
+            option.value = countryCode;
+            option.textContent = countriesMap[countryCode];
+            selectElement.appendChild(option);
+        }
+
+        const flagDiv = document.createElement("div");
+        flagDiv.classList.add("flag");
+        flagDiv.id = "flag" + uniqueId;
+
+        // Bouton de basculement
+        const toggleBtn = document.createElement("div");
+        toggleBtn.classList.add("toggle-btn");
+        toggleBtn.textContent = "-";  // Texte du bouton de basculement
+        toggleBtn.onclick = function () {
+            toggleVisibility(uniqueId); // Passer l'ID unique
+        };
+
+        const removeBtn = document.createElement("div");
+        removeBtn.classList.add("remove-btn");
+        removeBtn.textContent = "+";
+        removeBtn.onclick = function () {
+            removeInputs(inputRow.id);
+        };
+
+        const flexOpt = document.createElement("div");
+        flexOpt.classList.add("flex_opt");
+
+        const blocJour = document.createElement("div");
+        blocJour.classList.add("bloc_jour");
+
+        const flexOptPicto = document.createElement("div");
+        flexOptPicto.classList.add("flex_opt_picto");
+
+        const pictoOpt = document.createElement("div");
+        pictoOpt.classList.add("picto_opt");
+        pictoOpt.style.backgroundImage = "url('images/opti_letter_space.svg')";
+
+        const letterSpacingSelect = document.createElement("select");
+        letterSpacingSelect.id = "letterSpacing_" + uniqueId;
+        letterSpacingSelect.name = "letterSpacing[]";
+        letterSpacingSelect.className = "agendaOpt selopt";
+        letterSpacingSelect.onchange = function () {
+            updateLetterSpacing(this);
+        };
+
+        for (const value in letterSpacingOptions) {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = letterSpacingOptions[value];
+            letterSpacingSelect.appendChild(option);
+        }
+
+        flexOptPicto.appendChild(pictoOpt);
+        flexOptPicto.appendChild(letterSpacingSelect);
+        blocJour.appendChild(flexOptPicto);
+
+        const dayDisplay = document.createElement("h3");
+        dayDisplay.id = "jour_nom" + uniqueId;
+        dayDisplay.textContent = "Jour";
+
+        blocJour.appendChild(dayDisplay);
+        flexOpt.appendChild(blocJour);
+
+        const eventTextArea = document.createElement("textarea");
+        eventTextArea.id = "event_" + uniqueId;
+        eventTextArea.classList.add("input-text");
+        eventTextArea.name = "event[]";
+        eventTextArea.rows = 5;
+        eventTextArea.placeholder = "Evènement";
+        eventTextArea.oninput = updateTotalCharacters;
+
+        selFlag.appendChild(dateInput);
+        selFlag.appendChild(selectElement);
+        selFlag.appendChild(flagDiv);
+        selFlag.appendChild(toggleBtn);  // Ajoute le bouton de basculement
+        selFlag.appendChild(removeBtn);
+
+        flexOpt.appendChild(eventTextArea);
+        inputRow.appendChild(selFlag);
+        inputRow.appendChild(flexOpt);
+
+        container.insertBefore(inputRow, addButton);
+        inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById("go-down").style.display = "none";
+
+        document.querySelectorAll('.input-text').forEach((textarea) => {
+            textarea.addEventListener('input', function (event) {
+                const content = textarea.value;
+                textarea.value = content.replace(/"([^"]*)"/g, '« $1 »');
+            });
+        });
+
+        console.log("Input added successfully with ID:", uniqueId);
+
+    } catch (error) {
+        console.error("Error in addInputs:", error);
+    }
 }
+
+
+// Fonction pour masquer ou afficher les éléments
+function toggleVisibility(uniqueId) {
+    // Utiliser le bon uniqueId pour sélectionner les éléments à masquer/afficher
+    const eventElement = document.getElementById("event_" + uniqueId);
+    const blocJourElement = document.querySelector("#input-row-" + uniqueId + " .bloc_jour");
+    const flexOptPictoElement = document.querySelector("#input-row-" + uniqueId + " .flex_opt_picto");
+    // Vérifier si les éléments existent avant de changer leur affichage
+    if (eventElement && blocJourElement && flexOptPictoElement) {
+        const nomDuJour = document.getElementById("jour_nom" + uniqueId); // Récupérer le nom du jour
+        if (eventElement.style.display === "none") {
+            eventElement.style.display = "block";
+            blocJourElement.style.display = "flex"; // Affiche bloc_jour
+            flexOptPictoElement.style.display = "flex"; // Affiche flex_opt_picto
+
+            blocJourElement.style.height = "134px"; // Affiche bloc_jour
+        } else {
+
+            blocJourElement.style.display = "flex"; // Affiche bloc_jour
+
+            blocJourElement.style.height = "auto"; // Affiche bloc_jour
+            nomDuJour.style.display = "block"; // Gardez le nom du jour affiché
+            eventElement.style.display = "none";
+            blocJourElement.style.display = "flex"; // Masque bloc_jour
+            flexOptPictoElement.style.display = "none"; // Masque flex_opt_picto
+
+        }
+    }
+}
+
+// Initialiser les boîtes déjà présentes avec la fonctionnalité de masquage
+// document.querySelectorAll('.toggle-btn').forEach((btn) => {
+//     // Utiliser une fonction pour capturer le bon ID au moment du clic
+//     const uniqueId = btn.parentElement.id.replace('selFlag', '');
+//     btn.onclick = function () {
+//         toggleVisibility(uniqueId);
+//     };
+// });
+
+
 
 // Fonction pour remonter en haut de la page
 function goUp() {

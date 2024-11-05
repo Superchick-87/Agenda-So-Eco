@@ -109,12 +109,36 @@ textarea {
     width: 25px;
     height: 25px;
     margin-top: 6px;
-    margin-left: 10px;
+    margin-left: 3px;
     border-radius: 50%;
     font-size: 1.5em;
     line-height: 25px;
     transform: rotate(45deg);
     text-align: center;
+}
+
+.remove-btn:hover {
+    background-color: rgba(165, 42, 42, 0.5);
+}
+
+.toggle-btn {
+    background-color: rgb(73, 74, 74);
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin-top: 6px;
+    margin-left: 10px;
+    border-radius: 50%;
+    font-size: 2.5em;
+    line-height: 24px;
+    transform: rotate(0deg);
+    text-align: center;
+}
+
+.toggle-btn:hover {
+    background-color: rgba(73, 74, 74, 0.5);
 }
 
 .add-btn {
