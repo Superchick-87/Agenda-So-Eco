@@ -132,35 +132,20 @@ textarea {
     margin-bottom: 160px;
 }
 
-/* .go-up {
-    background-color: #607D8B;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 4em;
-    line-height: 47px;
+#upDown {
     position: fixed;
-    top: 418px;
-    left: 730px;
-    rotate: -90deg;
-    padding-bottom: -24px;
-    text-align: center;
-} */
+    bottom: 160px;
+    /* left: 292px; */
+}
 
-#go-up {
-    position: fixed;
-    rotate: -90deg;
+#go-up,
+#go-down {
+    /* position: fixed; */
+    /* Position fixe pour que les boutons soient toujours visibles dans le coin en bas */
     right: 20%;
-    bottom: 19%;
-    display: none;
-    /* Masqué par défaut */
     width: 40px;
     height: 40px;
     background-color: #3498db;
-    /* Couleur d'arrière-plan */
     color: white;
     font-size: 24px;
     text-align: center;
@@ -171,33 +156,28 @@ textarea {
     transition: background-color 0.3s ease;
 }
 
-#go-up:hover {
-    background-color: #2980b9;
-    /* Couleur au survol */
+#go-up {
+    rotate: -90deg;
+    bottom: 15%;
+    /* Positionnement en bas pour "go-up" */
 }
 
 #go-down {
-    position: fixed;
     rotate: 90deg;
-    right: 20%;
-    bottom: 14%;
-    /* Positionné juste sous le bouton "go-up" */
-    display: none;
-    /* Masqué par défaut */
-    width: 40px;
-    height: 40px;
-    background-color: #3498db;
-    /* Couleur d'arrière-plan */
-    color: white;
-    font-size: 24px;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    bottom: 10%;
+    /* Positionnement légèrement au-dessus pour "go-down" */
 }
 
+
+#go-up:hover,
+#go-down:hover {
+    background-color: #555;
+    /* Changement de couleur au survol */
+}
+
+
+
+#go-up:hover,
 #go-down:hover {
     background-color: #2980b9;
     /* Couleur au survol */

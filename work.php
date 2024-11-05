@@ -1,4 +1,3 @@
-
 <?php
 $agendaSod = $_GET['agendaSod'];
 $csvFilePath = 'datas/' . $agendaSod . '_datas.csv';
@@ -47,11 +46,15 @@ if (file_exists($csvFilePath)) {
 
     //@ FIN gestion des select pour les paramètres 
 
+    echo '
+    <div id="upDown">
+        <div id="go-up" onclick="goUp()">></div>
+        <div id="go-down" onclick="goDown()">></div>
+    </div>';
+
     echo '<input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
     <div id="inputs-container">';
 
-    echo ' <div id="go-up" onclick="goUp()">></div>
-        <div id="go-down" onclick="goDown()">></div>';
     $headers = fgetcsv($file);
     $i = 1;
     $a = 1;
@@ -143,8 +146,9 @@ if (file_exists($csvFilePath)) {
         echo '</div>';
     }
     echo '
-    <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
-    <div class="menu">
+    <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>';
+
+    echo ' <div class="menu">
         <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
     echo '<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
     echo '</div>
@@ -170,11 +174,14 @@ if (file_exists($csvFilePath)) {
     //@ FIN gestion des select pour les paramètres 
 
     echo '
+    <div id="upDown">
+        <div id="go-up" onclick="goUp()">></div>
+        <div id="go-down" onclick="goDown()">></div>
+    </div>';
+    echo '
     <input type="text" name="agendaSod" value=' . $agendaSod . ' style="display:none;">
     <div id="inputs-container">
         <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
-        <div id="go-up" onclick="goUp()">></div>
-        <div id="go-down" onclick="goDown()">></div>
     <div class="menu">
                 <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
     //  echo'<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
@@ -187,4 +194,3 @@ if (file_exists($csvFilePath)) {
         <h4 id="signes"> signes</h4>
     </div>';
 };
-?>

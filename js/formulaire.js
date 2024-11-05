@@ -191,7 +191,7 @@ function goDown() {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
-// Affiche ou cache le bouton "go-up" en fonction du défilement
+// Fonction pour mettre à jour la position de #upDown et les boutons de défilement
 function updateScrollButtons() {
     // Obtenir les éléments par la classe "input-row"
     const inputRows = document.getElementsByClassName("input-row");
@@ -199,6 +199,16 @@ function updateScrollButtons() {
 
     const goUpButton = document.getElementById("go-up");
     const goDownButton = document.getElementById("go-down");
+    const upDownButton = document.getElementById("upDown"); // Récupérer l'élément upDown
+
+    // Récupérer les coordonnées de #inputs-container
+    const container = document.getElementById('inputs-container');
+    const rect = container.getBoundingClientRect();
+    const xCoord = rect.x; // Coordonnée X par rapport à la fenêtre
+    const containerWidth = rect.width; // Largeur de #inputs-container
+
+    // Mettre à jour la position de #upDown
+    upDownButton.style.left = (xCoord + containerWidth) + 150 + 'px'; // Ajouter la largeur à la coordonnée X
 
     // Vérifiez si la page est défilable
     const isScrollable = document.body.scrollHeight > window.innerHeight;
@@ -206,19 +216,15 @@ function updateScrollButtons() {
     const isAtBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight;
 
     if (!isScrollable || inputRows.length === 0) {
-        // Si la page n'est pas défilable ou s'il n'y a pas d'éléments "input-row", masquer les boutons
         goUpButton.style.display = "none";
         goDownButton.style.display = "none";
     } else if (isAtTop) {
-        // En haut de la page : afficher seulement "go-down"
         goUpButton.style.display = "none";
         goDownButton.style.display = "block";
     } else if (isAtBottom) {
-        // En bas de la page : afficher seulement "go-up"
         goUpButton.style.display = "block";
         goDownButton.style.display = "none";
     } else {
-        // Entre le haut et le bas : afficher les deux boutons
         goUpButton.style.display = "block";
         goDownButton.style.display = "block";
     }
@@ -226,6 +232,7 @@ function updateScrollButtons() {
 
 // Attacher l'événement de scroll
 window.addEventListener("scroll", updateScrollButtons);
+window.addEventListener("resize", updateScrollButtons); // Ajout pour le redimensionnement
 
 // Utiliser MutationObserver pour surveiller les changements dans les éléments "input-row"
 const observer = new MutationObserver(updateScrollButtons);
@@ -238,6 +245,7 @@ observer.observe(document.body, {
 
 // Appeler la fonction au chargement initial
 updateScrollButtons();
+
 
 // Fonction pour générer un ID unique
 function generateUniqueId() {
