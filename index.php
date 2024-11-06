@@ -26,6 +26,7 @@
 
      <script>
          var agendaSod = document.getElementById('agendaSod');
+         
 
          function showHint(str) {
              var xhttp;
@@ -37,10 +38,11 @@
              xhttp.onreadystatechange = function() {
                  if (this.readyState == 4 && this.status == 200) {
                      document.getElementById("txtHint").innerHTML = this.responseText;
+                     // Mettre à jour l'interlettrage après le chargement du contenu
+                     updateLetterSpacingForAll();
                      updateTotalCharacters();
-
-
-
+                     guillemets();
+                    
                      $(document).ready(function() {
                          function updateFlagImage(selectElement) {
                              var selectedCountryCode = selectElement.val();
@@ -59,6 +61,7 @@
 
                      });
                  }
+            
              };
              xhttp.open("GET", "work.php?agendaSod=" + str, true);
              xhttp.send();

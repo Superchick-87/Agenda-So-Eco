@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url("https://use.typekit.net/fmv6kgf.css");
 * {
     margin: 0;
     padding: 0;
@@ -80,8 +81,15 @@ select {
 textarea {
     border: 2px solid var(--main-color);
     color: var(--font-color);
-    padding: 5px 10px;
+    padding: 5px 44px 5px 10px;
     outline: none;
+    width: 313px;
+    /* font-family: "utopia-std", serif; */
+    font-size: 15pt;
+    font-style: normal;
+    /* font-family: "utopia-std-display", serif; */
+    font-family: "console";
+font-weight: 400;
 }
 
 .textarea::placeholder {
@@ -89,11 +97,7 @@ textarea {
     opacity: 0.8;
 }
 
-textarea {
-    width: 313px;
-    font-family: 'Roboto';
-    font-size: 19.5px;
-}
+
 
 #txtHint {
     width: 350px;

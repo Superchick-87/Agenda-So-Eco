@@ -159,22 +159,32 @@ async function addInputs() {
         inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById("go-down").style.display = "none";
 
-        document.querySelectorAll('.input-text').forEach((textarea) => {
-            textarea.addEventListener('input', function (event) {
-                const content = textarea.value;
-                textarea.value = content.replace(/"([^"]*)"/g, '« $1 »');
-            });
-        });
-
+       
+        guillemets();
         console.log("Input added successfully with ID:", uniqueId);
+        
 
     } catch (error) {
         console.error("Error in addInputs:", error);
     }
 }
 
+//@ Change les guillemets us en fr
 
-// Fonction pour masquer ou afficher les éléments
+function guillemets() {
+    
+    document.querySelectorAll('.input-text').forEach((textarea) => {
+        textarea.addEventListener('input', function (event) {
+            const content = textarea.value;
+            textarea.value = content.replace(/"([^"]*)"/g, '« $1 »');
+        });
+    });
+}
+    
+//@ FIN - Change les guillemets us en fr
+
+//@ Fonction pour masquer ou afficher les éléments
+
 function toggleVisibility(uniqueId) {
     // Utiliser le bon uniqueId pour sélectionner les éléments à masquer/afficher
     const eventElement = document.getElementById("event_" + uniqueId);
@@ -211,6 +221,9 @@ function toggleVisibility(uniqueId) {
 //         toggleVisibility(uniqueId);
 //     };
 // });
+
+//@ FIN - Fonction pour masquer ou afficher les éléments
+
 
 
 
@@ -319,13 +332,23 @@ function removeInputs(parentRowId) {
     updateTotalCharacters();
 }
 
+
+
 // Fonction pour mettre à jour l'interlettrage d'une textarea
 function updateLetterSpacing(selectElement) {
     const textAreaId = selectElement.id.replace("letterSpacing", "event");
     const textArea = document.getElementById(textAreaId);
     if (textArea) {
-        textArea.style.letterSpacing = (selectElement.value * 1.5) + 'mm';
+        textArea.style.letterSpacing = (selectElement.value) * 1.43 + 'pt';
     }
+}
+
+// Applique la mise à jour de l'interlettrage à tous les <select> ayant un id contenant 'letterSpacing'
+function updateLetterSpacingForAll() {
+    const letterSpacingElements = document.querySelectorAll("select[id*='letterSpacing']");
+    letterSpacingElements.forEach(selectElement => {
+        updateLetterSpacing(selectElement);
+    });
 }
 
 function updateTotalCharacters() {

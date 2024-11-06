@@ -221,7 +221,7 @@ if (file_exists($csvFile)) {
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>
-                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'mm; font-size:9.5; line-height:' . $_GET['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
+                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_GET['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
                     ',
                 );
 

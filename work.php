@@ -143,7 +143,7 @@ if (file_exists($csvFilePath)) {
 
         echo '</div>';
 
-        echo '<textarea id="event_' . $b++ . '" style="letter-spacing:' . $row[4] . ' mm;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
+        echo '<textarea id="event_' . $b++ . '" style="letter-spacing:' . $row[4] . 'pt;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
         echo '</div>';
         echo '</div>';
     }
