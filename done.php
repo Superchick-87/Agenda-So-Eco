@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <title>AAgenda SOD</title>
+    <title>Agenda SOD</title>
 </head>
 
 <body>
@@ -140,6 +140,7 @@
         // Si le fichier n'existe pas, afficher un message
         echo '<p>Le fichier PDF n\'existe pas dans le dossier spécifié.</p>';
     }
+    
 ?>
 </body>
 </html>

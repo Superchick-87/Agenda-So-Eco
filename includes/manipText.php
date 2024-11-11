@@ -41,13 +41,9 @@ function exposant($tring)
 
     $tring = str_replace('<sup>e</sup>t', 'et', $tring);
 
-    // $tring = str_replace(' "', ' «', $tring);
-    // $tring = str_replace('" ', '» ', $tring);
-
-    // $tring = str_replace('", ', '», ', $tring);
-
-    // $tring = str_replace(' «', ' « ', $tring);
-    // $tring = str_replace('», ', ' », ', $tring);
-    // $tring = str_replace('» ', ' » ', $tring);
+    $tring = str_replace('Ie siècle', 'I<sup>e</sup> siècle', $tring);
+    $tring = str_replace('Ve siècle', 'V<sup>e</sup> siècle', $tring);
+    $tring = str_replace('Xe siècle', 'X<sup>e</sup> siècle', $tring);
+   
     return $tring;
 }

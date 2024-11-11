@@ -172,6 +172,7 @@ if (file_exists($csvFilePath)) {
     //@ gestion des select pour les paramètres 
 
     include('includes/barreOpt.php');
+    
 
     //@ FIN gestion des select pour les paramètres 
 
@@ -196,3 +197,4 @@ if (file_exists($csvFilePath)) {
         <h4 id="signes"> signes</h4>
     </div>';
 };
+

@@ -19,11 +19,14 @@
  </head>
 
  <body>
+   
      <div id="txtHint"></div>
-     <div class="colorInfo agendaDateSize">
-         <input id="agendaSod" class="agendaDate" type="date" name="agendaSod" onchange="showHint(this.value)">
+     <div>
+         <!-- <h1>L'agenda de la semaine</h1> -->
+         <div class="colorInfo agendaDateSize">
+            <input id="agendaSod" class="agendaDate" type="date" name="agendaSod" onchange="showHint(this.value)">
+        </div>
      </div>
-
      <script>
          var agendaSod = document.getElementById('agendaSod');
          
