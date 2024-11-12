@@ -107,7 +107,10 @@ font-weight: 400;
     margin: 0px auto;
 }
 
-
+.pays{
+    font-family : 'Roboto';
+    font-weight : bold;
+}
 .remove-btn {
     background-color: brown;
     color: white;

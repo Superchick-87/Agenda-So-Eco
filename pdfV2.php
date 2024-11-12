@@ -1,4 +1,7 @@
 <?php
+// require('/TCPDF/fonts/util/makefont.php');
+// $fontname = TCPDF_FONTS::addTTFfont('/TCPDF/fonts/util/UtopiaStdSemiboldDisp.ttf', 'TrueTypeUnicode', '', 96);
+
 include('includes/jourEnFr.php');
 include('includes/manipText.php');
 require_once('TCPDF/tcpdf.php');
@@ -7,7 +10,6 @@ require_once('TCPDF/tcpdf.php');
 // header('Content-Disposition: inline; filename="document.pdf"');
 // header('Cache-Control: private, max-age=0, must-revalidate');
 // header('Pragma: public');
-
 
 /**
  * Extend TCPDF to work with multiple columns
@@ -120,6 +122,17 @@ $pdf->SetKeywords('TCPDF, PDF, exemple, test, guide');
 $pdf->SetMargins(0, 0, 0); // Marge gauche, droite, haut
 $pdf->SetAutoPageBreak(false); // Désactiver le saut de page automatique
 
+$pdf->SetFont('UtopiaStdSemiboldDisp', '', 14, '', false);
+$pdf->SetFont('utopiastdb', '', 14, '', false);
+$pdf->SetFont('utopiastd', '', 14, '', false);
+$pdf->SetFont('robotob', '', 14, '', false);
+
+
+$pays = '
+    font-family:roboto;
+    font-weight:bold;
+';
+
 // Ajouter une image SVG en haut à gauche
 $pdf->ImageSVG(
     $file = 'images/fond.svg',  // Chemin de l'image SVG
@@ -141,6 +154,7 @@ function interletter($x)
     }
 }
 
+
 // Lecture des données CSV
 $csvFile = $csvFilePath;
 // $csvFile = 'datas/2024-03-31_datas.csv';
@@ -153,6 +167,7 @@ if (file_exists($csvFile)) {
 
     // Variable pour suivre si c'est la première ligne
     $firstLine = true;
+    // $pdf->SetFont($font_family = 'utopiastd', '', 14, '', false);
 
     // Définition des colonnes
     $colonneLargeur = 48;
@@ -215,9 +230,9 @@ if (file_exists($csvFile)) {
                 $content[] = array(
                     'text' => '
                 <div style="line-height:' . $_GET['interPaysHaut'] . 'px;"> </div>
-                    <div style="line-height:1px; font-family:Roboto; font-weight:bold; position:relative; margin-left:90px;  width:100%; padding:0;">
-                        <span style="font-size:14px; color:white;">--</span>
-                        <span style="' . interletter(strlen($country_full_name)) . 'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
+                    <div style="line-height:1px;  position:relative; margin-left:90px;  width:100%; padding:0;">
+                        <span style="font-size:14px; color:white; letter-spacing:-1pt;">--</span>
+                        <span style="font-family : robotob; ' . interletter(strlen($country_full_name)) . 'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>

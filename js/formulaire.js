@@ -35,10 +35,13 @@ async function addInputs() {
             container.appendChild(addButton);
         }
 
+        // Création de la nouvelle boîte inputRow
         const inputRow = document.createElement("div");
         inputRow.classList.add("input-row");
         inputRow.id = "input-row-" + uniqueId;
-        inputRow.draggable = true;
+        inputRow.draggable = true;  // Définir draggable sur true
+        // Associer les événements de drag-and-drop
+        inputRow.addEventListener('mousedown', startDrag);
         inputRow.addEventListener('dragstart', drag);
         inputRow.addEventListener('dragend', dragEnd);
         inputRow.addEventListener('dragover', allowDrop);
@@ -159,15 +162,13 @@ async function addInputs() {
         inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById("go-down").style.display = "none";
 
-       
         guillemets();
         console.log("Input added successfully with ID:", uniqueId);
-        
-
     } catch (error) {
         console.error("Error in addInputs:", error);
     }
 }
+
 
 //@ Change les guillemets us en fr
 

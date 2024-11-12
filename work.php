@@ -79,7 +79,7 @@ if (file_exists($csvFilePath)) {
         // Récupération du nom du pays à partir du fichier CSV
         $countryName = $row[1];
         echo '
-    <div class="input-row" id="input-row-' . $a++ . '" draggable="true" ondragstart="drag(event)" ondragover="allowDrop(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
+    <div class="input-row" id="input-row-' . $a++ . '" onmousedown="startDrag(event)" draggable="false" ondragstart="drag(event)" ondragover="allowDrop(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
         <div class="flex" id="selFag' . $d++ . '">
             <input id="date_' . $i++ . '" type="date" name="date[]" value="' . $row[0] . '" onchange="updateDayName(this)">
             <select name="country[]" id="country_' . $s++ . '">';
