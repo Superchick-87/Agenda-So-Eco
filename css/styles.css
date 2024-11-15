@@ -308,8 +308,9 @@ font-weight: 400;
 }
 
 .agendaOpt {
-    width: 70px;
-    margin-left: 0px;
+    width: 75px;
+  margin-left: 0px;
+  padding-left: 5px;
 }
 
 .agendaDateSize {
@@ -343,4 +344,28 @@ font-weight: 400;
     height: 137px;
     color: #00000045;
     font-size: 20px;
+}
+.bloc_jour_plie {
+display: flex;
+height: 90%;
+width: 429px;
+flex-direction: row-reverse;
+justify-content: flex-end;
+align-items: center;
+flex-wrap: nowrap;
+color: #00000045;
+    font-size: 20px;
+}
+
+.picto_drag{
+    height: 100%;
+  background-image: url('../images/drag.svg');
+  opacity: 0.2;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  text-align: center;
+  background-position: center;
+}
+.picto_drag:hover{
+  opacity: 0.5;
 }

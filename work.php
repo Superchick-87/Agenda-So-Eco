@@ -112,6 +112,7 @@ if (file_exists($csvFilePath)) {
         echo '<div class="bloc_jour">';
         //@ interlettrage
         echo '<div class="flex_opt_picto">';
+        
         echo '<div class="picto_opt" style="background-image: url(images/opti_letter_space.svg);"></div>';
 
         // Démarrer le menu déroulant
@@ -139,8 +140,8 @@ if (file_exists($csvFilePath)) {
 
         //@ FIN interlettrage
 
+        echo '<div class="picto_drag"></div>';
         echo '<h3 id="jour_nom' . $zzz++ . '"  onchange="updateDayName(this)">' . afficherJourSuivant($row[0]) . '</h3>';
-
         echo '</div>';
 
         echo '<textarea id="event_' . $b++ . '" style="letter-spacing:' . $row[4] . 'pt;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';

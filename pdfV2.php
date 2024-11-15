@@ -1,6 +1,6 @@
 <?php
 // require('/TCPDF/fonts/util/makefont.php');
-// $fontname = TCPDF_FONTS::addTTFfont('/TCPDF/fonts/util/UtopiaStdSemiboldDisp.ttf', 'TrueTypeUnicode', '', 96);
+// $fontname = TCPDF_FONTS::addTTFfont('/TCPDF/fonts/UtopiaStdSemiboldDisp.ttf', 'TrueTypeUnicode', '', 96);
 
 include('includes/jourEnFr.php');
 include('includes/manipText.php');
@@ -122,10 +122,11 @@ $pdf->SetKeywords('TCPDF, PDF, exemple, test, guide');
 $pdf->SetMargins(0, 0, 0); // Marge gauche, droite, haut
 $pdf->SetAutoPageBreak(false); // Désactiver le saut de page automatique
 
-$pdf->SetFont('UtopiaStdSemiboldDisp', '', 14, '', false);
+// $pdf->SetFont('UtopiaStdSemiboldDisp', '', 14, '', false);
 $pdf->SetFont('utopiastdb', '', 14, '', false);
 $pdf->SetFont('utopiastd', '', 14, '', false);
 $pdf->SetFont('robotob', '', 14, '', false);
+$pdf->SetTextColor(0,0,0,100);
 
 
 $pays = '

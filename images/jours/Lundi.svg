@@ -5,5 +5,5 @@
     <line x1="28.2523" y1="9.4508" x2="132.5514" y2="9.4508" fill="none" stroke="cmyk(0%, 0%, 0%, 100%)" stroke-miterlimit="10" stroke-width=".5"/>
     <rect x=".5328" y=".6522" width="45.7195" height="17.5972" fill="#fff" stroke="cmyk(0%, 0%, 0%, 100%)" stroke-miterlimit="10" stroke-width=".5"/>
   </g>
-  <text transform="translate(3.8528 13.819)" fill="#d42e1a" font-family="UtopiaStdSemiboldDisp" font-size="15" letter-spacing="1.1pt">Lundi</text>
+  <text transform="translate(3.8528 13.819)" fill="cmyk(0%, 91%, 94%, 10%)" stroke="cmyk(0%, 91%, 94%, 10%)" stroke-width="0.3" font-family="utopiastd" font-size="15" font-weight="600">Lundi</text>
 </svg>

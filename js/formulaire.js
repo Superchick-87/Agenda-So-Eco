@@ -39,7 +39,7 @@ async function addInputs() {
         const inputRow = document.createElement("div");
         inputRow.classList.add("input-row");
         inputRow.id = "input-row-" + uniqueId;
-        inputRow.draggable = true;  // Définir draggable sur true
+        inputRow.draggable = false;  // Définir draggable sur true
         // Associer les événements de drag-and-drop
         inputRow.addEventListener('mousedown', startDrag);
         inputRow.addEventListener('dragstart', drag);
@@ -110,6 +110,9 @@ async function addInputs() {
         const flexOptPicto = document.createElement("div");
         flexOptPicto.classList.add("flex_opt_picto");
 
+        const dragPicto = document.createElement("div");
+        dragPicto.classList.add("picto_drag");
+
         const pictoOpt = document.createElement("div");
         pictoOpt.classList.add("picto_opt");
         pictoOpt.style.backgroundImage = "url('images/opti_letter_space.svg')";
@@ -130,6 +133,9 @@ async function addInputs() {
         }
 
         flexOptPicto.appendChild(pictoOpt);
+
+        
+        
         flexOptPicto.appendChild(letterSpacingSelect);
         blocJour.appendChild(flexOptPicto);
 
@@ -137,6 +143,7 @@ async function addInputs() {
         dayDisplay.id = "jour_nom" + uniqueId;
         dayDisplay.textContent = "Jour";
 
+        blocJour.appendChild(dragPicto);
         blocJour.appendChild(dayDisplay);
         flexOpt.appendChild(blocJour);
 
@@ -191,6 +198,10 @@ function toggleVisibility(uniqueId) {
     const eventElement = document.getElementById("event_" + uniqueId);
     const blocJourElement = document.querySelector("#input-row-" + uniqueId + " .bloc_jour");
     const flexOptPictoElement = document.querySelector("#input-row-" + uniqueId + " .flex_opt_picto");
+    const inputRow = event.target.closest('.input-row');
+    
+    const gragPictoElement = document.querySelector(" .picto_drag");
+
     // Vérifier si les éléments existent avant de changer leur affichage
     if (eventElement && blocJourElement && flexOptPictoElement) {
         const nomDuJour = document.getElementById("jour_nom" + uniqueId); // Récupérer le nom du jour
@@ -198,18 +209,18 @@ function toggleVisibility(uniqueId) {
             eventElement.style.display = "block";
             blocJourElement.style.display = "flex"; // Affiche bloc_jour
             flexOptPictoElement.style.display = "flex"; // Affiche flex_opt_picto
-
             blocJourElement.style.height = "134px"; // Affiche bloc_jour
+            inputRow.setAttribute('draggable', 'false');
+            
         } else {
-
             blocJourElement.style.display = "flex"; // Affiche bloc_jour
-
             blocJourElement.style.height = "auto"; // Affiche bloc_jour
             nomDuJour.style.display = "block"; // Gardez le nom du jour affiché
+            gragPictoElement.style.display = "block";
             eventElement.style.display = "none";
             blocJourElement.style.display = "flex"; // Masque bloc_jour
             flexOptPictoElement.style.display = "none"; // Masque flex_opt_picto
-
+            inputRow.setAttribute('draggable', 'true');
         }
     }
 }
