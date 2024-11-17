@@ -1,6 +1,6 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 
 <head>
@@ -10,7 +10,7 @@
     <title>Agenda SOD</title>
 </head>
 
-<body> -->
+<body>
     <?php
 
     function defaultLand($x)
@@ -128,22 +128,28 @@
     include('pdfV2.php');
   
 
-   // Chemin du dossier et du fichier PDF
+// Chemin du dossier et du fichier PDF
 $directory = 'ProductionPdf/';
 $filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf';
 $filePath = $directory . $filename;
 
 // Vérifier si le fichier existe
 if (file_exists($filePath)) {
-    // Si le fichier existe, afficher le PDF dans la page avec un paramètre unique
-    echo '
-    <h3>Votre PDF :</h3>
-    <embed src="' . $filePath . '?v=' . time() . '" type="application/pdf" width="100%" height="800px" />';
+    
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: inline; filename="' . $filename . '"');
+    header('Cache-Control: no-cache, no-store, must-revalidate'); // Pour éviter la mise en cache
+
+   
+    readfile($filePath);
+    exit;
 } else {
     // Si le fichier n'existe pas, afficher un message
     echo '<p>Le fichier PDF n\'existe pas dans le dossier spécifié.</p>';
 }
+
+
     
 ?>
-<!-- </body>
-</html> -->
+</body>
+</html>

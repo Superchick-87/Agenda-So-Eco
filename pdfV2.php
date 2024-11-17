@@ -278,5 +278,6 @@ $filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf'; // Le nom du fichier PDF
 
 // Enregistrer le fichier PDF dans le dossier spécifique
 $pdf->Output($directory . $filename, 'F'); // 'F' pour sauver dans un fichier
+// $pdf->Output($directory . $filename, 'I'); // 'F' pour sauver dans un fichier
 
 // echo "Le PDF a été généré avec succès dans le dossier : " . $directory . $filename;

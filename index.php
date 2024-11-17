@@ -23,7 +23,7 @@
      <div id="txtHint"></div>
      <div>
          <!-- <h1>L'agenda de la semaine</h1> -->
-         <div class="colorInfo agendaDateSize">
+         <div class="colorInfo agendaDateSize logo">
             <input id="agendaSod" class="agendaDate" type="date" name="agendaSod" onchange="showHint(this.value)">
         </div>
      </div>
@@ -42,6 +42,7 @@
                  if (this.readyState == 4 && this.status == 200) {
                      document.getElementById("txtHint").innerHTML = this.responseText;
                      // Mettre à jour l'interlettrage après le chargement du contenu
+                    
                      updateLetterSpacingForAll();
                      updateTotalCharacters();
                      guillemets();

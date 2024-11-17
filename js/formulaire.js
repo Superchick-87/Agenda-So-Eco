@@ -21,6 +21,8 @@ async function loadCountriesCSV() {
 
 async function addInputs() {
     try {
+    
+
         const container = document.getElementById("inputs-container");
         const uniqueId = generateUniqueId();
         console.log("Generated uniqueId:", uniqueId);
@@ -171,6 +173,9 @@ async function addInputs() {
 
         guillemets();
         console.log("Input added successfully with ID:", uniqueId);
+      
+       
+        
     } catch (error) {
         console.error("Error in addInputs:", error);
     }
@@ -180,10 +185,14 @@ async function addInputs() {
 //@ Change les guillemets us en fr
 
 function guillemets() {
-    
     document.querySelectorAll('.input-text').forEach((textarea) => {
         textarea.addEventListener('input', function (event) {
-            const content = textarea.value;
+            let content = textarea.value;
+            
+            // Supprimer les entités HTML &nbsp;
+            content = content.replace(/&nbsp;/g, ' ');  // Remplacer &nbsp; par un espace normal
+
+            // Remplacer les guillemets doubles par des guillemets français
             textarea.value = content.replace(/"([^"]*)"/g, '« $1 »');
         });
     });
@@ -272,7 +281,8 @@ function updateScrollButtons() {
     const isAtTop = window.scrollY === 0;
     const isAtBottom = window.scrollY + window.innerHeight >= document.body.scrollHeight;
 
-    if (!isScrollable || inputRows.length === 0) {
+    console.log(inputRows.length);
+    if (!isScrollable || inputRows.length < 3) {
         goUpButton.style.display = "none";
         goDownButton.style.display = "none";
     } else if (isAtTop) {
@@ -281,7 +291,7 @@ function updateScrollButtons() {
     } else if (isAtBottom) {
         goUpButton.style.display = "block";
         goDownButton.style.display = "none";
-    } else {
+    }else {
         goUpButton.style.display = "block";
         goDownButton.style.display = "block";
     }
