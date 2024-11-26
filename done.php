@@ -13,118 +13,101 @@
 <body>
     <?php
 
-    function defaultLand($x)
-    {
-        if ($x === '') {
-            $x = 'Sélectionner un pays';
-            return $x;
+    // Fonction pour définir une valeur par défaut pour le pays
+function defaultLand($x)
+{
+    return $x === '' ? 'Sélectionner un pays' : $x;
+}
+
+// Fonction pour lire les correspondances des pays depuis le fichier CSV
+function lireCorrespondancesPays($filePath)
+{
+    $paysCorrespondances = [];
+    if (($paysFile = fopen($filePath, 'r')) !== false) {
+        while (($ligne = fgetcsv($paysFile, 1000, ',')) !== false) {
+            $paysCorrespondances[$ligne[2]] = $ligne[4];
         }
+        fclose($paysFile);
     }
+    return $paysCorrespondances;
+}
+
+// Fonction pour générer un fichier CSV
+function genererCSV($filePath, $header, $data)
+{
+    $file = fopen($filePath, 'w');
+    if ($file === false) {
+        die("Erreur lors de l'ouverture du fichier CSV : $filePath");
+    }
+    fputcsv($file, $header);
+    foreach ($data as $row) {
+        fputcsv($file, $row);
+    }
+    fclose($file);
+}
+
+// Vérifie si la méthode est GET
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $agendaSod = $_GET['agendaSod'];
-    // Initialisation du tableau pour stocker les données
-    $donnees = array();
 
-    // Vérifie si le formulaire a été soumis
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        // Vérifie si les champs nécessaires sont définis dans $_GET
-        if (isset($_GET['date']) && isset($_GET['country']) && isset($_GET['event'])) {
-            // Récupère les valeurs des champs du formulaire
-            $date = $_GET['date'];
-            $country = $_GET['country'];
-            $event = $_GET['event'];
-            $letterSpacing = $_GET['letterSpacing'];
+    // Initialisation des tableaux pour stocker les données
+    $donnees = [];
+    $donneesPref = [];
 
-            // Vérifie si le nombre de noms est égal au nombre d'âges
-            if (count($date) == count($country) && count($country) == count($event)) {
-                // Chemin vers le fichier de pays
-                $paysFilePath = 'datas/pays.csv';
+    // Chemin vers le fichier de correspondances pays
+    $paysFilePath = 'datas/pays.csv';
+    $paysCorrespondances = lireCorrespondancesPays($paysFilePath);
 
-                // Lire le fichier pays.csv et stocker les correspondances entre référence (colonne 3) et nom complet du pays (colonne 5)
-                $paysCorrespondances = array();
+    // Vérifie et traite les données principales
+    if (isset($_GET['date'], $_GET['country'], $_GET['event'])) {
+        $date = $_GET['date'];
+        $country = $_GET['country'];
+        $event = $_GET['event'];
+        $letterSpacing = $_GET['letterSpacing'];
 
-                if (($paysFile = fopen($paysFilePath, 'r')) !== FALSE) {
-                    // Lire chaque ligne du fichier pays.csv
-                    while (($ligne = fgetcsv($paysFile, 1000, ',')) !== FALSE) {
-                        // Supposons que la référence du pays soit dans la 3e colonne (index 2) et le nom complet du pays dans la 5e colonne (index 4)
-                        $paysCorrespondances[$ligne[2]] = $ligne[4];
-                    }
-                    fclose($paysFile);
-                }
+        if (count($date) == count($country) && count($country) == count($event)) {
+            for ($i = 0; $i < count($country); $i++) {
+                $countryReference = $country[$i];
+                $countryFullName = isset($paysCorrespondances[$countryReference]) ? $paysCorrespondances[$countryReference] : 'Unknown';
+                $eventText = str_replace("\n", '*@*', $event[$i]);
 
-                // Parcours les valeurs pour construire le tableau à deux dimensions
-                for ($i = 0; $i < count($country); $i++) {
-                    // Utiliser la 3e colonne (référence pays) pour obtenir le nom complet du pays
-                    $countryReference = $country[$i]; // Supposons que 'country' soit la référence
-                    $countryFullName = isset($paysCorrespondances[$countryReference]) ? $paysCorrespondances[$countryReference] : 'Unknown';
-
-                    // Remplacer les retours de ligne par *@* pour l'insertion dans le CSV
-                    $eventText = str_replace("\n", '*@*', $event[$i]);
-
-                    // Ajouter les données au tableau, y compris le nom complet du pays
-                    $donnees[] = array(
-                        'date' => $date[$i],
-                        'country' => $countryReference,
-                        'event' => $eventText, // Utiliser le texte d'événement modifié
-                        'country_full_name' => $countryFullName, // Ajout du nom complet du pays
-                        'letter_spacing' => $letterSpacing[$i] // Valeur de l'interlettrage de chaque bloc
-                    );
-                }
-
-                // Affichage des données
-                // echo "<pre>";
-                // print_r($donnees);
-                // echo "</pre>";
-
-                // Générer le fichier CSV
-                $csvFilePath = 'datas/' . $agendaSod . '_datas.csv';
-                $csvFile = fopen($csvFilePath, 'w');
-
-                // Écriture de l'en-tête du fichier CSV
-                fputcsv($csvFile, array('date', 'country', 'event', 'country_full_name', 'letter_spacing'));
-
-                // Écriture des données dans le fichier CSV
-                foreach ($donnees as $info) {
-                    // Laisser fputcsv gérer l'encapsulation et les retours de ligne
-                    fputcsv($csvFile, array($info['date'], $info['country'], $info['event'], $info['country_full_name'], $info['letter_spacing']));
-                }
-
-                fclose($csvFile);
-
-                // echo "Le fichier CSV a été généré avec succès.";
-            } else {
-                echo "Le nombre de dates, de pays et d'événements ne correspond pas.";
+                $donnees[] = [
+                    'date' => $date[$i],
+                    'country' => $countryReference,
+                    'event' => $eventText,
+                    'country_full_name' => $countryFullName,
+                    'letter_spacing' => $letterSpacing[$i]
+                ];
             }
+
+            // Générer le fichier des données principales
+            $csvFilePath = "datas/{$agendaSod}_datas.csv";
+            genererCSV($csvFilePath, ['date', 'country', 'event', 'country_full_name', 'letter_spacing'], $donnees);
         } else {
-            echo "Tous les champs du formulaire ne sont pas définis.";
+            echo "Le nombre de dates, de pays et d'événements ne correspond pas.";
         }
-
-        // Ajouter les données au tableau, y compris le nom complet du pays
-        $donneesPref[] = array(
-            'inter_Date_Haut' => $_GET['interDateHaut'], // Date espacement haut  
-            'inter_Date_Bas' => $_GET['interDateBas'], // Date espacement bas
-            'inter_Pays_Haut' => $_GET['interPaysHaut'], // Pays espacement haut  
-            'inter_Pays_Bas' => $_GET['interPaysBas'], // Pays espacement bas 
-            'interligne' => $_GET['interligne'], // interligna de l'ensemble du texte
-            'adjust_Colonne' => $_GET['adjustColonne'] // ajustage des colonnes
-        );
-        // Générer le fichier CSV
-        $csvFilePathh = 'datas/' . $agendaSod . '_pref.csv';
-        $csvFilee = fopen($csvFilePathh, 'w');
-
-        if ($csvFilee === false) {
-            die("Erreur lors de l'ouverture du fichier CSV.");
-        }
-
-        // Écriture de l'en-tête du fichier CSV
-        fputcsv($csvFilee, array('inter_Date_Haut', 'inter_Date_Bas', 'inter_Pays_Haut', 'inter_Pays_Bas', 'interligne','adjust_Colonne'));
-
-        // Écriture des données dans le fichier CSV
-        foreach ($donneesPref as $infoo) {
-            // Écrire la ligne avec le nom complet du pays
-            fputcsv($csvFilee, array($infoo['inter_Date_Haut'], $infoo['inter_Date_Bas'], $infoo['inter_Pays_Haut'], $infoo['inter_Pays_Bas'], $infoo['interligne'], $infoo['adjust_Colonne']));
-        }
-        fclose($csvFilee);
+    } else {
+        echo "Tous les champs du formulaire pour les données principales ne sont pas définis.";
     }
+
+    // Vérifie et traite les données de préférences
+    if (isset($_GET['interDateHaut'], $_GET['interDateBas'], $_GET['interPaysHaut'], $_GET['interPaysBas'], $_GET['interligne'], $_GET['adjustColonne'])) {
+        $donneesPref[] = [
+            'inter_Date_Haut' => $_GET['interDateHaut'],
+            'inter_Date_Bas' => $_GET['interDateBas'],
+            'inter_Pays_Haut' => $_GET['interPaysHaut'],
+            'inter_Pays_Bas' => $_GET['interPaysBas'],
+            'interligne' => $_GET['interligne'],
+            'adjust_Colonne' => $_GET['adjustColonne']
+        ];
+
+        // Générer le fichier des préférences
+        $csvFilePathh = "datas/{$agendaSod}_pref.csv";
+        genererCSV($csvFilePathh, ['inter_Date_Haut', 'inter_Date_Bas', 'inter_Pays_Haut', 'inter_Pays_Bas', 'interligne', 'adjust_Colonne'], $donneesPref);
+    } else {
+        echo "Tous les champs du formulaire pour les préférences ne sont pas définis.";
+    }
+}
     include('pdfV2.php');
   
 

@@ -6,10 +6,10 @@ include('includes/jourEnFr.php');
 include('includes/manipText.php');
 require_once('TCPDF/tcpdf.php');
 // Envoyer les en-têtes HTTP pour générer le fichier PDF
-// header('Content-Type: application/pdf');
-// header('Content-Disposition: inline; filename="document.pdf"');
-// header('Cache-Control: private, max-age=0, must-revalidate');
-// header('Pragma: public');
+header('Content-Type: application/pdf');
+header('Content-Disposition: inline; filename="document.pdf"');
+header('Cache-Control: private, max-age=0, must-revalidate');
+header('Pragma: public');
 
 /**
  * Extend TCPDF to work with multiple columns
@@ -262,7 +262,7 @@ if (file_exists($csvFile)) {
 }
 
 // Génération du PDF
-// ob_clean(); // Effacer tout contenu de sortie avant de générer le PDF
+ob_clean(); // Effacer tout contenu de sortie avant de générer le PDF
 // $pdf->Output('exemple.pdf', 'I');
 
 // Chemin du dossier où enregistrer le fichier PDF
@@ -278,6 +278,6 @@ $filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf'; // Le nom du fichier PDF
 
 // Enregistrer le fichier PDF dans le dossier spécifique
 $pdf->Output($directory . $filename, 'F'); // 'F' pour sauver dans un fichier
-// $pdf->Output($directory . $filename, 'I'); // 'F' pour sauver dans un fichier
+$pdf->Output($filename, 'I'); // 'F' pour sauver dans un fichier
 
 // echo "Le PDF a été généré avec succès dans le dossier : " . $directory . $filename;

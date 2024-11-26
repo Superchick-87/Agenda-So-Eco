@@ -15,7 +15,17 @@ foreach ($interDateHaut as $value => $label) {
     echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
 }
 echo '</select>';
-echo '</div>';
+
+// Info bulle
+echo '<div class="tooltip" >i
+        <div class="tooltiptext">
+            <div>Sert à régler l\'espacement entre le haut de la date en cours et le dernier bloc texte de la date précédente</div>
+            <img class="tooltippict" src="images/note_1.jpg" alt="Description">
+        </div>
+    </div>';
+// FIN - Info bulle
+
+echo ' </div>';
 
 echo '<div class="flex_opt_picto">';
 echo '<div class="picto_opt" style="background-image: url(images/opti_date_down.svg);"></div>';
@@ -27,6 +37,16 @@ foreach ($interDateBas as $value => $label) {
     echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
 }
 echo '</select>';
+
+// Info bulle
+echo '<div class="tooltip" >i
+        <div class="tooltiptext">
+            <div>Sert à régler l\'espacement entre le bas de la date en cours et le premier bloc texte de la date suivante</div>
+            <img class="tooltippict" src="images/note_2.jpg" alt="Description">
+        </div>
+    </div>';
+// FIN - Info bulle
+
 echo '</div><hr>';
 
 //* FIN espacements dates haut / bas
@@ -44,6 +64,16 @@ foreach ($interPaysHaut as $value => $label) {
     echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
 }
 echo '</select>';
+
+// Info bulle
+echo '<div class="tooltip" >i
+        <div class="tooltiptext">
+            <div>Sert à répartir l\'espacement entre les blocs : drapeaux / nom du pays + évènement</div>
+            <img class="tooltippict" src="images/note_3.jpg" alt="Description">
+        </div>
+    </div>';
+// FIN - Info bulle
+
 echo '</div>';
 
 echo '<div class="flex_opt_picto">';
@@ -56,6 +86,16 @@ foreach ($interPaysBas as $value => $label) {
     echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
 }
 echo '</select>';
+
+// Info bulle
+echo '<div class="tooltip" >i
+        <div class="tooltiptext">
+            <div>Sert à régler l\'espacement entre le bloc texte et le bloc pays (drapeau + nom)</div>
+            <img class="tooltippict" src="images/note_4.jpg" alt="Description">
+        </div>
+    </div>';
+// FIN - Info bulle
+
 echo '</div><hr>';
 
 //* FIN espacements pays haut / bas
@@ -74,6 +114,16 @@ foreach ($interLigne as $value => $label) {
     echo '<option value="' . $value . '"' . $selected . '>' . $label . '</option>';
 }
 echo '</select>';
+
+// Info bulle
+echo '<div class="tooltip" >i
+        <div class="tooltiptext">
+            <div>Sert à ajuster l\'interlignage de tous les évènements</div>
+            <img class="tooltippict" src="images/note_5.jpg" alt="Description">
+        </div>
+    </div>';
+// FIN - Info bulle
+
 echo '</div><hr>';
 
 //* FIN interlignage
@@ -101,6 +151,16 @@ foreach ($adjustColonne as $value => $label) {
 }
 
 echo '</select>';
+
+// Info bulle
+echo '<div class="tooltip" >i
+        <div class="tooltiptext">
+            <div>Force à basculer des évènements d\'une colonne à l\'autre</div>
+            <img class="tooltippict" src="images/note_6.jpg" alt="Description">
+        </div>
+    </div>';
+// FIN - Info bulle
+
 echo '</div>';
 
 
