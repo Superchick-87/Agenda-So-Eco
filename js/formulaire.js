@@ -173,7 +173,7 @@ async function addInputs() {
 
         guillemets();
         console.log("Input added successfully with ID:", uniqueId);
-      
+        totalEvents();
        
         
     } catch (error) {
@@ -261,7 +261,7 @@ function goDown() {
 function updateScrollButtons() {
     // Obtenir les éléments par la classe "input-row"
     const inputRows = document.getElementsByClassName("input-row");
-    console.log("Nombre d'input-row :", inputRows.length);
+    // console.log("Nombre d'input-row :", inputRows.length);
 
     const goUpButton = document.getElementById("go-up");
     const goDownButton = document.getElementById("go-down");
@@ -352,6 +352,7 @@ function removeInputs(parentRowId) {
     const inputRow = document.getElementById(parentRowId);
     inputRow.remove();
     updateTotalCharacters();
+    totalEvents();
 }
 
 
@@ -371,6 +372,25 @@ function updateLetterSpacingForAll() {
     letterSpacingElements.forEach(selectElement => {
         updateLetterSpacing(selectElement);
     });
+}
+
+function totalEvents() {
+    // <p id="totalEvenements" style="display:none;">0</p>
+    //      <h4 id="evenements"> évènements</h4>
+
+
+    // console.log("Nombre d'input-row :", inputRows.length);
+    
+    // Met à jour le texte avec le nombre total de caractères
+    const inputRows = document.getElementsByClassName("input-row");
+    const totalEvenements = document.getElementById('totalEvenements');
+
+    totalEvenements.innerHTML = inputRows.length;
+
+    // Affiche "évènement" ou "évènements" selon le nombre de caractères
+    const evenementsElement = document.getElementById('evenements');
+    evenementsElement.textContent = inputRows.length > 1 ? totalEvenements.innerHTML + " évènements" : totalEvenements.innerHTML + " évènement";
+
 }
 
 function updateTotalCharacters() {

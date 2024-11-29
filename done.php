@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Agenda SOD</title>
 </head>
-
 <body>
     <?php
 
@@ -44,7 +42,7 @@
         fclose($file);
     }
 
-    // Vérifie si la méthode est GET
+    // Vérifie si la méthode est POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $agendaSod = $_POST['agendaSod'];
 
@@ -111,13 +109,22 @@
     // print_r($_POST);
     // echo '</pre>';
 
+    //@ Fabrication du pdf
+
     include('pdfV2.php');
+
+    //@ FIN - Fabrication du pdf
+
+
+    //@ Affichage du pdf
+
     // Chemin du dossier et du fichier PDF
     $directory = 'ProductionPdf/';
-    // $agendaSod = '123';  // Exemple d'ID pour $agendaSod, vous pouvez le récupérer dynamiquement
     $filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf';
     $filePath = $directory . $filename;
-    // echo $filePath;
+    
+    //* Version php : 7.1.32
+
     // Vérifier si le fichier existe avant de l'afficher
     if (file_exists($filePath)) {
         // Affichage avec la balise <iframe>
@@ -134,10 +141,9 @@
             Le fichier PDF demandé est introuvable.
         </div>';
     }
-    // Chemin du dossier et du fichier PDF
-    // $directory = 'ProductionPdf/';
-    // $filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf';
-    // $filePath = $directory . $filename;
+    //* FIN - Version php : 7.1.32
+
+    //* Version php : 7.0.33
 
     // // Vérifier si le fichier existe
     // if (file_exists($filePath)) {
@@ -146,7 +152,6 @@
     //     header('Content-Disposition: inline; filename="' . $filename . '"');
     //     header('Cache-Control: no-cache, no-store, must-revalidate'); // Pour éviter la mise en cache
 
-
     //     readfile($filePath);
     //     exit;
     // } else {
@@ -154,8 +159,9 @@
     //     echo '<p>Le fichier PDF n\'existe pas dans le dossier spécifié.</p>';
     // }
 
+    //* FIN - Version php : 7.0.33
 
-
+    //@ FIN - Affichage du pdf
     ?>
 </body>
 

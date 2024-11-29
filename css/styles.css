@@ -37,7 +37,9 @@ hr {
     margin: 20px auto;
     text-align: center;
 }
-
+.detail{
+    line-height: 25px;
+}
 /* Change cursor to crosshair when dragging */
 .input-row {
     cursor: grab;
@@ -248,7 +250,7 @@ embed {
     color: white;
     border: none;
     cursor: pointer;
-    width: 125px;
+    width: 169px;
     height: 30px;
     font-size: 1em;
     text-align: center;
@@ -264,7 +266,7 @@ embed {
 .save {
     position: fixed;
     left: 0px;
-    top: 488px;
+    top: 513px;
 }
 
 .menu {
@@ -375,7 +377,7 @@ embed {
     position: fixed;
     left: 0px;
     color: white;
-    top: 160px;
+    top: 184px;
     z-index: 0;
 }
 

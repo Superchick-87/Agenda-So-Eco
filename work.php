@@ -5,8 +5,6 @@ include('includes/options.php');
 include('includes/manipText.php');
 include('includes/jourEnFr.php');
 
-
-
 $csvFileePathh = 'datas/' . $agendaSod . '_pref.csv';
 $interDateBasValue = null;
 $interDateHautValue = null;
@@ -18,7 +16,6 @@ if (file_exists($csvFileePathh)) {
     if (($csvFilee = fopen($csvFileePathh, 'r')) !== false) {
         // Lire l'en-tête du CSV
         fgetcsv($csvFilee); // Ignore the header
-
         // Lire la première ligne des valeurs
         if (($data = fgetcsv($csvFilee)) !== false) {
             $interDateHautValue = $data[0]; // Récupérer la valeur de 'inter_Date_Haut'
@@ -35,8 +32,6 @@ if (file_exists($csvFileePathh)) {
 
 if (file_exists($csvFilePath)) {
     $file = fopen($csvFilePath, 'r');
-
-    // echo '<div id="go-up" class="go-up" id="go-up" onclick="goUp()" style.display = "none";>></div>';
     echo '
     <form id="form2" action="done.php?" method="post">';
 
@@ -47,11 +42,11 @@ if (file_exists($csvFilePath)) {
     //@ FIN gestion des select pour les paramètres 
 
     echo '
-    <div id="upDown">
-        <div id="go-up" onclick="goUp()">></div>
-        <div id="go-down" onclick="goDown()">></div>
-    </div>';
-
+        <div id="upDown">
+            <div id="go-up" onclick="goUp()">></div>
+            <div id="go-down" onclick="goDown()">></div>
+        </div>
+    ';
     echo '<input type="date" name="agendaSod" id="agendaSod" value="' . $agendaSod . '" style="display:none">
     <div id="inputs-container">';
 
@@ -150,19 +145,21 @@ if (file_exists($csvFilePath)) {
     }
     echo '
     <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>';
-
     echo ' <div class="menu">
         <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
     echo '<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
     echo '</div>
     </form>
     </div>';
-
     echo '
         <div class="state colorInfo">
             <h2>Agenda en cours</h2>
-            <p id="totalCharacters" style="display:none;">0</p>
-            <h4 id="signes"></h4>
+            <div class="detail">
+                <p id="totalEvenements" style="display:none;">0</p>
+                <p id="evenements" style="display:block;"></p>
+                <p id="totalCharacters" style="display:none;">0</p>
+                <p id="signes"></p>
+            </div>
         </div>';
     fclose($file);
 } else {
@@ -188,13 +185,16 @@ if (file_exists($csvFilePath)) {
         <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>
     <div class="menu">
                 <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
-    //  echo'<input id="make" class="save pad" type="submit" name="make" value="Générer" style="display:none;">';
     echo '</div>
         </div>
     </form>
     <div class="state colorInfo">
         <h2>Nouvel agenda</h2>
-        <p id="totalCharacters" style="display:none;">0</p>
-        <h4 id="signes"> signes</h4>
+        <div class="detail">
+                <p id="totalEvenements" style="display:none;">0</p>
+                <p id="evenements" style="display:block;"></p>
+                <p id="totalCharacters" style="display:none;">0</p>
+                <p id="signes"></p>
+            </div>
     </div>';
 };

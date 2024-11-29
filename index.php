@@ -1,36 +1,29 @@
  <?php
-    echo phpversion();
+    // echo phpversion();
     include('includes/options.php');
     $letterSpacingJson = json_encode($letterSpacing);
     ?>
-
  <script>
      const letterSpacingOptions = <?php echo $letterSpacingJson; ?>;
  </script>
-
  <!DOCTYPE html>
  <html lang="fr">
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" type="text/css" href="css/styles.css">
      <title>Agenda SOD</title>
  </head>
-
  <body>
-
      <div id="txtHint"></div>
      <div>
-         <!-- <h1>L'agenda de la semaine</h1> -->
          <div class="colorInfo agendaDateSize logo">
              <input id="agendaSod" class="agendaDate" type="date" name="agendaSod" onchange="showHint(this.value)">
          </div>
      </div>
      <script>
          var agendaSod = document.getElementById('agendaSod');
-
 
          function showHint(str) {
              var xhttp;
@@ -43,11 +36,10 @@
                  if (this.readyState == 4 && this.status == 200) {
                      document.getElementById("txtHint").innerHTML = this.responseText;
                      // Mettre à jour l'interlettrage après le chargement du contenu
-
                      updateLetterSpacingForAll();
                      updateTotalCharacters();
+                     totalEvents();
                      guillemets();
-
 
                      $(document).ready(function() {
                          function updateFlagImage(selectElement) {
@@ -63,30 +55,25 @@
                          $("select[name='country[]']").each(function() {
                              updateFlagImage($(this));
                          });
-
-
                      });
                  }
-
              };
              xhttp.open("GET", "work.php?agendaSod=" + str, true);
              xhttp.send();
          }
      </script>
      <script src="js/formulaire.js"></script>
-
      <script>
-         let initialPosition = null;
+        //@ Gestion Drag & Drop
 
+         let initialPosition = null;
          function startDrag(event) {
              const inputRow = event.target.closest('.input-row');
              const blocJour = event.target.closest('.bloc_jour');
-
              // Vérifie si l'élément cliqué est bien un .input-row à l'intérieur d'une .bloc_jour
              if (inputRow && blocJour) {
                  // Activer draggable sur .input-row
                  inputRow.setAttribute('draggable', 'true');
-
                  // Sauvegarder la position initiale de l'élément
                  initialPosition = inputRow;
              }
@@ -127,7 +114,6 @@
                      dropzone.parentNode.insertBefore(draggedElement, dropzone.nextSibling);
                  }
              }
-
              // Supprime la classe de déplacement
              draggedElement.classList.remove('dragging');
          }
@@ -153,54 +139,18 @@
                  textarea.addEventListener('focus', () => {
                      inputRow.setAttribute('draggable', 'false');
                  });
-
                  // Quand le textarea perd le focus, réactiver le drag sur inputRow
                  textarea.addEventListener('blur', () => {
                      inputRow.setAttribute('draggable', 'true');
                  });
              }
          });
-
          // Ajout d'écouteurs sur .bloc_jour pour démarrer le drag-and-drop
          document.querySelectorAll('.bloc_jour').forEach(bloc => {
              bloc.addEventListener('mousedown', startDrag);
          });
 
-
-
-
-         //  function allowDrop(event) {
-         //      event.preventDefault(); // Prevent default behavior
-         //  }
-
-         //  function drag(event) {
-         //      event.dataTransfer.setData("text", event.target.id); // Store the ID of the dragged element
-         //      event.target.classList.add('dragging'); // Add the dragging class to change cursor
-         //  }
-
-         //  function drop(event) {
-         //      event.preventDefault(); // Prevent default behavior
-         //      var data = event.dataTransfer.getData("text"); // Get the ID of the dragged element
-         //      var draggedElement = document.getElementById(data);
-         //      var dropzone = event.target.closest('.input-row'); // Find the closest input row to drop onto
-
-         //      if (dropzone) {
-         //          // Insert the dragged element before the dropzone
-         //          dropzone.parentNode.insertBefore(draggedElement, dropzone);
-         //      } else {
-         //          // If not dropped on an input-row, append it to the container
-         //          document.getElementById('inputs-container').appendChild(draggedElement);
-         //      }
-
-         //      // Remove the dragging class when drop action is complete
-         //      draggedElement.classList.remove('dragging');
-         //  }
-
-         //  function dragEnd(event) {
-         //      event.target.classList.remove('dragging'); // Remove the dragging class when drag ends
-         //  }
+         //@ FIN - Gestion Drag & Drop
      </script>
-
  </body>
-
  </html>
