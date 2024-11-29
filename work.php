@@ -38,7 +38,7 @@ if (file_exists($csvFilePath)) {
 
     // echo '<div id="go-up" class="go-up" id="go-up" onclick="goUp()" style.display = "none";>></div>';
     echo '
-    <form id="form2" action="done.php?" method="get">';
+    <form id="form2" action="done.php?" method="post">';
 
     //@ gestion des select pour les paramètres 
 
@@ -112,7 +112,7 @@ if (file_exists($csvFilePath)) {
         echo '<div class="bloc_jour">';
         //@ interlettrage
         echo '<div class="flex_opt_picto">';
-        
+
         echo '<div class="picto_opt" style="background-image: url(images/opti_letter_space.svg);"></div>';
 
         // Démarrer le menu déroulant
@@ -168,12 +168,12 @@ if (file_exists($csvFilePath)) {
 } else {
 
     echo '
-    <form id="form2" action="done.php?" method="get">';
+    <form id="form2" action="done.php?" method="post">';
 
     //@ gestion des select pour les paramètres 
 
     include('includes/barreOpt.php');
-    
+
 
     //@ FIN gestion des select pour les paramètres 
 
@@ -198,4 +198,3 @@ if (file_exists($csvFilePath)) {
         <h4 id="signes"> signes</h4>
     </div>';
 };
-

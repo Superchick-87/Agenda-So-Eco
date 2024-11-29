@@ -1,9 +1,9 @@
 date,country,event,country_full_name,letter_spacing
-2024-11-25,onu,"Conseil de sécurité à New York : réunion sur le Proche-Orient.",ONU,0
 2024-11-25,ue,"Parlement européen : session plénière à Strasbourg (jusqu'au 28 novembre).  Au programme : le vote final sur la nouvelle équipe de commissaires européens.","Union européenne",-0.1
-2024-11-25,fr,"Sénat : Budget 2025, examen du projet de loi de finances (jusqu'au 12 décembre).",France,0.1
+2024-11-25,onu,"Conseil de sécurité à New York : réunion sur le Proche-Orient.",ONU,0
 2024-11-25,sg,"Championnat du monde d'échecs (jusqu'au 13 décembre). ",Singapour,-0.25
-2024-11-27,fr,"Fin du procès de Marine Le Pen, Jean-Marie Le Pen et 24 autres personnes pour détournement de fonds publics de l'UE.  Annonce de la date de décision du tribunal.",France,-0.1
+2024-11-25,fr,"Sénat : Budget 2025, examen du projet de loi de finances (jusqu'au 12 décembre).",France,0.1
+2024-11-27,fr,"Fin du procès de Marine Le Pen, Jean-Marie Le Pen et 24 autres personnes pour détournement de fonds publics de l'UE.  Annonce de la date de décision du tribunal.",France,0
 2024-11-28,fr,"Assemblée nationale : niche de la France insoumise. Parmi les propositions de loi : l’abrogation de la retraite à 64 ans et l’intégration de la notion de consentement dans la définition pénale des infractions d’agression sexuelle et de viol.",France,-0.1
 2024-11-28,fr,"Littérature :  attribution du*@*37e prix Goncourt des lycéens.",France,-0.1
 2024-11-28,fr,"Festival Néo-Terra organisé par la Région Nouvelle-Aquitaine*@*à Bordeaux (jusqu’au 30/11). ",France,0

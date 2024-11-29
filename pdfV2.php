@@ -1,15 +1,13 @@
 <?php
-// require('/TCPDF/fonts/util/makefont.php');
-// $fontname = TCPDF_FONTS::addTTFfont('/TCPDF/fonts/UtopiaStdSemiboldDisp.ttf', 'TrueTypeUnicode', '', 96);
+require_once('TCPDF/tcpdf.php');
 
 include('includes/jourEnFr.php');
 include('includes/manipText.php');
-require_once('TCPDF/tcpdf.php');
 // Envoyer les en-têtes HTTP pour générer le fichier PDF
-header('Content-Type: application/pdf');
-header('Content-Disposition: inline; filename="document.pdf"');
-header('Cache-Control: private, max-age=0, must-revalidate');
-header('Pragma: public');
+// header('Content-Type: application/pdf');
+// header('Content-Disposition: inline; filename="document.pdf"');
+// header('Cache-Control: private, max-age=0, must-revalidate');
+// header('Pragma: public');
 
 /**
  * Extend TCPDF to work with multiple columns
@@ -59,7 +57,7 @@ class MC_TCPDF extends TCPDF
             $this->writeHTMLCell($colWidth, $totalHeight, '', '', $allEvents, 0, 1, false, true, 'L', true);
         } else {
             // Diviser le contenu en deux colonnes
-            $linesPerColumn = ceil(count($content) / $_GET['adjustColonne']);
+            $linesPerColumn = ceil(count($content) / $_POST['adjustColonne']);
             $column1Events = array_slice($content, 0, $linesPerColumn + 0.5);
             $column2Events = array_slice($content, $linesPerColumn);
 
@@ -126,7 +124,7 @@ $pdf->SetAutoPageBreak(false); // Désactiver le saut de page automatique
 $pdf->SetFont('utopiastdb', '', 14, '', false);
 $pdf->SetFont('utopiastd', '', 14, '', false);
 $pdf->SetFont('robotob', '', 14, '', false);
-$pdf->SetTextColor(0,0,0,100);
+$pdf->SetTextColor(0, 0, 0, 100);
 
 
 $pays = '
@@ -157,7 +155,7 @@ function interletter($x)
 
 
 // Lecture des données CSV
-$csvFile = $csvFilePath;
+$csvFile = "datas/{$agendaSod}_datas.csv";
 // $csvFile = 'datas/2024-03-31_datas.csv';
 if (file_exists($csvFile)) {
     // Ajuster le texte du pays en utilisant la fonction d'ajustement
@@ -208,9 +206,9 @@ if (file_exists($csvFile)) {
                 // Ajouter une ligne avec la date
                 $content[] = array(
                     'text' => '
-                    <p style="margin: 0; padding: 0; line-height:' . $_GET['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
                     <img src="images/jours/' . afficherJourSuivant($date) . '.svg"/>
-                    <p style="margin: 0; padding: 0; line-height:' . $_GET['interDateBas'] . 'px; font-size: 2pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 2pt;">,</p> 
                 ',
                 );
 
@@ -230,14 +228,14 @@ if (file_exists($csvFile)) {
                 // Ajouter le pays et l'événement
                 $content[] = array(
                     'text' => '
-                <div style="line-height:' . $_GET['interPaysHaut'] . 'px;"> </div>
+                <div style="line-height:' . $_POST['interPaysHaut'] . 'px;"> </div>
                     <div style="line-height:1px;  position:relative; margin-left:90px;  width:100%; padding:0;">
                         <span style="font-size:14px; color:white; letter-spacing:-1pt;">--</span>
                         <span style="font-family : robotob; ' . interletter(strlen($country_full_name)) . 'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
-                    <div style="line-height:' . $_GET['interPaysBas'] . 'px;"></div>
-                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_GET['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
+                    <div style="line-height:' . $_POST['interPaysBas'] . 'px;"></div>
+                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_POST['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
                     ',
                 );
 
@@ -261,10 +259,6 @@ if (file_exists($csvFile)) {
     die('Le fichier CSV est introuvable.');
 }
 
-// Génération du PDF
-ob_clean(); // Effacer tout contenu de sortie avant de générer le PDF
-// $pdf->Output('exemple.pdf', 'I');
-
 // Chemin du dossier où enregistrer le fichier PDF
 $directory = __DIR__ . '/ProductionPdf/'; // Exemple : 'pdf_files/' ou '/var/www/html/pdf/'
 
@@ -277,7 +271,12 @@ if (!file_exists($directory)) {
 $filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf'; // Le nom du fichier PDF
 
 // Enregistrer le fichier PDF dans le dossier spécifique
+ob_clean();
 $pdf->Output($directory . $filename, 'F'); // 'F' pour sauver dans un fichier
-$pdf->Output($filename, 'I'); // 'F' pour sauver dans un fichier
-
+// header('Content-Type: application/pdf');
+// header('Content-Disposition: inline; filename="infog_SOD_Agenda_"');
+// header('Cache-Control: private, max-age=0, must-revalidate');
+// header('Pragma: public');
+// $pdf->Output('infog_SOD_Agenda_', 'I'); // 'F' pour sauver dans un fichier
+ob_end_clean();
 // echo "Le PDF a été généré avec succès dans le dossier : " . $directory . $filename;

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @import url("https://use.typekit.net/fmv6kgf.css");
+
 * {
     margin: 0;
     padding: 0;
@@ -12,9 +13,11 @@ body {
     font-family: 'Roboto', serif;
 
 }
-h2{
+
+h2 {
     font-size: 1rem;
 }
+
 h2,
 h4 {
     margin: 7px;
@@ -22,6 +25,17 @@ h4 {
 
 hr {
     margin: 10px 2px;
+}
+
+/* iframe {
+    width: 600px;
+    height: 820px;
+} */
+.iframe {
+    /* border: 1px solid red; */
+    width: max-content;
+    margin: 20px auto;
+    text-align: center;
 }
 
 /* Change cursor to crosshair when dragging */
@@ -51,6 +65,7 @@ hr {
     width: max-content;
     border-radius: 15px 0px;
 }
+
 .input-row:hover {
     background: #fff8e7;
     border-radius: 0px;
@@ -96,7 +111,7 @@ textarea {
     font-style: normal;
     font-family: "utopia-std-display", serif;
     /* font-family: "console"; */
-font-weight: 400;
+    font-weight: 400;
 }
 
 embed {
@@ -116,10 +131,11 @@ embed {
     margin: 0px auto;
 }
 
-.pays{
-    font-family : 'Roboto';
-    font-weight : bold;
+.pays {
+    font-family: 'Roboto';
+    font-weight: bold;
 }
+
 .remove-btn {
     background-color: #F44336;
     color: white;
@@ -277,13 +293,15 @@ embed {
 .colorInfoOk {
     background-color: #55A630;
 }
-.logo{
+
+.logo {
     background-image: url(../images/logo_agenda.svg);
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: 10px;
     background-size: 30%;
 }
+
 .flag {
     width: 40px;
     height: 40px;
@@ -330,8 +348,8 @@ embed {
 
 .agendaOpt {
     width: 75px;
-  margin-left: 0px;
-  padding-left: 5px;
+    margin-left: 0px;
+    padding-left: 5px;
 }
 
 .agendaDateSize {
@@ -342,6 +360,7 @@ embed {
     width: 160px;
     padding: 5px;
 }
+
 .agendaDate {
     margin-top: 26%;
 }
@@ -369,29 +388,31 @@ embed {
     color: #00000045;
     font-size: 20px;
 }
+
 .bloc_jour_plie {
-display: flex;
-height: 90%;
-width: 429px;
-flex-direction: row-reverse;
-justify-content: flex-end;
-align-items: center;
-flex-wrap: nowrap;
-color: #00000045;
+    display: flex;
+    height: 90%;
+    width: 429px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: nowrap;
+    color: #00000045;
     font-size: 20px;
 }
 
-.picto_drag{
+.picto_drag {
     height: 100%;
-  background-image: url('../images/drag.svg');
-  opacity: 0.2;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  text-align: center;
-  background-position: center;
+    background-image: url('../images/drag.svg');
+    opacity: 0.2;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    text-align: center;
+    background-position: center;
 }
-.picto_drag:hover{
-  opacity: 0.5;
+
+.picto_drag:hover {
+    opacity: 0.5;
 }
 
 .tooltip {
@@ -411,9 +432,9 @@ color: #00000045;
     font-family: serif;
     font-weight: bold;
     line-height: 1.6rem;
-  }
+}
 
-  .tooltiptext {
+.tooltiptext {
     font-size: 1rem;
     line-height: 1.1rem;
     font-family: serif;
@@ -439,20 +460,23 @@ color: #00000045;
     flex-wrap: wrap;
     justify-content: center;
     width: 250px;
-  }
-  .tooltippict {
+}
+
+.tooltippict {
     width: 240px;
     text-align: left;
     position: relative;
     z-index: 1;
     margin: 10px;
     width: 240px;
-  }
-  .tooltip:hover .tooltiptext{
+}
+
+.tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
-.tooltip:hover{
-      background-color: #ffffff91;
 
-  }
+.tooltip:hover {
+    background-color: #ffffff91;
+
+}
