@@ -91,15 +91,27 @@ select {
     margin: 5px;
 }
 
-input[type="date"],
+
 select {
     width: 150px;
+    height: 27px;
 }
 
 input[type="date"],
 input[type="text"],
 input[type="email"] {
     height: 27px;
+
+}
+
+input[type="email"]::placeholder,
+input[type="text"]::placeholder {
+    color: var(--font-color-sub);
+    opacity: 0.8;
+    font-size: 13pt;
+    font-style: normal;
+    font-family: "utopia-std-display", serif;
+    padding: 5px;
 }
 
 select {
@@ -107,16 +119,13 @@ select {
 }
 
 textarea {
-    /* border: 2px solid var(--main-color); */
     color: var(--font-color);
     padding: 5px 10px 5px 10px;
     outline: none;
     width: 318px;
-    /* font-family: "utopia-std", serif; */
     font-size: 17pt;
     font-style: normal;
     font-family: "utopia-std-display", serif;
-    /* font-family: "console"; */
     font-weight: 400;
 }
 
