@@ -37,9 +37,11 @@ hr {
     margin: 20px auto;
     text-align: center;
 }
-.detail{
+
+.detail {
     line-height: 25px;
 }
+
 /* Change cursor to crosshair when dragging */
 .input-row {
     cursor: grab;
@@ -94,7 +96,9 @@ select {
     width: 150px;
 }
 
-input[type="date"] {
+input[type="date"],
+input[type="text"],
+input[type="email"] {
     height: 27px;
 }
 

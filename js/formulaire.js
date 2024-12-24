@@ -21,8 +21,6 @@ async function loadCountriesCSV() {
 
 async function addInputs() {
     try {
-    
-
         const container = document.getElementById("inputs-container");
         const uniqueId = generateUniqueId();
         console.log("Generated uniqueId:", uniqueId);
@@ -136,8 +134,8 @@ async function addInputs() {
 
         flexOptPicto.appendChild(pictoOpt);
 
-        
-        
+
+
         flexOptPicto.appendChild(letterSpacingSelect);
         blocJour.appendChild(flexOptPicto);
 
@@ -157,6 +155,29 @@ async function addInputs() {
         eventTextArea.placeholder = "Evènement";
         eventTextArea.oninput = updateTotalCharacters;
 
+        //! EN COURS
+        const phoneMail = document.createElement("div");
+        phoneMail.id = "phoneMail_" + uniqueId;
+        phoneMail.classList.add("flex");
+
+        const phoneInput = document.createElement("input");
+        phoneInput.id = "phone_" + uniqueId;
+        phoneInput.type = "text";
+        phoneInput.classList.add("input-text");
+        phoneInput.name = "phone[]";
+        phoneInput.placeholder = "Téléphone";
+
+        const mailInput = document.createElement("input");
+        mailInput.id = "mail_" + uniqueId;
+        mailInput.type = "email";
+        mailInput.classList.add("input-text");
+        mailInput.name = "mail[]";
+        mailInput.placeholder = "Mail";
+
+
+        // phoneMail.appendChild(phoneInput);
+        //! EN COURS
+
         selFlag.appendChild(dateInput);
         selFlag.appendChild(selectElement);
         selFlag.appendChild(flagDiv);
@@ -167,6 +188,11 @@ async function addInputs() {
         inputRow.appendChild(selFlag);
         inputRow.appendChild(flexOpt);
 
+        inputRow.appendChild(phoneMail);
+        phoneMail.appendChild(phoneInput);
+        phoneMail.appendChild(mailInput);
+
+
         container.insertBefore(inputRow, addButton);
         inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById("go-down").style.display = "none";
@@ -174,8 +200,8 @@ async function addInputs() {
         guillemets();
         console.log("Input added successfully with ID:", uniqueId);
         totalEvents();
-       
-        
+
+
     } catch (error) {
         console.error("Error in addInputs:", error);
     }
@@ -188,7 +214,7 @@ function guillemets() {
     document.querySelectorAll('.input-text').forEach((textarea) => {
         textarea.addEventListener('input', function (event) {
             let content = textarea.value;
-            
+
             // Supprimer les entités HTML &nbsp;
             content = content.replace(/&nbsp;/g, ' ');  // Remplacer &nbsp; par un espace normal
 
@@ -197,18 +223,18 @@ function guillemets() {
         });
     });
 }
-    
+
 //@ FIN - Change les guillemets us en fr
 
 //@ Fonction pour masquer ou afficher les éléments
-
 function toggleVisibility(uniqueId) {
     // Utiliser le bon uniqueId pour sélectionner les éléments à masquer/afficher
+    const phoneMail = document.getElementById("phoneMail_" + uniqueId);
     const eventElement = document.getElementById("event_" + uniqueId);
     const blocJourElement = document.querySelector("#input-row-" + uniqueId + " .bloc_jour");
     const flexOptPictoElement = document.querySelector("#input-row-" + uniqueId + " .flex_opt_picto");
     const inputRow = event.target.closest('.input-row');
-    
+
     const gragPictoElement = document.querySelector(" .picto_drag");
 
     // Vérifier si les éléments existent avant de changer leur affichage
@@ -220,8 +246,10 @@ function toggleVisibility(uniqueId) {
             flexOptPictoElement.style.display = "flex"; // Affiche flex_opt_picto
             blocJourElement.style.height = "134px"; // Affiche bloc_jour
             inputRow.setAttribute('draggable', 'false');
-            
+            phoneMail.style.display = "block"; // Masque div coordonnées
+
         } else {
+            phoneMail.style.display = "none"; // Masque div coordonnées
             blocJourElement.style.display = "flex"; // Affiche bloc_jour
             blocJourElement.style.height = "auto"; // Affiche bloc_jour
             nomDuJour.style.display = "block"; // Gardez le nom du jour affiché
@@ -229,6 +257,7 @@ function toggleVisibility(uniqueId) {
             eventElement.style.display = "none";
             blocJourElement.style.display = "flex"; // Masque bloc_jour
             flexOptPictoElement.style.display = "none"; // Masque flex_opt_picto
+
             inputRow.setAttribute('draggable', 'true');
         }
     }
@@ -291,7 +320,7 @@ function updateScrollButtons() {
     } else if (isAtBottom) {
         goUpButton.style.display = "block";
         goDownButton.style.display = "none";
-    }else {
+    } else {
         goUpButton.style.display = "block";
         goDownButton.style.display = "block";
     }
@@ -380,7 +409,7 @@ function totalEvents() {
 
 
     // console.log("Nombre d'input-row :", inputRows.length);
-    
+
     // Met à jour le texte avec le nombre total de caractères
     const inputRows = document.getElementsByClassName("input-row");
     const totalEvenements = document.getElementById('totalEvenements');
