@@ -152,6 +152,29 @@ async function addInputs() {
         eventTextArea.placeholder = "Evènement";
         eventTextArea.oninput = updateTotalCharacters;
 
+        //! EN COURS
+        const phoneMail = document.createElement("div");
+        phoneMail.id = "coord_" + uniqueId;
+        phoneMail.classList.add("flex");
+
+        const phoneInput = document.createElement("input");
+        phoneInput.id = "phone_" + uniqueId;
+        phoneInput.type = "text";
+        phoneInput.classList.add("input-text");
+        phoneInput.name = "phone[]";
+        phoneInput.placeholder = "Téléphone";
+
+        const mailInput = document.createElement("input");
+        mailInput.id = "mail_" + uniqueId;
+        mailInput.type = "email";
+        mailInput.classList.add("input-text");
+        mailInput.name = "mail[]";
+        mailInput.placeholder = "Mail";
+
+
+        // phoneMail.appendChild(phoneInput);
+        //! EN COURS
+
         selFlag.appendChild(dateInput);
         selFlag.appendChild(selectElement);
         selFlag.appendChild(flagDiv);
@@ -161,6 +184,12 @@ async function addInputs() {
         flexOpt.appendChild(eventTextArea);
         inputRow.appendChild(selFlag);
         inputRow.appendChild(flexOpt);
+
+        inputRow.appendChild(phoneMail);
+        phoneMail.appendChild(phoneInput);
+        phoneMail.appendChild(mailInput);
+
+        //! EN COURS
 
         container.insertBefore(inputRow, addButton);
         inputRow.scrollIntoView({ behavior: 'smooth', block: 'center' });

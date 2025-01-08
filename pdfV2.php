@@ -204,11 +204,19 @@ if (file_exists($csvFile)) {
             // Vérifier si la date est différente de la date précédente
             if ($date !== $previousDate) {
                 // Ajouter une ligne avec la date
+                // $content[] = array(
+                //     'text' => '
+                //     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
+                //     <img src="images/jours/' . afficherJourSuivant($date) . '.svg"/>
+                //     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 2pt;">,</p> 
+                // ',
+                // );
+
                 $content[] = array(
                     'text' => '
                     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
-                    <img src="images/jours/' . afficherJourSuivant($date) . '.svg"/>
-                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 2pt;">,</p> 
+                    <div style="font-family:utopiastd; background-color: #d42e1a; color:white; font-size:15; border: 1px solid red;"> ' . coupeMois(afficherJourSuivant($date)) . '</div>
+                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 3pt;">,</p> 
                 ',
                 );
 
