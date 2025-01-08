@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Agenda SOD</title>
 </head>
+
 <body>
     <?php
 
@@ -122,16 +124,16 @@
     $directory = 'ProductionPdf/';
     $filename = 'infog_SOD_Agenda_' . $agendaSod . '.pdf';
     $filePath = $directory . $filename;
-    
+
     //* Version php : 7.1.32
 
     // Vérifier si le fichier existe avant de l'afficher
     if (file_exists($filePath)) {
         // Affichage avec la balise <iframe>
         echo '<div class="iframe" >
-            <iframe src="' . htmlspecialchars($filePath) . '#zoom=160" 
-                    width="640px" 
-                    height="1300px" 
+            <iframe src="' . htmlspecialchars($filePath) . '#zoom=140" 
+                    width="540px" 
+                    height="1120px" 
                     style="border:none;">
             </iframe>
         </div>';

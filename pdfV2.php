@@ -235,7 +235,7 @@ if (file_exists($csvFile)) {
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_POST['interPaysBas'] . 'px;"></div>
-                    <div style="font-family:utopiastd; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_POST['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
+                    <div style="font-family:utopiastd; word-break: break-all; width:100%; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_POST['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
                     ',
                 );
 

@@ -21,8 +21,6 @@ async function loadCountriesCSV() {
 
 async function addInputs() {
     try {
-    
-
         const container = document.getElementById("inputs-container");
         const uniqueId = generateUniqueId();
         console.log("Generated uniqueId:", uniqueId);
@@ -135,9 +133,6 @@ async function addInputs() {
         }
 
         flexOptPicto.appendChild(pictoOpt);
-
-        
-        
         flexOptPicto.appendChild(letterSpacingSelect);
         blocJour.appendChild(flexOptPicto);
 
@@ -174,13 +169,11 @@ async function addInputs() {
         guillemets();
         console.log("Input added successfully with ID:", uniqueId);
         totalEvents();
-       
-        
+
     } catch (error) {
         console.error("Error in addInputs:", error);
     }
 }
-
 
 //@ Change les guillemets us en fr
 
@@ -188,7 +181,7 @@ function guillemets() {
     document.querySelectorAll('.input-text').forEach((textarea) => {
         textarea.addEventListener('input', function (event) {
             let content = textarea.value;
-            
+
             // Supprimer les entités HTML &nbsp;
             content = content.replace(/&nbsp;/g, ' ');  // Remplacer &nbsp; par un espace normal
 
@@ -197,7 +190,6 @@ function guillemets() {
         });
     });
 }
-    
 //@ FIN - Change les guillemets us en fr
 
 //@ Fonction pour masquer ou afficher les éléments
@@ -208,7 +200,6 @@ function toggleVisibility(uniqueId) {
     const blocJourElement = document.querySelector("#input-row-" + uniqueId + " .bloc_jour");
     const flexOptPictoElement = document.querySelector("#input-row-" + uniqueId + " .flex_opt_picto");
     const inputRow = event.target.closest('.input-row');
-    
     const gragPictoElement = document.querySelector(" .picto_drag");
 
     // Vérifier si les éléments existent avant de changer leur affichage
@@ -220,7 +211,7 @@ function toggleVisibility(uniqueId) {
             flexOptPictoElement.style.display = "flex"; // Affiche flex_opt_picto
             blocJourElement.style.height = "134px"; // Affiche bloc_jour
             inputRow.setAttribute('draggable', 'false');
-            
+
         } else {
             blocJourElement.style.display = "flex"; // Affiche bloc_jour
             blocJourElement.style.height = "auto"; // Affiche bloc_jour
@@ -234,19 +225,7 @@ function toggleVisibility(uniqueId) {
     }
 }
 
-// Initialiser les boîtes déjà présentes avec la fonctionnalité de masquage
-// document.querySelectorAll('.toggle-btn').forEach((btn) => {
-//     // Utiliser une fonction pour capturer le bon ID au moment du clic
-//     const uniqueId = btn.parentElement.id.replace('selFlag', '');
-//     btn.onclick = function () {
-//         toggleVisibility(uniqueId);
-//     };
-// });
-
 //@ FIN - Fonction pour masquer ou afficher les éléments
-
-
-
 
 // Fonction pour remonter en haut de la page
 function goUp() {
@@ -259,10 +238,7 @@ function goDown() {
 
 // Fonction pour mettre à jour la position de #upDown et les boutons de défilement
 function updateScrollButtons() {
-    // Obtenir les éléments par la classe "input-row"
     const inputRows = document.getElementsByClassName("input-row");
-    // console.log("Nombre d'input-row :", inputRows.length);
-
     const goUpButton = document.getElementById("go-up");
     const goDownButton = document.getElementById("go-down");
     const upDownButton = document.getElementById("upDown"); // Récupérer l'élément upDown
@@ -274,7 +250,9 @@ function updateScrollButtons() {
     const containerWidth = rect.width; // Largeur de #inputs-container
 
     // Mettre à jour la position de #upDown
-    upDownButton.style.left = (xCoord + containerWidth) + 150 + 'px'; // Ajouter la largeur à la coordonnée X
+    // upDownButton.style.left = (xCoord + containerWidth) + 150 + 'px'; // Ajouter la largeur à la coordonnée X
+    upDownButton.style.left = xCoord + containerWidth + 30 + 'px'; // Ajouter la largeur à la coordonnée X
+
 
     // Vérifiez si la page est défilable
     const isScrollable = document.body.scrollHeight > window.innerHeight;
@@ -291,7 +269,7 @@ function updateScrollButtons() {
     } else if (isAtBottom) {
         goUpButton.style.display = "block";
         goDownButton.style.display = "none";
-    }else {
+    } else {
         goUpButton.style.display = "block";
         goDownButton.style.display = "block";
     }
@@ -312,7 +290,6 @@ observer.observe(document.body, {
 
 // Appeler la fonction au chargement initial
 updateScrollButtons();
-
 
 // Fonction pour générer un ID unique
 function generateUniqueId() {
@@ -355,8 +332,6 @@ function removeInputs(parentRowId) {
     totalEvents();
 }
 
-
-
 // Fonction pour mettre à jour l'interlettrage d'une textarea
 function updateLetterSpacing(selectElement) {
     const textAreaId = selectElement.id.replace("letterSpacing", "event");
@@ -375,12 +350,6 @@ function updateLetterSpacingForAll() {
 }
 
 function totalEvents() {
-    // <p id="totalEvenements" style="display:none;">0</p>
-    //      <h4 id="evenements"> évènements</h4>
-
-
-    // console.log("Nombre d'input-row :", inputRows.length);
-    
     // Met à jour le texte avec le nombre total de caractères
     const inputRows = document.getElementsByClassName("input-row");
     const totalEvenements = document.getElementById('totalEvenements');
@@ -390,7 +359,6 @@ function totalEvents() {
     // Affiche "évènement" ou "évènements" selon le nombre de caractères
     const evenementsElement = document.getElementById('evenements');
     evenementsElement.textContent = inputRows.length > 1 ? totalEvenements.innerHTML + " évènements" : totalEvenements.innerHTML + " évènement";
-
 }
 
 function updateTotalCharacters() {
@@ -421,7 +389,6 @@ function updateTotalCharacters() {
     const elementsColorInfoClass = document.querySelectorAll('.colorInfo');
     const elementsColorInfoClassOK = document.querySelectorAll('.colorInfoOk');
 
-
     // Gestion de l'affichage basé sur le nombre de caractères
     if (totalCharacters >= 1400 && totalCharacters <= 1500) {
         elementsColorInfoClass.forEach(element => {
@@ -436,6 +403,91 @@ function updateTotalCharacters() {
     }
 }
 
+//@ Gestion Drag & Drop
+let initialPosition = null;
 
+function startDrag(event) {
+    const inputRow = event.target.closest('.input-row');
+    const blocJour = event.target.closest('.bloc_jour');
+    // Vérifie si l'élément cliqué est bien un .input-row à l'intérieur d'une .bloc_jour
+    if (inputRow && blocJour) {
+        // Activer draggable sur .input-row
+        inputRow.setAttribute('draggable', 'true');
+        // Sauvegarder la position initiale de l'élément
+        initialPosition = inputRow;
+    }
+}
+
+function allowDrop(event) {
+    event.preventDefault(); // Permet le drop en empêchant le comportement par défaut
+}
+
+function drag(event) {
+    const inputRow = event.target.closest('.input-row');
+    if (inputRow) {
+        event.dataTransfer.setData("text", inputRow.id);
+        inputRow.classList.add('dragging'); // Ajoute une classe CSS pendant le déplacement
+    }
+}
+
+function drop(event) {
+    event.preventDefault(); // Empêche le comportement par défaut
+    const data = event.dataTransfer.getData("text"); // Récupère l'ID de l'élément déplacé
+    const draggedElement = document.getElementById(data); // Sélectionne l'élément par son ID
+    const dropzone = event.target.closest('.input-row'); // Trouve la zone de dépôt cible
+    const draggedElementBloc = draggedElement.closest('.bloc_jour'); // Récupère la boîte de l'élément déplacé
+    const dropzoneBloc = dropzone.closest('.bloc_jour'); // Récupère la boîte de la zone de dépôt
+
+    // Vérifie que l'élément et la zone de dépôt sont dans la même boîte
+    if (dropzone && dropzone !== draggedElement && draggedElementBloc === dropzoneBloc) {
+        // On insère l'élément avant ou après la zone de dépôt
+        const draggedRect = draggedElement.getBoundingClientRect();
+        const dropzoneRect = dropzone.getBoundingClientRect();
+
+        if (dropzoneRect.top < draggedRect.top) {
+            // Si la zone de dépôt est au-dessus de l'élément déplacé
+            dropzone.parentNode.insertBefore(draggedElement, dropzone);
+        } else if (dropzoneRect.top > draggedRect.top) {
+            // Si la zone de dépôt est en dessous de l'élément déplacé
+            dropzone.parentNode.insertBefore(draggedElement, dropzone.nextSibling);
+        }
+    }
+    // Supprime la classe de déplacement
+    draggedElement.classList.remove('dragging');
+}
+
+function dragEnd(event) {
+    const inputRow = event.target.closest('.input-row');
+    if (inputRow) {
+        // Vérifie si la position a changé ou non
+        if (initialPosition === inputRow) {
+            // Si pas de changement, désactiver draggable
+            inputRow.setAttribute('draggable', 'false');
+        }
+        inputRow.classList.remove('dragging'); // Supprime la classe CSS lorsque le glisser se termine
+    }
+    initialPosition = null; // Réinitialiser la position initiale
+}
+
+// Désactiver draggable pendant l'édition du textarea
+document.querySelectorAll('.input-row').forEach(inputRow => {
+    const textarea = inputRow.querySelector('textarea');
+    if (textarea) {
+        // Quand le textarea est en focus, désactiver le drag sur inputRow
+        textarea.addEventListener('focus', () => {
+            inputRow.setAttribute('draggable', 'false');
+        });
+        // Quand le textarea perd le focus, réactiver le drag sur inputRow
+        textarea.addEventListener('blur', () => {
+            inputRow.setAttribute('draggable', 'true');
+        });
+    }
+});
+// Ajout d'écouteurs sur .bloc_jour pour démarrer le drag-and-drop
+document.querySelectorAll('.bloc_jour').forEach(bloc => {
+    bloc.addEventListener('mousedown', startDrag);
+});
+
+//@ FIN - Gestion Drag & Drop
 
 

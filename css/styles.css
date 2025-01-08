@@ -27,19 +27,23 @@ hr {
     margin: 10px 2px;
 }
 
-/* iframe {
-    width: 600px;
-    height: 820px;
-} */
 .iframe {
-    /* border: 1px solid red; */
     width: max-content;
     margin: 20px auto;
+    margin-right: 70px;
     text-align: center;
+    position: sticky;
+    top: 20px;
 }
-.detail{
+
+#form2 {
+    margin: 20px auto;
+}
+
+.detail {
     line-height: 25px;
 }
+
 /* Change cursor to crosshair when dragging */
 .input-row {
     cursor: grab;
@@ -129,7 +133,6 @@ embed {
 
 
 #txtHint {
-    width: 350px;
     margin: 0px auto;
 }
 
@@ -196,13 +199,10 @@ embed {
 #upDown {
     position: fixed;
     bottom: 160px;
-    /* left: 292px; */
 }
 
 #go-up,
 #go-down {
-    /* position: fixed; */
-    /* Position fixe pour que les boutons soient toujours visibles dans le coin en bas */
     right: 20%;
     width: 40px;
     height: 40px;
@@ -220,20 +220,16 @@ embed {
 #go-up {
     rotate: -90deg;
     bottom: 15%;
-    /* Positionnement en bas pour "go-up" */
 }
 
 #go-down {
     rotate: 90deg;
     bottom: 10%;
-    /* Positionnement légèrement au-dessus pour "go-down" */
 }
-
 
 #go-up:hover,
 #go-down:hover {
     background-color: #555;
-    /* Changement de couleur au survol */
 }
 
 
@@ -241,7 +237,6 @@ embed {
 #go-up:hover,
 #go-down:hover {
     background-color: #2980b9;
-    /* Couleur au survol */
 }
 
 

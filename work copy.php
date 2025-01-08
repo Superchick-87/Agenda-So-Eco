@@ -165,7 +165,7 @@ if (file_exists($csvFilePath)) {
 } else {
 
     echo '
-    <form id="form2" onsubmit="submitForm(event)">';
+    <form id="form2" action="done.php?" method="post">';
 
     //@ gestion des select pour les paramètres 
 

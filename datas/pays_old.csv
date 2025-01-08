@@ -21,18 +21,18 @@
 14,48,bh,BHR,Bahreïn,Bahrain
 15,50,bd,BGD,Bangladesh,Bangladesh
 17,52,bb,BRB,Barbade,Barbados
+34,112,by,BLR,Bélarus,Belarus
 18,56,be,BEL,Belgique,Belgium
 26,84,bz,BLZ,Belize,Belize
 59,204,bj,BEN,Bénin,Benin
 19,60,bm,BMU,Bermudes,Bermuda
 20,64,bt,BTN,Bhoutan,Bhutan
-34,112,by,BLR,Biélorussie,Belarus
 32,104,mm,MMR,Birmanie,Myanmar
 21,68,bo,BOL,Bolivie,Bolivia
 22,70,ba,BIH,Bosnie-Herzégovine,Bosnia and Herzegovina
 23,72,bw,BWA,Botswana,Botswana
 25,76,br,BRA,Brésil,Brazil
-30,96,bn,BRN,Brunéi,Brunei Darussalam
+30,96,bn,BRN,Brunéi Darussalam,Brunei Darussalam
 31,100,bg,BGR,Bulgarie,Bulgaria
 233,854,bf,BFA,Burkina Faso,Burkina Faso
 33,108,bi,BDI,Burundi,Burundi
@@ -45,8 +45,6 @@
 57,196,cy,CYP,Chypre,Cyprus
 48,170,co,COL,Colombie,Colombia
 49,174,km,COM,Comores,Comoros
-116,408,kp,PRK,Corée du nord,Democratic People's Rep. of Korea
-117,410,kr,KOR,Corée du sud,Rep. of Korea
 54,188,cr,CRI,Costa Rica,Costa Rica
 110,384,ci,CIV,Côte d'Ivoire,Côte d'Ivoire
 55,191,hr,HRV,Croatie,Croatia
@@ -55,11 +53,13 @@
 79,262,dj,DJI,Djibouti,Djibouti
 61,212,dm,DMA,Dominique,Dominica
 227,818,eg,EGY,Égypte,Egypt
-218,784,ae,ARE,Émirats arabes unis,United Arab Emirates
+64,222,sv,SLV,El Salvador,El Salvador
+218,784,ae,ARE,Émirats Arabes Unis,United Arab Emirates
 63,218,ec,ECU,Équateur,Ecuador
 67,232,er,ERI,Érythrée,Eritrea
 203,724,es,ESP,Espagne,Spain
 68,233,ee,EST,Estonie,Estonia
+164,583,fm,FSM,États Fédérés de Micronésie,Federated States of Micronesia
 231,840,us,USA,États-Unis,United States
 66,231,et,ETH,Éthiopie,Ethiopia
 72,242,fj,FJI,Fidji,Fiji
@@ -78,10 +78,10 @@
 92,316,gu,GUM,Guam,Guam
 93,320,gt,GTM,Guatemala,Guatemala
 94,324,gn,GIN,Guinée,Guinea
-65,226,gq,GNQ,Guinée équatoriale,Equatorial Guinea
+65,226,gq,GNQ,Guinée Équatoriale,Equatorial Guinea
 176,624,gw,GNB,Guinée-Bissau,Guinea-Bissau
 95,328,gy,GUY,Guyana,Guyana
-76,254,gf,GUF,Guyane française,French Guiana
+76,254,gf,GUF,Guyane Française,French Guiana
 96,332,ht,HTI,Haïti,Haiti
 99,340,hn,HND,Honduras,Honduras
 100,344,hk,HKG,Hong-Kong,Hong Kong
@@ -106,12 +106,13 @@
 232,850,vi,VIR,Îles Vierges des États-Unis,U.S. Virgin Islands
 103,356,in,IND,Inde,India
 104,360,id,IDN,Indonésie,Indonesia
-106,368,iq,IRQ,Irak,Iraq
 105,364,ir,IRN,Iran,Iran
+106,368,iq,IRQ,Iraq,Iraq
 107,372,ie,IRL,Irlande,Ireland
 102,352,is,ISL,Islande,Iceland
 108,376,il,ISR,Israël,Israel
 109,380,it,ITA,Italie,Italy
+125,434,ly,LBY,Jamahiriya Arabe Libyenne,Libyan Arab Jamahiriya
 111,388,jm,JAM,Jamaïque,Jamaica
 112,392,jp,JPN,Japon,Japan
 114,400,jo,JOR,Jordanie,Jordan
@@ -120,16 +121,15 @@
 119,417,kg,KGZ,Kirghizistan,Kyrgyzstan
 87,296,ki,KIR,Kiribati,Kiribati
 118,414,kw,KWT,Koweït,Kuwait
+226,807,mk,MKD,L'ex-Rép. Yougoslave de Macédoine,The Former Yugoslav Rep. of Macedonia
 122,426,ls,LSO,Lesotho,Lesotho
 123,428,lv,LVA,Lettonie,Latvia
 121,422,lb,LBN,Liban,Lebanon
 124,430,lr,LBR,Libéria,Liberia
-125,434,ly,LBY,Libye,Libyan Arab Jamahiriya
 126,438,li,LIE,Liechtenstein,Liechtenstein
 127,440,lt,LTU,Lituanie,Lithuania
 128,442,lu,LUX,Luxembourg,Luxembourg
 129,446,mo,MAC,Macao,Macao
-226,807,mk,MKD,Macédoine du nord,The Former Yugoslav Rep. of Macedonia
 130,450,mg,MDG,Madagascar,Madagascar
 132,458,my,MYS,Malaisie,Malaysia
 131,454,mw,MWI,Malawi,Malawi
@@ -142,8 +142,7 @@
 137,478,mr,MRT,Mauritanie,Mauritania
 50,175,yt,MYT,Mayotte,Mayotte
 139,484,mx,MEX,Mexique,Mexico
-164,583,fm,FSM,Micronésie,Federated States of Micronesia
-142,498,md,MDA,Moldavie,Moldova
+142,498,md,MDA,Moldova,Moldova
 140,492,mc,MCO,Monaco,Monaco
 242,800,wd,WRD,Monde,Monde
 141,496,mn,MNG,Mongolie,Mongolia
@@ -177,27 +176,26 @@
 178,630,pr,PRI,Porto Rico,Puerto Rico
 175,620,pt,PRT,Portugal,Portugal
 179,634,qa,QAT,Qatar,Qatar
+211,760,sy,SYR,Rép. Arabe Syrienne,Syrian Arab Rep.
 40,140,cf,CAF,Rép. Centrafricaine,Central African
-52,180,cd,COD,Rép. Dém. du Congo,The Democratic Rep. Of The Congo
+117,410,kr,KOR,Rép. de Corée,Rep. of Korea
+52,180,cd,COD,Rép. Démocratique du Congo,The Democratic Rep. Of The Congo
 120,418,la,LAO,Rép. Démocratique Populaire Lao,Lao People's Democratic Rep.
 62,214,do,DOM,Rép. Dominicaine,Dominican Rep.
 51,178,cg,COG,Rép. du Congo,Rep. of the Congo
+116,408,kp,PRK,Rép. Populaire Démocratique de Corée,Democratic People's Rep. of Korea
+58,203,cz,CZE,Rép. Tchèque,Czech Rep.
 180,638,re,REU,Réunion,Réunion
 181,642,ro,ROU,Roumanie,Romania
 228,826,gb,GBR,Royaume-Uni,United Kingdom
 182,643,ru,RUS,Russie,Russian
 183,646,rw,RWA,Rwanda,Rwanda
 204,732,eh,ESH,Sahara Occidental,Western Sahara
-185,659,kn,KNA,Saint-Kitts-et-Nevis,St Kitts and Nevis
-190,674,sm,SMR,Saint-Marin,San Marino
-184,654,sh,SHN,Sainte-Hélène,St Helena
-187,662,lc,LCA,Sainte-Lucie,St Lucia
-64,222,sv,SLV,Salvador,El Salvador
 238,882,ws,WSM,Samoa,Samoa
 5,16,as,ASM,Samoa Américaines,American Samoa
 191,678,st,STP,Sao Tomé-et-Principe,Sao Tome and Principe
 193,686,sn,SEN,Sénégal,Senegal
-240,891,rs,SRB,Serbie,Serbia
+240,891,cs,SCG,Serbie-et-Monténégro,Serbia and Montenegro
 194,690,sc,SYC,Seychelles,Seychelles
 195,694,sl,SLE,Sierra Leone,Sierra Leone
 196,702,sg,SGP,Singapour,Singapore
@@ -206,24 +204,26 @@
 200,706,so,SOM,Somalie,Somalia
 205,736,sd,SDN,Soudan,Sudan
 41,144,lk,LKA,Sri Lanka,Sri Lanka
+185,659,kn,KNA,St-Kitts-et-Nevis,St Kitts and Nevis
+190,674,sm,SMR,St-Marin,San Marino
 188,666,pm,SPM,St-Pierre-et-Miquelon,St-Pierre and Miquelon
-189,670,vc,VCT,St-Vinc.-et-les-Grenadines,St Vincent and the Grenadines
+189,670,vc,VCT,St-Vincent-et-les Grenadines,St Vincent and the Grenadines
+184,654,sh,SHN,Ste-Hélène,St Helena
+187,662,lc,LCA,Ste-Lucie,St Lucia
 209,752,se,SWE,Suède,Sweden
 210,756,ch,CHE,Suisse,Switzerland
 206,740,sr,SUR,Suriname,Suriname
-207,744,sj,SJM,Svalbard et Île Jan Mayen,Svalbard and Jan Mayen
+207,744,sj,SJM,Svalbard etÎle Jan Mayen,Svalbard and Jan Mayen
 208,748,sz,SWZ,Swaziland,Swaziland
-211,760,sy,SYR,Syrie,Syrian Arab Rep.
 212,762,tj,TJK,Tadjikistan,Tajikistan
 45,158,tw,TWN,Taïwan,Taiwan
 230,834,tz,TZA,Tanzanie,Tanzania
 42,148,td,TCD,Tchad,Chad
-58,203,cz,CZE,Tchèquie,Czech Rep.
 78,260,tf,ATF,Terres Australes Françaises,French Southern Territories
 27,86,io,IOT,Territoire Britannique de l'Océan Indien,British Indian Ocean Territory
 83,275,ps,PSE,Territoire Palestinien Occupé,Occupied Palestinian Territory
 213,764,th,THA,Thaïlande,Thailand
-177,626,tl,TLS,Timor oriental,Timor-Leste
+177,626,tl,TLS,Timor-Leste,Timor-Leste
 214,768,tg,TGO,Togo,Togo
 215,772,tk,TKL,Tokelau,Tokelau
 216,776,to,TON,Tonga,Tonga
@@ -237,8 +237,8 @@
 234,858,uy,URY,Uruguay,Uruguay
 154,548,vu,VUT,Vanuatu,Vanuatu
 98,336,va,VAT,Vatican,Vatican
-236,862,ve,VEN,Vénézuela,Venezuela
-198,704,vn,VNM,Viêt Nam,Vietnam
+236,862,ve,VEN,Venezuela,Venezuela
+198,704,vn,VNM,Viet Nam,Vietnam
 237,876,wf,WLF,Wallis et Futuna,Wallis and Futuna
 239,887,ye,YEM,Yémen,Yemen
 241,894,zm,ZMB,Zambie,Zambia
