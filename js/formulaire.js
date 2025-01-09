@@ -37,6 +37,7 @@ async function addInputs() {
 
         // Création de la nouvelle boîte inputRow
         const inputRow = document.createElement("div");
+        inputRow.classList.add("fade-in");
         inputRow.classList.add("input-row");
         inputRow.id = "input-row-" + uniqueId;
         inputRow.draggable = false;  // Définir draggable sur true
@@ -344,21 +345,112 @@ function updateDayName(inputElement) {
     const dateValue = inputElement.value;
     if (dateValue) {
         const date = new Date(dateValue);
-        const joursSemaine = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-        const jourNom = joursSemaine[date.getDay()];
+        const optionsJour = { weekday: 'long' };
+        const optionsDate = { day: 'numeric', month: 'long' };
+        
+        const jourNom = new Intl.DateTimeFormat('fr-FR', optionsJour).format(date);
+        let moisNom = new Intl.DateTimeFormat('fr-FR', optionsDate).format(date).split(' ')[1]; // Récupère le nom du mois
+        const jourNumero = date.getDate();
+        
+        // Raccourcir les mois longs
+        const moisCourts = {
+            // "janvier": "janv.",
+            // "février": "févr.",
+            "septembre": "sept.",
+            // "octobre": "oct.",
+            "novembre": "nov.",
+            "décembre": "déc."
+        };
+        
+        if (moisNom in moisCourts) {
+            moisNom = moisCourts[moisNom];
+        }
+        
+        const jourComplet = `${jourNom}<br>${jourNumero} ${moisNom}`;
+        
         const jourElement = document.getElementById(inputElement.id.replace("date_", "jour_nom"));
         if (jourElement) {
-            jourElement.textContent = jourNom;
+            jourElement.innerHTML = jourComplet; // Utilisation de innerHTML pour inclure <br>
         }
     }
 }
 
+
+
+
 // Fonction pour supprimer une boîte de saisie
 function removeInputs(parentRowId) {
-    const inputRow = document.getElementById(parentRowId);
-    inputRow.remove();
-    updateTotalCharacters();
-    totalEvents();
+
+     const inputRow = document.getElementById(parentRowId);
+    // inputRow.remove();
+
+
+     // Créer un overlay (arrière-plan bloquant)
+     const overlay = document.createElement("div");
+     overlay.classList.add("overlay");
+
+     // Créer une boîte de confirmation
+     const confirmationBox = document.createElement("div");
+     confirmationBox.classList.add("confirmationBox");
+
+     // Ajouter du texte à la boîte
+     const message = document.createElement("p");
+     message.textContent =
+       "Êtes-vous sûr de vouloir supprimer cet élément ?";
+     confirmationBox.appendChild(message);
+
+     // Bouton "Supprimer"
+     const deleteButton = document.createElement("button");
+     deleteButton.textContent = "Supprimer";
+     deleteButton.classList.add("deleteButton");
+
+     // Bouton "Annuler"
+     const cancelButton = document.createElement("button");
+     cancelButton.textContent = "Annuler";
+     cancelButton.classList.add("cancelButton");
+
+     // Ajouter les boutons à la boîte
+     confirmationBox.appendChild(cancelButton);
+     confirmationBox.appendChild(deleteButton);
+
+     // Ajouter l'overlay et la boîte au document
+     document.body.appendChild(overlay);
+     document.body.appendChild(confirmationBox);
+
+     // Gestion des événements pour les boutons
+     deleteButton.addEventListener("click", function () {
+       // Ajouter la classe fade-out pour déclencher l'animation de disparition
+       inputRow.classList.add("fade-out");
+
+       // Attendre la fin de l'animation avant de supprimer l'élément
+       inputRow.addEventListener("animationend", function () {
+        inputRow.remove(); // Supprimer l'élément une fois l'animation terminée
+        updateTotalCharacters();
+        totalEvents();
+       });
+
+       // Supprimer l'overlay et la boîte de confirmation immédiatement
+       overlay.remove();
+       confirmationBox.remove();
+     });
+
+     cancelButton.addEventListener("click", function () {
+       overlay.remove(); // Retirer l'overlay
+       confirmationBox.remove(); // Fermer la boîte sans supprimer
+     });
+
+     // Bloquer la propagation des clics à l'overlay
+     confirmationBox.addEventListener("click", function (event) {
+       event.stopPropagation();
+     });
+
+     // Empêcher la fermeture en cliquant sur l'overlay
+     overlay.addEventListener("click", function (event) {
+       // Pas d'action pour les clics sur l'overlay
+     });
+
+   
+    
 }
 
 // Fonction pour mettre à jour l'interlettrage d'une textarea

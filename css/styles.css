@@ -26,6 +26,79 @@ h4 {
 hr {
     margin: 10px 2px;
 }
+.confirmationBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+  }
+  .cancelButton {
+    margin-right: 10px;
+    background-color: gray;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+  }
+  .cancelButton,
+  .deleteButton {
+    cursor: pointer;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+   /* Animation fade-in */
+   @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
+
+  /* Animation CSS pour l'apparition */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .fade-out {
+    animation: fadeOut 0.3s ease-out;
+  }
+
 
 .iframe {
     width: max-content;
@@ -383,7 +456,9 @@ embed {
     justify-content: space-between;
     height: 137px;
     color: #00000045;
-    font-size: 20px;
+    font-size: 18px;
+    width: 110px;
+    letter-spacing: -0.9;
 }
 
 .bloc_jour_plie {
