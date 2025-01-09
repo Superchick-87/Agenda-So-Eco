@@ -154,17 +154,20 @@ async function addInputs() {
         eventTextArea.oninput = updateTotalCharacters;
 
         //! EN COURS
-        const phoneMail = document.createElement("div");
-        phoneMail.id = "coord_" + uniqueId;
-        phoneMail.classList.add("flex");
+        const bloc_contact = document.createElement("div");
+        bloc_contact.id = "coord_" + uniqueId;
+        bloc_contact.classList.add("flex");
 
+        // Phone
         const phoneInput = document.createElement("input");
         phoneInput.id = "phone_" + uniqueId;
-        phoneInput.type = "text";
+        phoneInput.type = "tel";
+        phoneInput.pattern = "[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}";
         phoneInput.classList.add("input-text");
         phoneInput.name = "phone[]";
         phoneInput.placeholder = "Téléphone";
 
+        // Mail
         const mailInput = document.createElement("input");
         mailInput.id = "mail_" + uniqueId;
         mailInput.type = "email";
@@ -173,7 +176,6 @@ async function addInputs() {
         mailInput.placeholder = "Mail";
 
 
-        // phoneMail.appendChild(phoneInput);
         //! EN COURS
 
         selFlag.appendChild(dateInput);
@@ -186,9 +188,9 @@ async function addInputs() {
         inputRow.appendChild(selFlag);
         inputRow.appendChild(flexOpt);
 
-        inputRow.appendChild(phoneMail);
-        phoneMail.appendChild(phoneInput);
-        phoneMail.appendChild(mailInput);
+        inputRow.appendChild(bloc_contact);
+        bloc_contact.appendChild(phoneInput);
+        bloc_contact.appendChild(mailInput);
 
         //! EN COURS
 
