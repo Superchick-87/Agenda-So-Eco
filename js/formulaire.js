@@ -162,8 +162,9 @@ async function addInputs() {
         const phoneInput = document.createElement("input");
         phoneInput.id = "phone_" + uniqueId;
         phoneInput.type = "tel";
-        phoneInput.pattern = "[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}";
-        phoneInput.classList.add("input-text");
+        phoneInput.pattern = "[0-9]{10}"; // 10 chiffres consécutifs
+        phoneInput.maxLength = 10; // Limite physique de 10 caractères
+        phoneInput.classList.add("input-tel");
         phoneInput.name = "phone[]";
         phoneInput.placeholder = "Téléphone";
 
@@ -171,7 +172,7 @@ async function addInputs() {
         const mailInput = document.createElement("input");
         mailInput.id = "mail_" + uniqueId;
         mailInput.type = "email";
-        mailInput.classList.add("input-text");
+        mailInput.classList.add("input-email");
         mailInput.name = "mail[]";
         mailInput.placeholder = "Mail";
 
