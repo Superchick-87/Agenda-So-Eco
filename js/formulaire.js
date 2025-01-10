@@ -165,6 +165,7 @@ async function addInputs() {
         adresseArea.name = "adresse[]";
         adresseArea.rows = 1;
         adresseArea.placeholder = "Adresse";
+        adresseArea.oninput = updateTotalCharacters;
 
         // Phone
         const phoneInput = document.createElement("input");
@@ -176,6 +177,7 @@ async function addInputs() {
         phoneInput.name = "phone[]";
         phoneInput.placeholder = "Téléphone";
         phoneInput.title = "Entrez un numéro de téléphone de 10 chiffres : (ex : 0612345678)";
+        phoneInput.oninput = updateTotalCharacters;
 
         // Mail
         const mailInput = document.createElement("input");
@@ -184,6 +186,7 @@ async function addInputs() {
         mailInput.classList.add("input-email");
         mailInput.name = "mail[]";
         mailInput.placeholder = "Mail";
+        
 
          // web
          const webInput = document.createElement("input");
@@ -510,11 +513,12 @@ function totalEvents() {
 }
 
 function updateTotalCharacters() {
-    let totalCharacters = 0;
+    let totalCharacters = -10;
 
     // Compte le nombre total de caractères dans tous les textarea
-    document.querySelectorAll('textarea').forEach(textArea => {
-        totalCharacters += textArea.value.length;
+    document.querySelectorAll('textarea, input[type="tel"], input[type="email"], input[type="text"]').forEach(element => {
+
+        totalCharacters += element.value.length;
     });
 
     // Met à jour le texte avec le nombre total de caractères
