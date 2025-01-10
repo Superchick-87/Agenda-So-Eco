@@ -156,7 +156,15 @@ async function addInputs() {
         //! EN COURS
         const bloc_contact = document.createElement("div");
         bloc_contact.id = "coord_" + uniqueId;
-        bloc_contact.classList.add("flex");
+        bloc_contact.classList.add("bloc_contact");
+
+        // Adresse
+        const adresseArea = document.createElement("textarea");
+        adresseArea.id = "adresse_" + uniqueId;
+        adresseArea.classList.add("adresse");
+        adresseArea.name = "adresse[]";
+        adresseArea.rows = 1;
+        adresseArea.placeholder = "Adresse";
 
         // Phone
         const phoneInput = document.createElement("input");
@@ -167,6 +175,7 @@ async function addInputs() {
         phoneInput.classList.add("input-tel");
         phoneInput.name = "phone[]";
         phoneInput.placeholder = "Téléphone";
+        phoneInput.title = "Entrez un numéro de téléphone de 10 chiffres : (ex : 0612345678)";
 
         // Mail
         const mailInput = document.createElement("input");
@@ -175,6 +184,14 @@ async function addInputs() {
         mailInput.classList.add("input-email");
         mailInput.name = "mail[]";
         mailInput.placeholder = "Mail";
+
+         // web
+         const webInput = document.createElement("input");
+         webInput.id = "web_" + uniqueId;
+         webInput.type = "text";
+         webInput.classList.add("input-web");
+         webInput.name = "web[]";
+         webInput.placeholder = "Site web";
 
 
         //! EN COURS
@@ -190,8 +207,11 @@ async function addInputs() {
         inputRow.appendChild(flexOpt);
 
         inputRow.appendChild(bloc_contact);
+        bloc_contact.appendChild(adresseArea);
         bloc_contact.appendChild(phoneInput);
         bloc_contact.appendChild(mailInput);
+        bloc_contact.appendChild(webInput);
+        
 
         //! EN COURS
 
@@ -234,6 +254,8 @@ function toggleVisibility(uniqueId) {
     const flexOptPictoElement = document.querySelector("#input-row-" + uniqueId + " .flex_opt_picto");
     const inputRow = event.target.closest('.input-row');
     const gragPictoElement = document.querySelector(" .picto_drag");
+   
+    const bloc_contact = document.getElementById("coord_" + uniqueId);
 
     // Vérifier si les éléments existent avant de changer leur affichage
     if (eventElement && blocJourElement && flexOptPictoElement) {
@@ -244,6 +266,7 @@ function toggleVisibility(uniqueId) {
             flexOptPictoElement.style.display = "flex"; // Affiche flex_opt_picto
             blocJourElement.style.height = "134px"; // Affiche bloc_jour
             inputRow.setAttribute('draggable', 'false');
+            bloc_contact.style.display = "block";
 
         } else {
             blocJourElement.style.display = "flex"; // Affiche bloc_jour
@@ -254,6 +277,7 @@ function toggleVisibility(uniqueId) {
             blocJourElement.style.display = "flex"; // Masque bloc_jour
             flexOptPictoElement.style.display = "none"; // Masque flex_opt_picto
             inputRow.setAttribute('draggable', 'true');
+            bloc_contact.style.display = "none";
         }
     }
 }

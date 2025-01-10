@@ -99,9 +99,25 @@ hr {
     animation: fadeOut 0.3s ease-out;
   }
 
-.input-tel, .input-email{
+.bloc_contact, .adresse{
+    width: 430px;
+  }
+
+.input-tel, .input-email, .adresse, .input-web{
+    padding: 5px;
     height: 30px;
 }
+.adresse{
+    height: 50px;
+}
+
+.input-email, .input-web{
+    width: 270px;
+}
+.input-email{
+    width: 250px;
+}
+
 .iframe {
     width: max-content;
     margin: 20px auto;
@@ -181,7 +197,7 @@ select {
     height: 30px;
 }
 
-textarea {
+.input-text {
     /* border: 2px solid var(--main-color); */
     color: var(--font-color);
     padding: 5px 10px 5px 10px;
@@ -479,7 +495,7 @@ embed {
     height: 100%;
     background-image: url('../images/drag.svg');
     opacity: 0.2;
-    background-size: 50%;
+    background-size: contain;
     background-repeat: no-repeat;
     text-align: center;
     background-position: center;
