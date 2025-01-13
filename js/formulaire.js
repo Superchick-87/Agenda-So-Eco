@@ -73,7 +73,7 @@ async function addInputs() {
 
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
-        defaultOption.textContent = 'Sélectionner un pays';
+        defaultOption.textContent = 'Sélectionner un lieu';
         selectElement.appendChild(defaultOption);
 
         for (const countryCode in countriesMap) {
@@ -513,7 +513,7 @@ function totalEvents() {
 }
 
 function updateTotalCharacters() {
-    let totalCharacters = -10;
+    let totalCharacters = 0;
 
     // Compte le nombre total de caractères dans tous les textarea
     document.querySelectorAll('textarea, input[type="tel"], input[type="email"], input[type="text"]').forEach(element => {

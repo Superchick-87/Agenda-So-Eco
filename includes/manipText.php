@@ -49,3 +49,16 @@ function exposant($tring)
 
     return $tring;
 }
+
+// function interletter($x)
+// {
+//     if ($x > 19) {
+//         return 'letter-spacing: -0.2px;';
+//     }
+// }
+
+function interletter($x){
+   if ($x > 20) {
+        return 'letter-spacing: -0.3px;';
+    }
+}

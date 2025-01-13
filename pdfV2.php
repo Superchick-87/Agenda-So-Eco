@@ -146,12 +146,7 @@ $pdf->ImageSVG(
     false     // Conserver l'aspect proportionnel
 );
 
-function interletter($x)
-{
-    if ($x > 19) {
-        return 'letter-spacing: -0.2px;';
-    }
-}
+
 
 
 // Lecture des données CSV
@@ -215,7 +210,7 @@ if (file_exists($csvFile)) {
                 $content[] = array(
                     'text' => '
                     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
-                    <div style="font-family:utopiastd; background-color: #d42e1a; color:white; font-size:15; border: 1px solid red;"> ' . coupeMois(afficherJourSuivant($date)) . '</div>
+                    <div style="line-height: 18px; font-family:utopiastd; background-color: #d42e1a; color:white; font-size:14;"> ' . coupeMois(afficherJourSuivant($date)) . '</div>
                     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 3pt;">,</p> 
                 ',
                 );

@@ -96,7 +96,7 @@ function processAllFlags($inputDir, $outputDir) {
         // Traiter l'image et l'enregistrer au format JPG
         createSquareRoundFlag($file, $outputImagePath);
 
-        echo "Image traitée et enregistrée en JPG : " . $outputImagePath . "\n";
+        echo "Image traitée et enregistrée en JPG : " . $outputImagePath . "</br>";
     }
 }
 
