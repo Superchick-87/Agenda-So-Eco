@@ -5,7 +5,7 @@ async function loadCountriesCSV() {
         const data = await response.text();
         const rows = data.split('\n');
         const countriesData = rows.map(row => row.split(','));
-        countriesData.shift(); // Suppression de l'en-tête
+        // countriesData.shift(); // Suppression de l'en-tête
         const countriesMap = {};
         countriesData.forEach(country => {
             const countryCode = country[2];
@@ -186,15 +186,17 @@ async function addInputs() {
         mailInput.classList.add("input-email");
         mailInput.name = "mail[]";
         mailInput.placeholder = "Mail";
-        
+        mailInput.oninput = updateTotalCharacters;
 
-         // web
-         const webInput = document.createElement("input");
-         webInput.id = "web_" + uniqueId;
-         webInput.type = "text";
-         webInput.classList.add("input-web");
-         webInput.name = "web[]";
-         webInput.placeholder = "Site web";
+
+        // web
+        const webInput = document.createElement("input");
+        webInput.id = "web_" + uniqueId;
+        webInput.type = "text";
+        webInput.classList.add("input-web");
+        webInput.name = "web[]";
+        webInput.placeholder = "Site web";
+        webInput.oninput = updateTotalCharacters;
 
 
         //! EN COURS
@@ -214,7 +216,7 @@ async function addInputs() {
         bloc_contact.appendChild(phoneInput);
         bloc_contact.appendChild(mailInput);
         bloc_contact.appendChild(webInput);
-        
+
 
         //! EN COURS
 
@@ -257,7 +259,7 @@ function toggleVisibility(uniqueId) {
     const flexOptPictoElement = document.querySelector("#input-row-" + uniqueId + " .flex_opt_picto");
     const inputRow = event.target.closest('.input-row');
     const gragPictoElement = document.querySelector(" .picto_drag");
-   
+
     const bloc_contact = document.getElementById("coord_" + uniqueId);
 
     // Vérifier si les éléments existent avant de changer leur affichage
@@ -377,11 +379,11 @@ function updateDayName(inputElement) {
         const date = new Date(dateValue);
         const optionsJour = { weekday: 'long' };
         const optionsDate = { day: 'numeric', month: 'long' };
-        
+
         const jourNom = new Intl.DateTimeFormat('fr-FR', optionsJour).format(date);
         let moisNom = new Intl.DateTimeFormat('fr-FR', optionsDate).format(date).split(' ')[1]; // Récupère le nom du mois
         const jourNumero = date.getDate();
-        
+
         // Raccourcir les mois longs
         const moisCourts = {
             // "janvier": "janv.",
@@ -391,13 +393,13 @@ function updateDayName(inputElement) {
             "novembre": "nov.",
             "décembre": "déc."
         };
-        
+
         if (moisNom in moisCourts) {
             moisNom = moisCourts[moisNom];
         }
-        
+
         const jourComplet = `${jourNom}<br>${jourNumero} ${moisNom}`;
-        
+
         const jourElement = document.getElementById(inputElement.id.replace("date_", "jour_nom"));
         if (jourElement) {
             jourElement.innerHTML = jourComplet; // Utilisation de innerHTML pour inclure <br>
@@ -411,76 +413,76 @@ function updateDayName(inputElement) {
 // Fonction pour supprimer une boîte de saisie
 function removeInputs(parentRowId) {
 
-     const inputRow = document.getElementById(parentRowId);
+    const inputRow = document.getElementById(parentRowId);
     // inputRow.remove();
 
 
-     // Créer un overlay (arrière-plan bloquant)
-     const overlay = document.createElement("div");
-     overlay.classList.add("overlay");
+    // Créer un overlay (arrière-plan bloquant)
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
 
-     // Créer une boîte de confirmation
-     const confirmationBox = document.createElement("div");
-     confirmationBox.classList.add("confirmationBox");
+    // Créer une boîte de confirmation
+    const confirmationBox = document.createElement("div");
+    confirmationBox.classList.add("confirmationBox");
 
-     // Ajouter du texte à la boîte
-     const message = document.createElement("p");
-     message.textContent =
-       "Êtes-vous sûr de vouloir supprimer cet élément ?";
-     confirmationBox.appendChild(message);
+    // Ajouter du texte à la boîte
+    const message = document.createElement("p");
+    message.textContent =
+        "Êtes-vous sûr de vouloir supprimer cet élément ?";
+    confirmationBox.appendChild(message);
 
-     // Bouton "Supprimer"
-     const deleteButton = document.createElement("button");
-     deleteButton.textContent = "Supprimer";
-     deleteButton.classList.add("deleteButton");
+    // Bouton "Supprimer"
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Supprimer";
+    deleteButton.classList.add("deleteButton");
 
-     // Bouton "Annuler"
-     const cancelButton = document.createElement("button");
-     cancelButton.textContent = "Annuler";
-     cancelButton.classList.add("cancelButton");
+    // Bouton "Annuler"
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Annuler";
+    cancelButton.classList.add("cancelButton");
 
-     // Ajouter les boutons à la boîte
-     confirmationBox.appendChild(cancelButton);
-     confirmationBox.appendChild(deleteButton);
+    // Ajouter les boutons à la boîte
+    confirmationBox.appendChild(cancelButton);
+    confirmationBox.appendChild(deleteButton);
 
-     // Ajouter l'overlay et la boîte au document
-     document.body.appendChild(overlay);
-     document.body.appendChild(confirmationBox);
+    // Ajouter l'overlay et la boîte au document
+    document.body.appendChild(overlay);
+    document.body.appendChild(confirmationBox);
 
-     // Gestion des événements pour les boutons
-     deleteButton.addEventListener("click", function () {
-       // Ajouter la classe fade-out pour déclencher l'animation de disparition
-       inputRow.classList.add("fade-out");
+    // Gestion des événements pour les boutons
+    deleteButton.addEventListener("click", function () {
+        // Ajouter la classe fade-out pour déclencher l'animation de disparition
+        inputRow.classList.add("fade-out");
 
-       // Attendre la fin de l'animation avant de supprimer l'élément
-       inputRow.addEventListener("animationend", function () {
-        inputRow.remove(); // Supprimer l'élément une fois l'animation terminée
-        updateTotalCharacters();
-        totalEvents();
-       });
+        // Attendre la fin de l'animation avant de supprimer l'élément
+        inputRow.addEventListener("animationend", function () {
+            inputRow.remove(); // Supprimer l'élément une fois l'animation terminée
+            updateTotalCharacters();
+            totalEvents();
+        });
 
-       // Supprimer l'overlay et la boîte de confirmation immédiatement
-       overlay.remove();
-       confirmationBox.remove();
-     });
+        // Supprimer l'overlay et la boîte de confirmation immédiatement
+        overlay.remove();
+        confirmationBox.remove();
+    });
 
-     cancelButton.addEventListener("click", function () {
-       overlay.remove(); // Retirer l'overlay
-       confirmationBox.remove(); // Fermer la boîte sans supprimer
-     });
+    cancelButton.addEventListener("click", function () {
+        overlay.remove(); // Retirer l'overlay
+        confirmationBox.remove(); // Fermer la boîte sans supprimer
+    });
 
-     // Bloquer la propagation des clics à l'overlay
-     confirmationBox.addEventListener("click", function (event) {
-       event.stopPropagation();
-     });
+    // Bloquer la propagation des clics à l'overlay
+    confirmationBox.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
 
-     // Empêcher la fermeture en cliquant sur l'overlay
-     overlay.addEventListener("click", function (event) {
-       // Pas d'action pour les clics sur l'overlay
-     });
+    // Empêcher la fermeture en cliquant sur l'overlay
+    overlay.addEventListener("click", function (event) {
+        // Pas d'action pour les clics sur l'overlay
+    });
 
-   
-    
+
+
 }
 
 // Fonction pour mettre à jour l'interlettrage d'une textarea
@@ -516,7 +518,7 @@ function updateTotalCharacters() {
     let totalCharacters = 0;
 
     // Compte le nombre total de caractères dans tous les textarea
-    document.querySelectorAll('textarea, input[type="tel"], input[type="email"], input[type="text"]').forEach(element => {
+    document.querySelectorAll('textarea[name="event[]"], textarea[name="adresse[]"], input[name="phone[]"], input[name="mail[]"], input[name="web[]"]').forEach(element => {
 
         totalCharacters += element.value.length;
     });

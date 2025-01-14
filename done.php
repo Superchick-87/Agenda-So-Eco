@@ -61,6 +61,10 @@
             $date = $_POST['date'];
             $country = $_POST['country'];
             $event = $_POST['event'];
+            $adresse = $_POST['adresse'];
+            $phone = $_POST['phone'];
+            $mail = $_POST['mail'];
+            $web = $_POST['web'];
             $letterSpacing = $_POST['letterSpacing'];
 
             if (count($date) == count($country) && count($country) == count($event)) {
@@ -68,19 +72,28 @@
                     $countryReference = $country[$i];
                     $countryFullName = isset($paysCorrespondances[$countryReference]) ? $paysCorrespondances[$countryReference] : 'Unknown';
                     $eventText = str_replace("\n", '*@*', $event[$i]);
+                    $adresseText = str_replace("\n", '*@*', $adresse[$i]);
+                    $phoneText = $phone[$i];
+                    $mailText = $mail[$i];
+                    $webText = $web[$i];
 
                     $donnees[] = [
                         'date' => $date[$i],
                         'country' => $countryReference,
                         'event' => $eventText,
                         'country_full_name' => $countryFullName,
-                        'letter_spacing' => $letterSpacing[$i]
+                        'letter_spacing' => $letterSpacing[$i],
+                        'adresse' => $adresseText,
+                        'phone' => $phoneText,
+                        'mail' => $mailText,
+                        'web' => $webText
+
                     ];
                 }
 
                 // Générer le fichier des données principales
                 $csvFilePath = "datas/{$agendaSod}_datas.csv";
-                genererCSV($csvFilePath, ['date', 'country', 'event', 'country_full_name', 'letter_spacing'], $donnees);
+                genererCSV($csvFilePath, ['date', 'country', 'event', 'country_full_name', 'letter_spacing', 'adresse', 'phone', 'mail', 'web'], $donnees);
             } else {
                 echo "Le nombre de dates, de pays et d'événements ne correspond pas.";
             }

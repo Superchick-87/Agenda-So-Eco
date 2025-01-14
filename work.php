@@ -61,6 +61,11 @@ if (file_exists($csvFilePath)) {
     $zz = 1;
     $zzz = 1;
     $xx = 1;
+    $coord = 1;
+    $adresse = 1;
+    $phone = 1;
+    $mail = 1;
+    $web = 1;
 
     // Lecture du fichier CSV des pays
     $paysFile = fopen('datas/pays.csv', 'r');
@@ -141,6 +146,15 @@ if (file_exists($csvFilePath)) {
 
         echo '<textarea id="event_' . $b++ . '" style="letter-spacing:' . $row[4] . 'pt;" class="input-text" rows="5" name="event[]" placeholder="Evènement" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[2])) . '</textarea>';
         echo '</div>';
+        echo '
+                <div id="coord_' . $coord++ . '" class="bloc_contact">
+                    <textarea id="adresse_' . $adresse++ . '" style="letter-spacing:' . $row[4] . 'pt;" class="adresse" rows="1" name="adresse[]" placeholder="Adresse" oninput="updateTotalCharacters()">' . turnFront(htmlspecialchars($row[5])) . '</textarea>
+                    <div style="display:flex;">
+                    <input id="phone_' . $phone++ . '" type="tel" pattern="[0-9]{10}" maxLength = "10" class="input-tel" name = "phone[]" placeholder = "Téléphone" oninput="updateTotalCharacters()" value="' . $row[6] . '">
+                    <input id="mail_' . $mail++ . '" type="email" class="input-email" name = "mail[]" placeholder = "Mail" oninput="updateTotalCharacters()" value="' . $row[7] . '">
+                </div>
+                <input id="web_' . $web++ . '" type="text" class="input-web" name = "web[]" placeholder = "text" oninput="updateTotalCharacters()" value="' . $row[8] . '">
+                    </div>';
         echo '</div>';
     }
     echo '

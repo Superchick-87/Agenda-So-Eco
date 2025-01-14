@@ -1,0 +1,5 @@
+date,country,event,country_full_name,letter_spacing,adresse,phone,mail,web
+2025-01-13,NouvelleAquitaine,vvvs,Nouvelle-Aquitaine,0,"adresse 1",0000000000,vvvvv@vvvvv,
+2025-01-10,Ardennes,vvv,Ardennes,0,"adresse 2",1111111111,vv@vvv,
+2025-01-17,Aube,ccccc,Aube,0,,2222222222,,
+,,,"--- Sélectionner un pays ---",0,,,,

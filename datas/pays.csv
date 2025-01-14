@@ -1,9 +1,124 @@
-1234,1235,,reg,--- Régions ---,--- Régions ---
-8444,4448,ara,AuvergneRhoneAlpes,Auvergne-Rhône-Alpes,Auvergne-Rhône-Alpes
-5300,5301,Bretagne,Bretagne,Bretagne,Bretagne
-7500,7501,NouvelleAquitaine,NouvelleAquitaine,Nouvelle-Aquitaine,Nouvelle-Aquitaine
-2345,2346,,dep,--- Départements ---,--- Départements ---
-4444,4445,adhp,AlpesDeHauteProvence,Alpes-de-Haute-Provence,Alpes-de-Haute-Provence
+1222,1241,',zzz,--- Régions ---,--- Régions ---
+1295,1251,AuvergneRhoneAlpes,AUVERGNERHONEALPES,Auvergne-Rhône-Alpes,Auvergne-Rhône-Alpes
+1299,1296,BourgogneFrancheComte,BOURGOGNEFRANCHECOMTE,Bourgogne-Franche-Comté,Bourgogne-Franche-Comté
+1261,1287,Bretagne,BRETAGNE,Bretagne,Bretagne
+1245,1294,CentreValDeLoire,CENTREVALDELOIRE,Centre-Val de Loire,Centre-Val de Loire
+1253,1232,Corse,CORSE,Corse,Corse
+1244,1230,GrandEst,GRANDEST,Grand Est,Grand Est
+1300,1255,Guadeloupe,GUADELOUPE,Guadeloupe,Guadeloupe
+1271,1291,Guyane,GUYANE,Guyane,Guyane
+1212,1247,HautsDeFrance,HAUTSDEFRANCE,Hauts-de-France,Hauts-de-France
+1268,1207,IleDeFrance,ILEDEFRANCE,Île-de-France,Île-de-France
+1222,1234,LaReunion,LAREUNION,La Réunion,La Réunion
+1201,1250,Martinique,MARTINIQUE,Martinique,Martinique
+1296,1243,Mayotte,MAYOTTE,Mayotte,Mayotte
+1276,1288,Normandie,NORMANDIE,Normandie,Normandie
+1225,1248,NouvelleAquitaine,NOUVELLEAQUITAINE,Nouvelle-Aquitaine,Nouvelle-Aquitaine
+1259,1275,Occitanie,OCCITANIE,Occitanie,Occitanie
+1282,1257,PaysDeLaLoire,PAYSDELALOIRE,Pays de la Loire,Pays de la Loire
+1282,1288,ProvenceAlpesCoteDazur,PROVENCEALPESCOTEDAZUR,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur
+1002,1176,',yyy,--- Départements ---,--- Départements ---
+1188,1064,Ain,AIN,Ain,Ain
+1071,1085,Aisne,AISNE,Aisne,Aisne
+1134,1186,Allier,ALLIER,Allier,Allier
+1066,1125,AlpesDeHauteProvence,ALPESDEHAUTEPROVENCE,Alpes-de-Haute-Provence,Alpes-de-Haute-Provence
+1109,1148,AlpesMaritimes,ALPESMARITIMES,Alpes-Maritimes,Alpes-Maritimes
+1010,1162,Ardeche,ARDECHE,Ardèche,Ardèche
+1007,1022,Ardennes,ARDENNES,Ardennes,Ardennes
+1141,1107,Ariege,ARIEGE,Ariège,Ariège
+1175,1002,Aube,AUBE,Aube,Aube
+1045,1048,Aude,AUDE,Aude,Aude
+1079,1065,Aveyron,AVEYRON,Aveyron,Aveyron
+1073,1043,BasRhin,BASRHIN,Bas-Rhin,Bas-Rhin
+1192,1031,BouchesDuRhone,BOUCHESDURHONE,Bouches-du-Rhône,Bouches-du-Rhône
+1076,1192,Calvados,CALVADOS,Calvados,Calvados
+1143,1012,Cantal,CANTAL,Cantal,Cantal
+1027,1118,Charente,CHARENTE,Charente,Charente
+1046,1036,CharenteMaritime,CHARENTEMARITIME,Charente-Maritime,Charente-Maritime
+1196,1055,Cher,CHER,Cher,Cher
+1143,1200,Correze,CORREZE,Corrèze,Corrèze
+1065,1047,CorseDuSud,CORSEDUSUD,Corse-du-Sud,Corse-du-Sud
+1104,1141,CoteDor,COTEDOR,Côte-d'Or,Côte-d'Or
+1169,1076,CotesDarmor,COTESDARMOR,Côtes-d'Armor,Côtes-d'Armor
+1091,1175,Creuse,CREUSE,Creuse,Creuse
+1091,1118,DeuxSevres,DEUXSEVRES,Deux-Sèvres,Deux-Sèvres
+1023,1184,Dordogne,DORDOGNE,Dordogne,Dordogne
+1130,1006,Doubs,DOUBS,Doubs,Doubs
+1190,1148,Drome,DROME,Drôme,Drôme
+1182,1040,Essonne,ESSONNE,Essonne,Essonne
+1160,1197,Eure,EURE,Eure,Eure
+1124,1026,EureEtLoir,EUREETLOIR,Eure-et-Loir,Eure-et-Loir
+1073,1142,Finistere,FINISTERE,Finistère,Finistère
+1021,1112,Gard,GARD,Gard,Gard
+1105,1037,Gers,GERS,Gers,Gers
+1196,1117,Gironde,GIRONDE,Gironde,Gironde
+1112,1008,Guadeloupe,GUADELOUPE,Guadeloupe,Guadeloupe
+1078,1116,Guyane,GUYANE,Guyane,Guyane
+1155,1083,HautRhin,HAUTRHIN,Haut-Rhin,Haut-Rhin
+1176,1158,HauteCorse,HAUTECORSE,Haute-Corse,Haute-Corse
+1053,1046,HauteGaronne,HAUTEGARONNE,Haute-Garonne,Haute-Garonne
+1083,1191,HauteLoire,HAUTELOIRE,Haute-Loire,Haute-Loire
+1145,1075,HauteMarne,HAUTEMARNE,Haute-Marne,Haute-Marne
+1194,1160,HauteSaone,HAUTESAONE,Haute-Saône,Haute-Saône
+1068,1190,HauteSavoie,HAUTESAVOIE,Haute-Savoie,Haute-Savoie
+1106,1045,HauteVienne,HAUTEVIENNE,Haute-Vienne,Haute-Vienne
+1174,1120,HautesAlpes,HAUTESALPES,Hautes-Alpes,Hautes-Alpes
+1186,1180,HautesPyrenees,HAUTESPYRENEES,Hautes-Pyrénées,Hautes-Pyrénées
+1175,1029,HautsDeSeine,HAUTSDESEINE,Hauts-de-Seine,Hauts-de-Seine
+1050,1129,Herault,HERAULT,Hérault,Hérault
+1024,1187,IlleEtVilaine,ILLEETVILAINE,Ille-et-Vilaine,Ille-et-Vilaine
+1090,1061,Indre,INDRE,Indre,Indre
+1012,1083,IndreEtLoire,INDREETLOIRE,Indre-et-Loire,Indre-et-Loire
+1158,1100,Isere,ISERE,Isère,Isère
+1091,1050,Jura,JURA,Jura,Jura
+1187,1095,LaReunion,LAREUNION,La Réunion,La Réunion
+1104,1111,Landes,LANDES,Landes,Landes
+1018,1000,LoirEtCher,LOIRETCHER,Loir-et-Cher,Loir-et-Cher
+1119,1052,Loire,LOIRE,Loire,Loire
+1090,1074,LoireAtlantique,LOIREATLANTIQUE,Loire-Atlantique,Loire-Atlantique
+1010,1171,Loiret,LOIRET,Loiret,Loiret
+1128,1079,Lot,LOT,Lot,Lot
+1050,1024,LotEtGaronne,LOTETGARONNE,Lot-et-Garonne,Lot-et-Garonne
+1066,1194,Lozere,LOZERE,Lozère,Lozère
+1061,1180,MaineEtLoire,MAINEETLOIRE,Maine-et-Loire,Maine-et-Loire
+1179,1092,Manche,MANCHE,Manche,Manche
+1013,1030,Marne,MARNE,Marne,Marne
+1071,1059,Martinique,MARTINIQUE,Martinique,Martinique
+1005,1153,Mayenne,MAYENNE,Mayenne,Mayenne
+1136,1048,Mayotte,MAYOTTE,Mayotte,Mayotte
+1073,1034,MeurtheEtMoselle,MEURTHEETMOSELLE,Meurthe-et-Moselle,Meurthe-et-Moselle
+1171,1040,Meuse,MEUSE,Meuse,Meuse
+1052,1110,Morbihan,MORBIHAN,Morbihan,Morbihan
+1015,1063,Moselle,MOSELLE,Moselle,Moselle
+1014,1090,Nievre,NIEVRE,Nièvre,Nièvre
+1060,1199,Nord,NORD,Nord,Nord
+1152,1114,Oise,OISE,Oise,Oise
+1175,1158,Orne,ORNE,Orne,Orne
+1200,1171,Paris,PARIS,Paris,Paris
+1172,1074,PasDeCalais,PASDECALAIS,Pas-de-Calais,Pas-de-Calais
+1057,1061,PuyDeDome,PUYDEDOME,Puy-de-Dôme,Puy-de-Dôme
+1085,1123,PyreneesAtlantiques,PYRENEESATLANTIQUES,Pyrénées-Atlantiques,Pyrénées-Atlantiques
+1032,1143,PyreneesOrientales,PYRENEESORIENTALES,Pyrénées-Orientales,Pyrénées-Orientales
+1183,1164,Rhone,RHONE,Rhône,Rhône
+1090,1031,SaoneEtLoire,SAONEETLOIRE,Saône-et-Loire,Saône-et-Loire
+1063,1153,Sarthe,SARTHE,Sarthe,Sarthe
+1173,1089,Savoie,SAVOIE,Savoie,Savoie
+1172,1006,SeineEtMarne,SEINEETMARNE,Seine-et-Marne,Seine-et-Marne
+1076,1063,SeineMaritime,SEINEMARITIME,Seine-Maritime,Seine-Maritime
+1054,1084,SeineSaintDenis,SEINESAINTDENIS,Seine-Saint-Denis,Seine-Saint-Denis
+1155,1199,Somme,SOMME,Somme,Somme
+1162,1173,Tarn,TARN,Tarn,Tarn
+1144,1133,TarnEtGaronne,TARNETGARONNE,Tarn-et-Garonne,Tarn-et-Garonne
+1177,1031,TerritoireDeBelfort,TERRITOIREDEBELFORT,Territoire de Belfort,Territoire de Belfort
+1199,1127,ValDoise,VALDOISE,Val-d'Oise,Val-d'Oise
+1079,1114,ValDeMarne,VALDEMARNE,Val-de-Marne,Val-de-Marne
+1042,1057,Var,VAR,Var,Var
+1079,1166,Vaucluse,VAUCLUSE,Vaucluse,Vaucluse
+1048,1015,Vendee,VENDEE,Vendée,Vendée
+1186,1052,Vienne,VIENNE,Vienne,Vienne
+1080,1111,Vosges,VOSGES,Vosges,Vosges
+1199,1177,Yonne,YONNE,Yonne,Yonne
+1057,1166,Yvelines,YVELINES,Yvelines,Yvelines
 0,1,,xxx,--- Sélectionner un pays ---,> Sélectionner un pays <
 1,4,af,AFG,Afghanistan,Afghanistan
 201,710,za,ZAF,Afrique du Sud,South Africa
