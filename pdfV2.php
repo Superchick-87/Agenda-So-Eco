@@ -59,7 +59,7 @@ class MC_TCPDF extends TCPDF
             // Diviser le contenu en deux colonnes
             $linesPerColumn = ceil(count($content) / $_POST['adjustColonne']);
             $column1Events = array_slice($content, 0, $linesPerColumn + 0.5);
-            $column2Events = array_slice($content, $linesPerColumn);
+            $column2Events = array_slice($content,  $linesPerColumn);
 
             // Préparer le texte pour la première colonne
             $column1Text = '';
@@ -154,6 +154,45 @@ $csvFile = "datas/{$agendaSod}_datas.csv";
 // $csvFile = 'datas/2024-03-31_datas.csv';
 
 
+function afficherBlocInfo($data)
+{
+    // Vérifie si toutes les entrées du tableau sont vides
+    $toutesVides = true;
+    foreach ($data as $valeur) {
+        if (!empty($valeur)) {
+            $toutesVides = false;
+            break;
+        }
+    }
+
+    // Si toutes les entrées sont vides, on ne retourne rien
+    if ($toutesVides) {
+        return '';
+    }
+
+    // Sinon, on construit le bloc en supprimant les <br> pour les valeurs vides
+    $resultat = '<div style="line-height:-13px;"></div>
+                <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
+                <div style="line-height:-12px;"></div>
+                <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>';
+
+    // Ajout des valeurs non vides avec <br>
+    $elementsNonVides = [];
+    foreach ($data as $valeur) {
+        if (!empty($valeur)) {
+            $elementsNonVides[] = $valeur;
+        }
+    }
+
+    // Concatène les valeurs avec <br> entre elles
+    $resultat .= implode('<br>', $elementsNonVides);
+
+    $resultat .= '</i></div>';
+    return $resultat;
+}
+
+
+
 if (file_exists($csvFile)) {
     // Ajuster le texte du pays en utilisant la fonction d'ajustement
     $adjustedCountry = interletter($country_full_name);
@@ -227,8 +266,7 @@ if (file_exists($csvFile)) {
             // Chemin de l'image du drapeau
             $flagImage = 'images/flags/' . $country . '.jpg';
 
-
-
+            $info = ['', '', $data[5], '', $data[6], '', $data[7], '', $data[8], ''];
             // Vérifier si le fichier image existe
             if (file_exists($flagImage)) {
 
@@ -243,21 +281,15 @@ if (file_exists($csvFile)) {
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_POST['interPaysBas'] . 'px;"></div>
                     <div style="font-family:utopiastd; word-break: break-all; width:100%; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_POST['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
+                    ' . afficherBlocInfo($info) . '
                     
-                    <div style="line-height:0px;"> </div>
-                        <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
-                       <div style="line-height:2px;"> </div>
-                        <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>' . $data[5] . '<br>' . $data[6] . '<br>' . $data[7] . '<br>' . $data[8] . '</i></div>
-                       
                     ',
                 );
-                //     <div style="line-height:-6px;"> </div>
-                //     <div style=""><i>' . turn(exposant($data[5])) . '</i></div>
-                //     <div style="line-height:-6px;"> </div>
-                //     <div style=""><i>' . turn(exposant($data[5])) . '</i></div>
-                //     <div style="line-height:-6px;"> </div>
-                //     <div style=""><i>' . turn(exposant($data[7])) . '</i></div>
-                // </div>
+                // <div style="line-height:0px;"> </div>
+                //     <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
+                //    <div style="line-height:2px;"> </div>
+                //     <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>' . $data[5] . '<br>' . $data[6] . '<br>' . $data[7] . '<br>' . $data[8] . '</i></div>
+
 
 
                 // Marquer que le premier événement pour cette date a été traité
