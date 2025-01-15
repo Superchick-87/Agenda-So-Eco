@@ -145,8 +145,8 @@
         // Affichage avec la balise <iframe>
         echo '<div class="iframe" >
             <iframe src="' . htmlspecialchars($filePath) . '#zoom=140" 
-                    width="540px" 
-                    height="1120px" 
+                    width="640px" 
+                    height="1350px" 
                     style="border:none;">
             </iframe>
         </div>';

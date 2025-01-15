@@ -33,9 +33,9 @@ class MC_TCPDF extends TCPDF
         $x1 = 0; // Position de la colonne 1
         $x2 = $colWidth + $colSpacing; // Position de la colonne 2
         $y1 = $startY;
-        $y2 = 1; // Position Y de la colonne 2, alignée avec celle de la colonne 1
+        $y2 = $startY; // Position Y de la colonne 2, alignée avec celle de la colonne 1
 
-        $borderWidth = 0;
+        $borderWidth = 1;
 
         // Définir la taille de police
         $this->SetFont('', '', $fontSize);
@@ -96,7 +96,7 @@ class MC_TCPDF extends TCPDF
 
 
 // Création d'une nouvelle instance MC_TCPDF
-$pdf = new MC_TCPDF('P', 'mm', array(97.8, 197.5), true, 'UTF-8', false);
+$pdf = new MC_TCPDF('P', 'mm', array(101.8, 240.4), true, 'UTF-8', false);
 
 // Supprimer les marges par défaut
 $pdf->SetMargins(0, 0, 0);  // Gauche, haut, droite
@@ -135,10 +135,10 @@ $pays = '
 // Ajouter une image SVG en haut à gauche
 $pdf->ImageSVG(
     $file = 'images/fond.svg',  // Chemin de l'image SVG
-    $x = 0,  // Position X
-    $y = 0,  // Position Y
-    $w = 97.8,  // Largeur de l'image
-    $h = 197.5,  // Hauteur de l'image
+    $x = -1,  // Position X
+    $y = 1,  // Position Y
+    $w = 101.8,  // Largeur de l'image, 
+    $h = 240.4,  // Hauteur de l'image
     '',       // Lien si cliquable (laisser vide si aucun)
     '',       // Alignement de l'image
     '',       // Palette des couleurs (laisser vide pour les couleurs de base)
@@ -152,6 +152,8 @@ $pdf->ImageSVG(
 // Lecture des données CSV
 $csvFile = "datas/{$agendaSod}_datas.csv";
 // $csvFile = 'datas/2024-03-31_datas.csv';
+
+
 if (file_exists($csvFile)) {
     // Ajuster le texte du pays en utilisant la fonction d'ajustement
     $adjustedCountry = interletter($country_full_name);
@@ -164,10 +166,10 @@ if (file_exists($csvFile)) {
     // $pdf->SetFont($font_family = 'utopiastd', '', 14, '', false);
 
     // Définition des colonnes
-    $colonneLargeur = 48;
-    $colonneHauteur1 = 180; // Hauteur de la colonne 1
-    $colonneHauteur2 = 195; // Hauteur de la colonne 2
-    $espaceEntreColonnes = 2; // Espace entre les colonnes
+    $colonneLargeur = 50;
+    $colonneHauteur1 = 223; // Hauteur de la colonne 1
+    $colonneHauteur2 = 223; // Hauteur de la colonne 2
+    $espaceEntreColonnes = 1; // Espace entre les colonnes
     $minHeight = 12; // Hauteur minimale de chaque événement
     $fontSize = 9.5; // Taille de la police
 
@@ -225,6 +227,8 @@ if (file_exists($csvFile)) {
             // Chemin de l'image du drapeau
             $flagImage = 'images/flags/' . $country . '.jpg';
 
+
+
             // Vérifier si le fichier image existe
             if (file_exists($flagImage)) {
 
@@ -239,9 +243,21 @@ if (file_exists($csvFile)) {
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_POST['interPaysBas'] . 'px;"></div>
                     <div style="font-family:utopiastd; word-break: break-all; width:100%; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_POST['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
+                    
+                    <div style="line-height:0px;"> </div>
+                        <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
+                       <div style="line-height:2px;"> </div>
+                        <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>' . $data[5] . '<br>' . $data[6] . '<br>' . $data[7] . '<br>' . $data[8] . '</i></div>
+                       
                     ',
                 );
-
+                //     <div style="line-height:-6px;"> </div>
+                //     <div style=""><i>' . turn(exposant($data[5])) . '</i></div>
+                //     <div style="line-height:-6px;"> </div>
+                //     <div style=""><i>' . turn(exposant($data[5])) . '</i></div>
+                //     <div style="line-height:-6px;"> </div>
+                //     <div style=""><i>' . turn(exposant($data[7])) . '</i></div>
+                // </div>
 
 
                 // Marquer que le premier événement pour cette date a été traité
@@ -257,7 +273,7 @@ if (file_exists($csvFile)) {
 
 
     // Impression du contenu dans deux colonnes avec bordures et texte aligné à gauche
-    $pdf->PrintTwoColumnsWithBorder($content, $colonneLargeur, $espaceEntreColonnes, 18, $colonneHauteur1, $colonneHauteur2, 1, $fontSize, $minHeight);
+    $pdf->PrintTwoColumnsWithBorder($content, $colonneLargeur, $espaceEntreColonnes, 14, $colonneHauteur1, $colonneHauteur2, $borderWidth, $fontSize, $minHeight);
 } else {
     die('Le fichier CSV est introuvable.');
 }
