@@ -10,18 +10,6 @@
 
 <body>
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $agendaSod  = $_POST['agendaSod'];
-        $date       = $_POST['datec'];
-
-//     // if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['datec']) !== $agendaSod)) {
-//         if (($date !== $agendaSod)) {
-//         // echo $date;
-//         echo "La date reçue est : " . htmlspecialchars($date) . "</br> on peut dupliquer les fichiers";
-//     } else {
-//         echo "Aucune date reçue.";
-// }
-}
 
     // Fonction pour définir une valeur par défaut pour le pays
     function defaultLand($x)
