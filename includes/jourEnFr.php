@@ -49,4 +49,4 @@ function coupeMois($tring)
     return $tring;
 }
 // Exemple d'utilisation
-echo afficherJourSuivant('2025-01-07'); // Affiche "Mercredi 8 janvier"
+// echo afficherJourSuivant('2025-01-07'); // Affiche "Mercredi 8 janvier"

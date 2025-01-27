@@ -151,8 +151,6 @@ $pdf->ImageSVG(
 
 // Lecture des données CSV
 $csvFile = "datas/{$agendaSod}_datas.csv";
-// $csvFile = 'datas/2024-03-31_datas.csv';
-
 
 function afficherBlocInfo($data)
 {
@@ -171,10 +169,10 @@ function afficherBlocInfo($data)
     }
 
     // Sinon, on construit le bloc en supprimant les <br> pour les valeurs vides
-    $resultat = '<div style="line-height:-13px;"></div>
+    $resultat = '<div style="line-height:-11px;"></div>
                 <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
-                <div style="line-height:-12px;"></div>
-                <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>';
+                <div style="line-height:-10px;"></div>
+                <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;">';
 
     // Ajout des valeurs non vides avec <br>
     $elementsNonVides = [];
@@ -185,13 +183,11 @@ function afficherBlocInfo($data)
     }
 
     // Concatène les valeurs avec <br> entre elles
-    $resultat .= implode('<br>', $elementsNonVides);
+    $resultat .= implode(' - ', $elementsNonVides);
 
-    $resultat .= '</i></div>';
+    $resultat .= '</div>';
     return $resultat;
 }
-
-
 
 if (file_exists($csvFile)) {
     // Ajuster le texte du pays en utilisant la fonction d'ajustement
@@ -251,8 +247,11 @@ if (file_exists($csvFile)) {
                 $content[] = array(
                     'text' => '
                     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
-                    <div style="line-height: 18px; font-family:utopiastd; background-color: #d42e1a; color:white; font-size:14;"> ' . coupeMois(afficherJourSuivant($date)) . '</div>
+
+                    <span style="border: 2px solid; background-color: #d42e1a; display: inline-block; line-height: 18px; font-family:utopiastd; color:white; font-size:14;"> ' . coupeMois(afficherJourSuivant($date)) . ' </span>
+                    
                     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 3pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:1px; font-size: 10pt;">,</p> 
                 ',
                 );
 
@@ -281,15 +280,15 @@ if (file_exists($csvFile)) {
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_POST['interPaysBas'] . 'px;"></div>
                     <div style="font-family:utopiastd; word-break: break-all; width:100%; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_POST['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
-                    ' . afficherBlocInfo($info) . '
                     
+                    ' . afficherBlocInfo($info) . '
                     ',
                 );
+                
                 // <div style="line-height:0px;"> </div>
                 //     <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
                 //    <div style="line-height:2px;"> </div>
-                //     <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>' . $data[5] . '<br>' . $data[6] . '<br>' . $data[7] . '<br>' . $data[8] . '</i></div>
-
+                //     <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>' . $data[5] . ' - ' . $data[6] . ' - ' . $data[7] . ' - ' . $data[8] . '</i></div>
 
 
                 // Marquer que le premier événement pour cette date a été traité

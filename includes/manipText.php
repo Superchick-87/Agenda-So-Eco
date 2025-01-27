@@ -26,6 +26,8 @@ function exposant($tring)
     $tring = str_replace('9 e', '9<sup>e</sup>', $tring);
     $tring = str_replace('0 e', '0<sup>e</sup>', $tring);
 
+   
+
     $tring = str_replace('1re', '1<sup>re</sup>', $tring);
     $tring = str_replace('1er', '1<sup>er</sup>', $tring);
     $tring = str_replace('1e', '1<sup>e</sup>', $tring);
@@ -46,6 +48,8 @@ function exposant($tring)
     $tring = str_replace('Ie siècle', 'I<sup>e</sup> siècle', $tring);
     $tring = str_replace('Ve siècle', 'V<sup>e</sup> siècle', $tring);
     $tring = str_replace('Xe siècle', 'X<sup>e</sup> siècle', $tring);
+
+    $tring = str_replace('<sup>e</sup>n', ' en', $tring);
 
     return $tring;
 }

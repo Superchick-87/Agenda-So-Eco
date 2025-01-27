@@ -435,6 +435,7 @@ function removeInputs(parentRowId) {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Supprimer";
     deleteButton.classList.add("deleteButton");
+   
 
     // Bouton "Annuler"
     const cancelButton = document.createElement("button");
@@ -459,6 +460,7 @@ function removeInputs(parentRowId) {
             inputRow.remove(); // Supprimer l'élément une fois l'animation terminée
             updateTotalCharacters();
             totalEvents();
+            
         });
 
         // Supprimer l'overlay et la boîte de confirmation immédiatement
@@ -467,6 +469,7 @@ function removeInputs(parentRowId) {
     });
 
     cancelButton.addEventListener("click", function () {
+        
         overlay.remove(); // Retirer l'overlay
         confirmationBox.remove(); // Fermer la boîte sans supprimer
     });
