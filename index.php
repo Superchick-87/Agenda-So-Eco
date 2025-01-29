@@ -29,14 +29,14 @@
      <script>
          var agendaSod = document.getElementById('agendaSod');
 
-      
-         
+
+
          //@ Fonctions d'envoi du formulaire via AJAX
          function showHint(str) {
              const toto = document.getElementById('toto');
              const inputRows = document.getElementsByClassName("input-row");
-            
-                
+
+
              var xhttp;
              if (str == '') {
                  document.getElementById("txtHint").innerHTML = "mdmdm";
@@ -46,18 +46,18 @@
              xhttp.onreadystatechange = function() {
                  if (this.readyState == 4 && this.status == 200) {
                      document.getElementById("txtHint").innerHTML = this.responseText;
-                     compareDate();
                      //* Appels fonctions
                      updateLetterSpacingForAll();
                      updateTotalCharacters();
                      totalEvents();
                      guillemets();
-                     duplicate();
                      //* FIN - Appels fonctions
 
                      toto.style.display = "none";
+                     compareDate();
+                     duplicate();
 
-       
+
 
                      $(document).ready(function() {
                          function updateFlagImage(selectElement) {
@@ -79,7 +79,7 @@
              xhttp.send();
          }
 
-    
+
 
 
          function submitForm(event) {
@@ -98,7 +98,7 @@
              xhr.onreadystatechange = function() {
                  if (xhr.status === 200) {
                      document.getElementById('toto').style.display = "block";
-                     
+
                      // Mettre à jour le contenu de #toto avec la réponse de done.php
                      document.getElementById('toto').innerHTML = xhr.responseText;
                  }
@@ -109,107 +109,130 @@
      </script>
      <script src="js/formulaire.js"></script>
      <script>
+         function compareDate() {
+             const dateOrigine = document.getElementById('agendaSod');
+             const agendaSodd = document.getElementById('agendaSodd');
 
-        function compareDate() {
-            const dateOrigine = document.getElementById('agendaSod');
-            const agendaSodd = document.getElementById('agendaSodd');
+             // Initialisation : mettre la valeur de `dateOrigine` dans `agendaSodd`
+             agendaSodd.value = dateOrigine.value;
 
-            // Initialisation : mettre la valeur de `dateOrigine` dans `agendaSodd`
-            agendaSodd.value = dateOrigine.value;
+             // Ajout d'un écouteur pour détecter les changements dans `dateOrigine`
+             dateOrigine.addEventListener('change', (event) => {
+                 // Met à jour la valeur de `agendaSodd` avec celle de `dateOrigine`
+                 agendaSodd.value = event.target.value;
+             });
 
-            // Ajout d'un écouteur pour détecter les changements dans `dateOrigine`
-            dateOrigine.addEventListener('change', (event) => {
-                // Met à jour la valeur de `agendaSodd` avec celle de `dateOrigine`
-                agendaSodd.value = event.target.value;
-            });
+             console.log('Valeur initiale de agendaSodd:', agendaSodd.value);
+         }
 
-            console.log('Valeur initiale de agendaSodd:', agendaSodd.value);
-        }
+         function duplicate() {
+             const dupliButton = document.getElementById('dupli');
+             const overlay = document.getElementById('overlay');
+             const partDupli = document.getElementById('partDupli');
+             const agendaSodd = document.getElementById('agendaSodd');
 
-        function duplicate() {
-    const dupliButton = document.getElementById('dupli');
-    const overlay = document.getElementById('overlay');
-    const partDupli = document.getElementById('partDupli');
-    const agendaSodd = document.getElementById('agendaSodd');
+             // Vérifie si un événement est déjà attaché pour éviter les doublons
+             if (!dupliButton.dataset.listenerAdded) {
+                 dupliButton.addEventListener('click', function() {
+                     // Afficher l'overlay
+                     overlay.style.display = 'block';
 
-    // Vérifie si un événement est déjà attaché pour éviter les doublons
-    if (!dupliButton.dataset.listenerAdded) {
-        dupliButton.addEventListener('click', function () {
-            // Afficher l'overlay
-            overlay.style.display = 'block';
-            
-            // Nettoyer le conteneur pour recréer le formulaire
-            partDupli.innerHTML = '';
+                     // Nettoyer le conteneur pour recréer le formulaire
+                     partDupli.innerHTML = '';
 
-            // Créer un formulaire
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'duplicate.php';
+                     // Créer un formulaire
+                     const form = document.createElement('form');
+                     form.method = 'POST';
+                     form.action = 'duplicate.php';
 
-            // Créer un élément input de type date (nouvelle date)
-            const dateInput = document.createElement('input');
-            dateInput.type = 'date';
-            dateInput.name = 'datec'; // Nom du champ pour la soumission
+                     // Créer un élément div container label - date d'origine
+                     const divlabeOrigineDate = document.createElement('div');
+                     divlabeOrigineDate.classList.add("labelDate");
 
-            // Récupération de la date d'origine
-            const dateOrigine = document.createElement('input');
-            dateOrigine.id = 'date';
-            dateOrigine.value = agendaSodd.value;
-            dateOrigine.type = 'date';
-            dateOrigine.name = 'agendaSodd'; // Nom du champ pour la soumission
+                     // Créer un élément label (date d'origine)
+                     const labelOrigineDate = document.createElement('label');
+                     labelOrigineDate.htmlFor = 'datec';
+                     labelOrigineDate.innerText = 'Date d\'origine';
 
-            // Créer un conteneur pour les boutons
-            const buttonContainer = document.createElement('div');
-            buttonContainer.style.display = 'flex';
-            buttonContainer.style.justifyContent = 'center';
-            buttonContainer.style.gap = '10px';
+                     // Récupération de la date d'origine
+                     const dateOrigine = document.createElement('input');
+                     dateOrigine.id = 'date';
+                     dateOrigine.value = agendaSodd.value;
+                     dateOrigine.type = 'date';
+                     dateOrigine.name = 'agendaSodd'; // Nom du champ pour la soumission
 
-            // Créer le bouton "Valider"
-            const validateButton = document.createElement('button');
-            validateButton.type = 'submit'; // Bouton de soumission
-            validateButton.textContent = 'Valider';
-            validateButton.classList.add('validButton');
+                     // Créer un élément div container label - nouvelle date
+                     const divlabeNouvelleDate = document.createElement('div');
+                     divlabeNouvelleDate.classList.add("labelDate");
 
-            // Créer le bouton "Annuler"
-            const cancelButton = document.createElement('button');
-            cancelButton.type = 'button'; // Bouton de type bouton
-            cancelButton.textContent = 'Annuler';
-            cancelButton.classList.add('cancelButton');
+                     // Créer un élément label (nouvelle date)
+                     const labelNouvelleDate = document.createElement('label');
+                     labelNouvelleDate.htmlFor = 'datec';
+                     labelNouvelleDate.innerText = 'Nouvelle date';
 
-            // Ajouter un événement pour fermer l'overlay en cliquant sur "Annuler"
-            cancelButton.addEventListener('click', function () {
-                overlay.style.display = 'none';
-            });
+                     // Créer un élément input de type date (nouvelle date)
+                     const dateInput = document.createElement('input');
+                     dateInput.id = 'datec';
+                     dateInput.type = 'date';
+                     dateInput.name = 'datec'; // Nom du champ pour la soumission
 
-            // Ajouter un événement avant soumission
-            form.addEventListener('submit', function (event) {
-                if (!dateInput.value) { // Vérifie si le champ de date est vide
-                    event.preventDefault(); // Empêche la soumission du formulaire
-                    alert('Veuillez sélectionner une date avant de soumettre.');
-                }
-            });
+                     // Créer un conteneur pour les boutons
+                     const buttonContainer = document.createElement('div');
+                     buttonContainer.classList.add("containerButton");
 
-            // Ajouter les éléments au formulaire
-            form.appendChild(dateOrigine);
-            form.appendChild(dateInput);
+                     // Créer le bouton "Valider"
+                     const validateButton = document.createElement('button');
+                     validateButton.type = 'submit'; // Bouton de soumission
+                     validateButton.textContent = 'Valider';
+                     validateButton.classList.add('validButton');
 
-            // Ajouter les boutons au conteneur de boutons
-            buttonContainer.appendChild(cancelButton);
-            buttonContainer.appendChild(validateButton);
+                     // Créer le bouton "Annuler"
+                     const cancelButton = document.createElement('button');
+                     cancelButton.type = 'button'; // Bouton de type bouton
+                     cancelButton.textContent = 'Annuler';
+                     cancelButton.classList.add('cancelButton');
 
-            // Ajouter le conteneur de boutons au formulaire
-            form.appendChild(buttonContainer);
 
-            // Ajouter le formulaire au conteneur
-            partDupli.appendChild(form);
-        });
+                     // Ajouter un événement pour fermer l'overlay en cliquant sur "Annuler"
+                     cancelButton.addEventListener('click', function() {
+                         overlay.style.display = 'none';
+                     });
 
-        // Marque le bouton comme ayant un écouteur
-        dupliButton.dataset.listenerAdded = true;
-    }
-}
+                     // Ajouter un événement avant soumission
+                     form.addEventListener('submit', function(event) {
+                         if (!dateInput.value) { // Vérifie si le champ de date est vide
+                             event.preventDefault(); // Empêche la soumission du formulaire
+                             alert('Veuillez sélectionner une date avant de soumettre.');
+                         }
+                     });
 
-    </script>
+                     // Ajouter les éléments au formulaire
+                     form.appendChild(divlabeOrigineDate);
+                     divlabeOrigineDate.appendChild(labelOrigineDate);
+                     divlabeOrigineDate.appendChild(dateOrigine);
+
+                     form.appendChild(divlabeNouvelleDate);
+                     divlabeNouvelleDate.appendChild(labelNouvelleDate);
+                     divlabeNouvelleDate.appendChild(dateInput);
+                     //  form.appendChild(dateOrigine);
+                     //  form.appendChild(dateInput);
+
+                     // Ajouter les boutons au conteneur de boutons
+                     buttonContainer.appendChild(cancelButton);
+                     buttonContainer.appendChild(validateButton);
+
+                     // Ajouter le conteneur de boutons au formulaire
+                     form.appendChild(buttonContainer);
+
+                     // Ajouter le formulaire au conteneur
+                     partDupli.appendChild(form);
+                 });
+
+                 // Marque le bouton comme ayant un écouteur
+                 dupliButton.dataset.listenerAdded = true;
+             }
+         }
+     </script>
  </body>
 
  </html>

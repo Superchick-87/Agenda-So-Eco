@@ -123,6 +123,7 @@ $pdf->SetAutoPageBreak(false); // Désactiver le saut de page automatique
 // $pdf->SetFont('UtopiaStdSemiboldDisp', '', 14, '', false);
 $pdf->SetFont('utopiastdb', '', 14, '', false);
 $pdf->SetFont('utopiastd', '', 14, '', false);
+$pdf->SetFont('roboto', '', 14, '', false);
 $pdf->SetFont('robotob', '', 14, '', false);
 $pdf->SetTextColor(0, 0, 0, 100);
 
@@ -246,7 +247,7 @@ if (file_exists($csvFile)) {
 
                 $content[] = array(
                     'text' => '
-                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt; ">,</p> 
 
                     <span style="border: 2px solid; background-color: #d42e1a; display: inline-block; line-height: 18px; font-family:utopiastd; color:white; font-size:14;"> ' . coupeMois(afficherJourSuivant($date)) . ' </span>
                     
@@ -284,7 +285,7 @@ if (file_exists($csvFile)) {
                     ' . afficherBlocInfo($info) . '
                     ',
                 );
-                
+
                 // <div style="line-height:0px;"> </div>
                 //     <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
                 //    <div style="line-height:2px;"> </div>

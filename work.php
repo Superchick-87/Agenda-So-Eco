@@ -12,7 +12,7 @@ $interPaysHautValue = null;
 $interPaysBasValue = null;
 
 
-  
+
 // Vérifier si le fichier CSV PREF existe
 if (file_exists($csvFileePathh)) {
     if (($csvFilee = fopen($csvFileePathh, 'r')) !== false) {
@@ -33,19 +33,19 @@ if (file_exists($csvFileePathh)) {
 }
 
 if (file_exists($csvFilePath)) {
-    
+
     $file = fopen($csvFilePath, 'r');
     $agendaSodd = '';
-    // <button id="dupli">Dupliquer</button>
+
     echo '
-    <input id="dupli" type="submit" name="Dupliquer" value="Dupliquer" style="display:block;">
+    <input id="dupli" class="pad" type="submit" name="Dupliquer" value="Dupliquer" style="display:block;">
         <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1;">
-            <div id="partDupli" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; z-index: 1000; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);">
+            <div id="partDupli" class="confirmationBox">
                 <input type="date" valeur="" name="agendaSodd" id="agendaSodd" style="display:none">
             </div>
         </div>   
     ';
- 
+
     echo '
     <form id="form2" onsubmit="submitForm(event)">';
 
@@ -175,7 +175,7 @@ if (file_exists($csvFilePath)) {
     <div class="add-btn" id="add-btn" onclick="addInputs()">+</div>';
     echo ' <div class="menu">
         <input id="save" class="save pad" type="submit" name="save" value="Sauver" style="display:none;">';
-   
+
     echo '</div>
     </form>
     </div>';
@@ -189,7 +189,7 @@ if (file_exists($csvFilePath)) {
                 <p id="signes"></p>
             </div>
             </div>';
-            fclose($file);
+    fclose($file);
 } else {
 
     echo '

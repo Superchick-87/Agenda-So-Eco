@@ -47,7 +47,7 @@
     // Vérifie si la méthode est POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $agendaSod = $_POST['agendaSod'];
-       
+
 
         // Initialisation des tableaux pour stocker les données
         $donnees = [];

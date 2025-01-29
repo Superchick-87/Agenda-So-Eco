@@ -11,7 +11,6 @@ body {
     background-image: radial-gradient(currentColor .5px, transparent .5px);
     background-size: calc(10* .5px) calc(10* .5px);
     font-family: 'Roboto', serif;
-
 }
 
 h2 {
@@ -26,45 +25,64 @@ h4 {
 hr {
     margin: 10px 2px;
 }
+
 .confirmationBox {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: white;
     padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-  }
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
 
-  .deleteButton {
+label {
+    font-style: italic;
+}
+
+.labelDate {
+    display: inline-grid;
+}
+
+.containerButton {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.deleteButton {
     background-color: red;
     color: white;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
-  }
-  .validButton {
+}
+
+.validButton {
     background-color: rgb(38, 133, 0);
     color: white;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
-  }
-  .cancelButton {
-    margin-right: 10px;
+}
+
+.cancelButton {
     background-color: gray;
     color: white;
     border: none;
     padding: 5px 10px;
     margin-top: 10px;
-  }
-  .cancelButton,
-  .deleteButton {
+}
+
+.cancelButton,
+.deleteButton {
     cursor: pointer;
-  }
-  .overlay {
+}
+
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -72,58 +90,65 @@ hr {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
-  }
+}
 
-   /* Animation fade-in */
-   @keyframes fadeIn {
+/* Animation fade-in */
+@keyframes fadeIn {
     from {
-      opacity: 0;
-      transform: scale(0.9);
+        opacity: 0;
+        transform: scale(0.9);
     }
 
     to {
-      opacity: 1;
-      transform: scale(1);
+        opacity: 1;
+        transform: scale(1);
     }
-  }
+}
 
-  @keyframes fadeOut {
+@keyframes fadeOut {
     from {
-      opacity: 1;
-      transform: scale(1);
+        opacity: 1;
+        transform: scale(1);
     }
 
     to {
-      opacity: 0;
-      transform: scale(0.9);
+        opacity: 0;
+        transform: scale(0.9);
     }
-  }
+}
 
-  /* Animation CSS pour l'apparition */
-  .fade-in {
+/* Animation CSS pour l'apparition */
+.fade-in {
     animation: fadeIn 0.3s ease-out;
-  }
+}
 
-  .fade-out {
+.fade-out {
     animation: fadeOut 0.3s ease-out;
-  }
+}
 
-.bloc_contact, .adresse{
+.bloc_contact,
+.adresse {
     width: 430px;
-  }
+}
 
-.input-tel, .input-email, .adresse, .input-web{
+.input-tel,
+.input-email,
+.adresse,
+.input-web {
     padding: 5px;
     height: 30px;
 }
-.adresse{
+
+.adresse {
     height: 50px;
 }
 
-.input-email, .input-web{
+.input-email,
+.input-web {
     width: 270px;
 }
-.input-email{
+
+.input-email {
     width: 250px;
 }
 
@@ -187,10 +212,19 @@ hr {
     /* Cursor during dragging */
 }
 
+textarea {
+    margin: 5px;
+    outline: 1px solid;
+    border-radius: 5px;
+    border: none;
+}
+
 input,
-textarea,
 select {
     margin: 5px;
+    outline: 1px solid;
+    border-radius: 5px;
+    border: none;
 }
 
 input[type="date"],
@@ -198,8 +232,27 @@ select {
     width: 150px;
 }
 
-input[type="date"] {
+/* input[type="date"] {
     height: 27px;
+} */
+
+input[type="date"] {
+    background-color: #ffffff;
+    height: 30px;
+    font-family: "Roboto Mono", monospace;
+    color: #000000;
+    font-size: 13px;
+    border: none;
+    outline: 1px solid;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
 }
 
 select {
@@ -207,16 +260,13 @@ select {
 }
 
 .input-text {
-    /* border: 2px solid var(--main-color); */
     color: var(--font-color);
     padding: 5px 10px 5px 10px;
-    outline: none;
+    /* outline: none; */
     width: 318px;
-    /* font-family: "utopia-std", serif; */
     font-size: 17pt;
     font-style: normal;
     font-family: "utopia-std-display", serif;
-    /* font-family: "console"; */
     font-weight: 400;
 }
 
@@ -332,8 +382,6 @@ embed {
     background-color: #555;
 }
 
-
-
 #go-up:hover,
 #go-down:hover {
     background-color: #2980b9;
@@ -441,6 +489,7 @@ embed {
     background-color: #4d5d67;
     color: white;
     border: solid 1px white;
+    border: none;
 }
 
 .agendaOpt {
