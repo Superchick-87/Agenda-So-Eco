@@ -26,7 +26,7 @@ function exposant($tring)
     $tring = str_replace('9 e', '9<sup>e</sup>', $tring);
     $tring = str_replace('0 e', '0<sup>e</sup>', $tring);
 
-   
+
 
     $tring = str_replace('1re', '1<sup>re</sup>', $tring);
     $tring = str_replace('1er', '1<sup>er</sup>', $tring);
@@ -44,6 +44,7 @@ function exposant($tring)
     $tring = str_replace('<sup>e</sup>t', 'et', $tring);
     $tring = str_replace('<sup>e</sup>uros', ' euros', $tring);
     $tring = str_replace('<sup>e</sup>uro', ' euro', $tring);
+    $tring = str_replace('0et', '0 et', $tring);
 
     $tring = str_replace('Ie siècle', 'I<sup>e</sup> siècle', $tring);
     $tring = str_replace('Ve siècle', 'V<sup>e</sup> siècle', $tring);
@@ -61,8 +62,9 @@ function exposant($tring)
 //     }
 // }
 
-function interletter($x){
-   if ($x > 20) {
+function interletter($x)
+{
+    if ($x > 20) {
         return 'letter-spacing: -0.3px;';
     }
 }

@@ -170,10 +170,10 @@ function afficherBlocInfo($data)
     }
 
     // Sinon, on construit le bloc en supprimant les <br> pour les valeurs vides
-    $resultat = '<div style="line-height:-11px;"></div>
-                <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
-                <div style="line-height:-10px;"></div>
-                <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;">';
+    $resultat = '
+                <hr style="border:none; line-height:2px; border-top: 1px dotted; height:1px; width:20%; color:#d42e1a; " >
+                <div style="line-height:-22px;"></div>
+                <div style="line-height:9px;font-size:8px; font-family:roboto; font-style:italic;">';
 
     // Ajout des valeurs non vides avec <br>
     $elementsNonVides = [];
@@ -184,7 +184,7 @@ function afficherBlocInfo($data)
     }
 
     // Concatène les valeurs avec <br> entre elles
-    $resultat .= implode(' - ', $elementsNonVides);
+    $resultat .= implode(' * ', $elementsNonVides);
 
     $resultat .= '</div>';
     return $resultat;
@@ -247,12 +247,10 @@ if (file_exists($csvFile)) {
 
                 $content[] = array(
                     'text' => '
-                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt; ">,</p> 
-
-                    <span style="border: 2px solid; background-color: #d42e1a; display: inline-block; line-height: 18px; font-family:utopiastd; color:white; font-size:14;"> ' . coupeMois(afficherJourSuivant($date)) . ' </span>
-                    
-                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 3pt;">,</p> 
-                    <p style="margin: 0; padding: 0; line-height:1px; font-size: 10pt;">,</p> 
+                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt; "> </p> 
+                    <span style="border: 2px solid; background-color: #d42e1a; display: inline-block; line-height: 18px; font-family:utopiastd; color:white; letter-spacing: ' . letterSpacingDate(afficherJourSuivant($date)) . '; font-size:13;"> ' . afficherJourSuivant($date) . ' </span>
+                    <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 3pt;"> </p> 
+                    <p style="margin: 0; padding: 0; line-height:1px; font-size: 10pt;"> </p> 
                 ',
                 );
 

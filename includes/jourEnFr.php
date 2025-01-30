@@ -45,8 +45,21 @@ function afficherJourSuivant($date)
 
 function coupeMois($tring)
 {
-    $tring = str_replace('septembre', 'sept.', $tring);
+    $tring = str_replace('novembre', 'novembre', $tring);
+    $tring = str_replace('décembre', 'décembre', $tring);
+    $tring = str_replace('septembre', 'septembre', $tring);
     return $tring;
 }
 // Exemple d'utilisation
 // echo afficherJourSuivant('2025-01-07'); // Affiche "Mercredi 8 janvier"
+
+function letterSpacingDate($n)
+{
+    $spacingValues = [
+        20 => -0.25,
+        21 => -0.35,
+        22 => -0.45, // Ajoutez d'autres valeurs si nécessaire
+    ];
+
+    return $spacingValues[strlen($n)] ?? ''; // Retourne la valeur correspondante ou 1 par défaut
+}
