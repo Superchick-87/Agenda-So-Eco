@@ -56,8 +56,8 @@ function coupeMois($tring)
 function letterSpacingDate($n)
 {
     $spacingValues = [
-        20 => -0.25,
-        21 => -0.35,
+        20 => -0.35,
+        21 => -0.40,
         22 => -0.45, // Ajoutez d'autres valeurs si nécessaire
     ];
 

@@ -125,6 +125,8 @@ $pdf->SetFont('utopiastdb', '', 14, '', false);
 $pdf->SetFont('utopiastd', '', 14, '', false);
 $pdf->SetFont('roboto', '', 14, '', false);
 $pdf->SetFont('robotob', '', 14, '', false);
+
+$pdf->SetFont('arialb', '', 14, '', false);
 $pdf->SetTextColor(0, 0, 0, 100);
 
 
@@ -168,23 +170,23 @@ function afficherBlocInfo($data)
     if ($toutesVides) {
         return '';
     }
-
+    
     // Sinon, on construit le bloc en supprimant les <br> pour les valeurs vides
     $resultat = '
                 <hr style="border:none; line-height:2px; border-top: 1px dotted; height:1px; width:20%; color:#d42e1a; " >
-                <div style="line-height:-22px;"></div>
-                <div style="line-height:9px;font-size:8px; font-family:roboto; font-style:italic;">';
+                <div style="line-height:-20px;"></div>
+                <div style="line-height:8px;font-size:7.5px; font-family:arialb; letter-spacing:-0.1; color:">';
 
     // Ajout des valeurs non vides avec <br>
     $elementsNonVides = [];
     foreach ($data as $valeur) {
         if (!empty($valeur)) {
-            $elementsNonVides[] = $valeur;
+            $elementsNonVides[] = turn($valeur);
         }
     }
 
     // Concatène les valeurs avec <br> entre elles
-    $resultat .= implode(' * ', $elementsNonVides);
+    $resultat .= implode(' | ', $elementsNonVides);
 
     $resultat .= '</div>';
     return $resultat;
@@ -262,7 +264,7 @@ if (file_exists($csvFile)) {
             }
 
             // Chemin de l'image du drapeau
-            $flagImage = 'images/flags/' . $country . '.jpg';
+            $flagImage = 'images/flags/' . $country . '.svg';
 
             $info = ['', '', $data[5], '', $data[6], '', $data[7], '', $data[8], ''];
             // Vérifier si le fichier image existe
