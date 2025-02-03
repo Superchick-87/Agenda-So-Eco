@@ -63,7 +63,7 @@
                          function updateFlagImage(selectElement) {
                              var selectedCountryCode = selectElement.val();
                              var flagElement = selectElement.closest(".input-row").find(".flag");
-                             flagElement.css("background-image", "url(images/flags/" + selectedCountryCode + ".jpg)");
+                             flagElement.css("background-image", "url(images/flags/" + selectedCountryCode + ".svg)");
                          }
                          $("select[name='country[]']").change(function() {
                              updateFlagImage($(this));

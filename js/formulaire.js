@@ -361,7 +361,7 @@ function generateUniqueId() {
 // Fonction pour mettre à jour l'image du drapeau
 function updateFlagImage(countryCode, flagDivId) {
     const flagDiv = document.getElementById(flagDivId);
-    flagDiv.style.backgroundImage = `url(./images/flags/${countryCode}.jpg)`;
+    flagDiv.style.backgroundImage = `url(./images/flags/${countryCode}.svg)`;
 }
 
 // Fonction pour gérer la sélection de pays

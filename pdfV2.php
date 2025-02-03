@@ -275,7 +275,7 @@ if (file_exists($csvFile)) {
                     'text' => '
                 <div style="line-height:' . $_POST['interPaysHaut'] . 'px;"> </div>
                     <div style="line-height:1px;  position:relative; margin-left:90px;  width:100%; padding:0;">
-                        <span style="font-size:14px; color:white; letter-spacing:-1pt;">--</span>
+                        <span style="font-size:14px; color:white; letter-spacing:-1pt;">,,,</span>
                         <span style="font-family : robotob; ' . interletter(strlen($country_full_name)) . 'width:80%; font-size:11px;">' . htmlspecialchars($country_full_name) . '</span>
                     </div>
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>

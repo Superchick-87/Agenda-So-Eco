@@ -114,7 +114,7 @@ if (file_exists($csvFilePath)) {
         echo '</select>';
         foreach ($paysData as $pays) {
             if ($pays[2] == $countryName) {
-                echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.jpg);"></div>';
+                echo '<div class="flag" id="flag' . $z++ . '" style="background-image: url(images/flags/' . $pays[2] . '.svg);"></div>';
             }
         }
         echo '<div onclick="toggleVisibility(' . $xx++  . ')" class="toggle-btn">-</div>';
