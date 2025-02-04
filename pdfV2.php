@@ -239,14 +239,6 @@ if (file_exists($csvFile)) {
             // Vérifier si la date est différente de la date précédente
             if ($date !== $previousDate) {
                 // Ajouter une ligne avec la date
-                // $content[] = array(
-                //     'text' => '
-                //     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt;">,</p> 
-                //     <img src="images/jours/' . afficherJourSuivant($date) . '.svg"/>
-                //     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateBas'] . 'px; font-size: 2pt;">,</p> 
-                // ',
-                // );
-
                 $content[] = array(
                     'text' => '
                     <p style="margin: 0; padding: 0; line-height:' . $_POST['interDateHaut'] . 'px; font-size: 2pt; "> </p> 
@@ -281,17 +273,10 @@ if (file_exists($csvFile)) {
                     <img src="' . $flagImage . '" style="line-height:33px; padding:0; height:5mm;"/>
                     <div style="line-height:' . $_POST['interPaysBas'] . 'px;"></div>
                     <div style="font-family:utopiastd; word-break: break-all; width:100%; letter-spacing: ' . $letter_Spacing . 'pt; font-size:9.5; line-height:' . $_POST['interligne'] . 'px;">' . turn(exposant($event)) . '</div>
-                    
                     ' . afficherBlocInfo($info) . '
                     ',
                 );
-
-                // <div style="line-height:0px;"> </div>
-                //     <span style="font-size:9px; font-family:roboto; font-weight:light; line-height:10px; background-color:#f0b298;"> Info. </span>
-                //    <div style="line-height:2px;"> </div>
-                //     <div style="line-height:9px;font-size:8px; font-family:roboto; font-weight:light;"><i>' . $data[5] . ' - ' . $data[6] . ' - ' . $data[7] . ' - ' . $data[8] . '</i></div>
-
-
+ 
                 // Marquer que le premier événement pour cette date a été traité
                 $firstEvent = false;
             } else {
