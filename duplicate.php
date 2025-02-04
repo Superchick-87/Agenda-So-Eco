@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $forceCopy  = $_POST['forceCopy'];  // Récupère la valeur du champ caché 'forceCopy'
 
         // Debug : Afficher les valeurs des variables agendaSod et date
-        echo "<p>AgendaSod: $agendaSod</p>";
-        echo "<p>Date: $date</p>";
+        // echo "<p>AgendaSod: $agendaSod</p>";
+        // echo "<p>Date: $date</p>";
 
         // Chemins des fichiers source : utiliser la variable 'agendaSod' pour les noms de fichiers
         $fileDataSource = "datas/{$agendaSod}_datas.csv";
@@ -23,10 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $filePrefTarget = "datas/{$date}_pref.csv";
 
         // Debug : Afficher les chemins des fichiers
-        echo "<p>Chemin fichier source Data: $fileDataSource</p>";
-        echo "<p>Chemin fichier source Pref: $filePrefSource</p>";
-        echo "<p>Chemin fichier cible Data: $fileDataTarget</p>";
-        echo "<p>Chemin fichier cible Pref: $filePrefTarget</p>";
+        // echo "<p>Chemin fichier source Data: $fileDataSource</p>";
+        // echo "<p>Chemin fichier source Pref: $filePrefSource</p>";
+        // echo "<p>Chemin fichier cible Data: $fileDataTarget</p>";
+        // echo "<p>Chemin fichier cible Pref: $filePrefTarget</p>";
 
         // Vérification de l'existence des fichiers source
         if (file_exists($fileDataSource) && file_exists($filePrefSource)) {
