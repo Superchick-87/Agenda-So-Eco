@@ -7,6 +7,11 @@
     padding: 0;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
     background-image: radial-gradient(currentColor .5px, transparent .5px);
     background-size: calc(10* .5px) calc(10* .5px);
@@ -78,7 +83,8 @@ label {
 }
 
 .cancelButton,
-.deleteButton {
+.deleteButton,
+.validButton {
     cursor: pointer;
 }
 
@@ -264,7 +270,7 @@ select {
     padding: 5px 10px 5px 10px;
     /* outline: none; */
     width: 318px;
-    font-size: 16pt;
+    font-size: 21px;
     font-style: normal;
     font-family: "utopia-std-display", serif;
     font-weight: 400;
