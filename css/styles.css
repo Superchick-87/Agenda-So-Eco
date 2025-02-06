@@ -16,6 +16,7 @@ body {
     background-image: radial-gradient(currentColor .5px, transparent .5px);
     background-size: calc(10* .5px) calc(10* .5px);
     font-family: 'Roboto', serif;
+
 }
 
 h2 {

@@ -167,7 +167,7 @@ if (file_exists($csvFilePath)) {
                     <input id="phone_' . $phone++ . '" type="tel" pattern="[0-9]{10}" maxLength = "10" class="input-tel" name = "phone[]" placeholder = "Téléphone" oninput="updateTotalCharacters()" value="' . $row[6] . '">
                     <input id="mail_' . $mail++ . '" type="email" class="input-email" name = "mail[]" placeholder = "Mail" oninput="updateTotalCharacters()" value="' . $row[7] . '">
                 </div>
-                <input id="web_' . $web++ . '" type="text" class="input-web" name = "web[]" placeholder = "text" oninput="updateTotalCharacters()" value="' . $row[8] . '">
+                <input id="web_' . $web++ . '" type="text" class="input-web" name = "web[]" placeholder = "Site web" oninput="updateTotalCharacters()" value="' . $row[8] . '">
                     </div>';
         echo '</div>';
     }
